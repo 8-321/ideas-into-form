@@ -142,10 +142,10 @@ export default function SoundChapterPage() {
             </p>
 
             <div className="sound-statement__stats stagger">
-              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display">{tracks.length}</b><span className="mono">TRACKS / 音轨</span></div>
+              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{tracks.length}</b><span className="mono">TRACKS / 音轨</span></div>
               <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{totalLabel}</b><span className="mono">TOTAL / 总时长</span></div>
-              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display">01</b><span className="mono">LONG FORM / 长音频</span></div>
-              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display">04</b><span className="mono">NOTES / 手记</span></div>
+              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display" data-count>01</b><span className="mono">LONG FORM / 长音频</span></div>
+              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display" data-count>04</b><span className="mono">NOTES / 手记</span></div>
             </div>
           </div>
         </div>

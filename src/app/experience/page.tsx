@@ -180,10 +180,10 @@ export default function ExperienceChapterPage() {
             </p>
 
             <div className="film-statement__stats stagger">
-              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display">{allVideos.length}</b><span className="mono">FILMS / 影像</span></div>
+              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{allVideos.length}</b><span className="mono">FILMS / 影像</span></div>
               <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{fmt(totalRuntime)}</b><span className="mono">RUNTIME / 总时长</span></div>
-              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display">{groups.length}</b><span className="mono">CATEGORIES / 类型</span></div>
-              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display">{DECKS.length}</b><span className="mono">DECKS / 演示</span></div>
+              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display" data-count>{groups.length}</b><span className="mono">CATEGORIES / 类型</span></div>
+              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display" data-count>{DECKS.length}</b><span className="mono">DECKS / 演示</span></div>
             </div>
           </div>
         </div>

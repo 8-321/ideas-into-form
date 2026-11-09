@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./design.css";
+import { AmbientField } from "@/components/AmbientField";
+import { Cursor } from "@/components/Cursor";
 import { LightboxProvider } from "@/components/Lightbox";
 import { MotionLayer } from "@/components/MotionLayer";
 import { MotionProvider } from "@/components/MotionProvider";
@@ -50,6 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <MotionProvider>
           <TransitionProvider>
             <LightboxProvider>
+              <AmbientField />
+              <Cursor />
+              <div className="scroll-progress" aria-hidden="true"><i /></div>
               <SiteShell>{children}</SiteShell>
               <MotionLayer />
             </LightboxProvider>

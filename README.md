@@ -27,8 +27,11 @@ npm start          # npx serve out -l 3000
 | `npm run build` | Next.js 静态导出（`output: "export"`，`trailingSlash: true`） |
 | `node scripts/audit.mjs` | 18 个视口截图 + 破图、控制台、失败请求检查 |
 | `node scripts/interact.mjs` | 音频播放、放映室、PPT、灯箱、动效开关、18 个详情页、链接与媒体存在性检查 |
+| `node scripts/reader-check.mjs` | 翻书模式、七种内容页转场、键盘 / 滚轮回翻、移动端、动效关闭与数字 / 倾斜动效检查 |
+| `node scripts/motion-check.mjs` | 标题折页、CTA 磁吸、作品掠光、点击墨点与 MOTION OFF 检查 |
+| `node scripts/layout-check.mjs` | 5 个桌面宽度 × 4 个总览页的标题断行检查 |
 
-`audit.mjs` / `interact.mjs` 使用本机 Edge（`C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe`）与 3011 / 3013 端口；换机器时改脚本顶部常量。
+`audit.mjs` / `interact.mjs` / `reader-check.mjs` / `motion-check.mjs` / `layout-check.mjs` 使用本机 Edge（`C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe`），端口分别为 3011 / 3013 / 3012 / 3014 / 3015；换机器时改脚本顶部常量。
 
 ## 内容结构
 
@@ -64,8 +67,12 @@ site/
 
 ## 动效与可访问性
 
-- 全站滚动入场由 `data-reveal` + `IntersectionObserver` 驱动；支持 `prefers-reduced-motion`。
-- 右上角 `MOTION ON/OFF` 记忆在 `localStorage` 的 `iif-motion`。
+- **氛围背景**：`AmbientField` 使用单个全屏 Canvas，按成象 / 成声 / 成境切换纸纤维、唱片沟槽、片门光束三套粒子语言；DPR 上限 2，页面隐藏时暂停。
+- **自定义光标**：`Cursor` 只在细指针设备启用，环形延迟跟随，链接 / 媒体 / 播放 / 拖拽显示不同标签；触屏与动效关闭时自动退回系统光标。
+- **阅读版翻书**：作品详情由 `WorkBook` 提供全书目录、翻页阅读、方向键 / PageUp / PageDown / 滚轮 / 触屏翻页，打开时锁定滚动并暂停非当前页音视频。
+- **分类型转场**：文本翻纸、过程卡片抬升、图像贴纸错峰、说明印章落下、占位蓝图展开、声音声纹上浮、影像幕布拉开；方向键前后翻页各有对应方向。
+- **总览动效**：滚动进度、数字递增、作品卡指针倾斜、错峰入场；章节标题按语义行折页展开，主要 CTA 轻磁吸，作品图随指针产生掠光，点击光标散出细墨点。交互概念参考 React Bits 的 Fold Text / Magnet / Glare Hover / Click Spark，使用原生 React / CSS / Canvas 重写，不引入额外运行时依赖。
+- 全站入场由 `data-reveal` + `IntersectionObserver` 驱动；右上角 `MOTION ON/OFF` 记忆在 `localStorage` 的 `iif-motion`，并同步尊重 `prefers-reduced-motion`。
 - 页面切换使用圆形遮罩转场；站内链接统一走 `TransitionLink`。
 - 图片均有 `alt`；灯箱、弹窗支持 ESC 关闭，放映室支持 ← → 切换。
 
@@ -81,11 +88,16 @@ site/
 
 ## 验收基线
 
-最近一次全量检查：
+2026-11-09 全量检查：
 
-- 18 个页面截图：0 破图、0 控制台错误、0 失败请求
+- 18 个视口截图：0 破图、0 控制台错误、0 失败请求、0 横向溢出
 - 18 个详情页：全部可访问；6 个内部链接 200；79 个媒体引用全部存在
 - 音频真实播放、放映室打开即播并可切换、PPT 快速连点不越界、灯箱 98 张可翻页
+- 翻书验收：7 种内容页分别命中 `leaf-text / steps / gallery / note / placeholder / audio / film` 动画；键盘、滚轮回翻、ESC、移动端与 MOTION OFF 全部通过
+- 动效验收：标题折页从 `rotateX(-88deg)` 过渡到 `none`，磁吸位移约 `2.9px`，掠光跟随到约 `22%`，点击生成 5 个墨点并自动清理；MOTION OFF 下全部归零
+- 排版验收：5 个桌面宽度 × 4 个总览页，共 65 个章节标题，无非预期折行
+- 截图基线：`.shots/audit.json`、`.shots/reader-report.json`、`.shots/motion-report.json`、`.shots/layout-report.json`、`.shots/book-*.png`
+
 ## 公网发布
 
 - 线上地址：https://8-321.github.io/

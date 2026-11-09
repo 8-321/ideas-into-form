@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import "../../work.css";
 import "../../sound/sound.css";
 import "../../experience/experience.css";
+import "../../book.css";
+import { WorkBook } from "@/components/WorkBook";
 import { Cinema, type CinemaGroup } from "@/components/experience/Cinema";
 import { DeckViewer } from "@/components/experience/DeckViewer";
 import { ArrowRight, ArrowUpRight, Play } from "@/components/Icons";
@@ -47,7 +49,7 @@ const filmGroups: CinemaGroup[] = [
   { key: "ppt", label: "PPT", en: "DECK FILM", note: "信息如何被组织成叙事。演示视频与演示文稿节选互为证据。", videos: filmVideos.ppt },
 ];
 
-function GalleryBlock({ section }: { section: GallerySection }) {
+function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafIndex: string }) {
   const gallery = section.items.map((item) => ({
     src: item.src,
     alt: item.caption || item.label,
@@ -56,7 +58,13 @@ function GalleryBlock({ section }: { section: GallerySection }) {
   const layout = section.layout ?? "grid";
 
   return (
-    <section className="work-section work-gallery-block">
+    <section
+      className="work-section work-gallery-block"
+      data-leaf
+      data-leaf-type="gallery"
+      data-leaf-label={section.title}
+      data-leaf-index={leafIndex}
+    >
       <div className="wrap">
         <div className="work-section__head">
           <span className="eyebrow">{section.eyebrow}</span>
@@ -102,7 +110,14 @@ function WorkBody({ work }: { work: Work }) {
       {work.sections.map((section, index) => {
         if (section.type === "text") {
           return (
-            <section className="work-section work-text" key={`text-${index}`}>
+            <section
+              className="work-section work-text"
+              key={`text-${index}`}
+              data-leaf
+              data-leaf-type="text"
+              data-leaf-label={section.title}
+              data-leaf-index={String(index + 1).padStart(2, "0")}
+            >
               <div className="wrap work-text__grid">
                 <div className="work-text__side">
                   <span className="eyebrow">{section.eyebrow}</span>
@@ -121,7 +136,14 @@ function WorkBody({ work }: { work: Work }) {
 
         if (section.type === "steps") {
           return (
-            <section className="work-section work-steps" key={`steps-${index}`}>
+            <section
+              className="work-section work-steps"
+              key={`steps-${index}`}
+              data-leaf
+              data-leaf-type="steps"
+              data-leaf-label={section.title}
+              data-leaf-index={String(index + 1).padStart(2, "0")}
+            >
               <div className="wrap">
                 <div className="work-section__head">
                   <span className="eyebrow">{section.eyebrow}</span>
@@ -143,11 +165,26 @@ function WorkBody({ work }: { work: Work }) {
           );
         }
 
-        if (section.type === "gallery") return <GalleryBlock section={section} key={`gallery-${index}`} />;
+        if (section.type === "gallery") {
+          return (
+            <GalleryBlock
+              section={section}
+              leafIndex={String(index + 1).padStart(2, "0")}
+              key={`gallery-${index}`}
+            />
+          );
+        }
 
         if (section.type === "note") {
           return (
-            <section className="work-section work-note" key={`note-${index}`}>
+            <section
+              className="work-section work-note"
+              key={`note-${index}`}
+              data-leaf
+              data-leaf-type="note"
+              data-leaf-label={section.title}
+              data-leaf-index={String(index + 1).padStart(2, "0")}
+            >
               <div className="wrap work-note__inner">
                 <span className="mono">NOTE / 素材说明</span>
                 <div>
@@ -161,7 +198,14 @@ function WorkBody({ work }: { work: Work }) {
 
         if (section.type === "placeholder") {
           return (
-            <section className="work-section work-placeholder" key={`placeholder-${index}`}>
+            <section
+              className="work-section work-placeholder"
+              key={`placeholder-${index}`}
+              data-leaf
+              data-leaf-type="placeholder"
+              data-leaf-label={section.title}
+              data-leaf-index={String(index + 1).padStart(2, "0")}
+            >
               <div className="wrap">
                 <div className="work-section__head">
                   <span className="eyebrow">PENDING MATERIAL / 占位</span>
@@ -184,7 +228,14 @@ function WorkBody({ work }: { work: Work }) {
 
         if (section.type === "audio") {
           return (
-            <section className="work-section work-audio" key={`audio-${index}`}>
+            <section
+              className="work-section work-audio"
+              key={`audio-${index}`}
+              data-leaf
+              data-leaf-type="audio"
+              data-leaf-label={section.title}
+              data-leaf-index={String(index + 1).padStart(2, "0")}
+            >
               <div className="wrap">
                 <div className="work-section__head">
                   <span className="eyebrow">{section.eyebrow}</span>
@@ -199,7 +250,14 @@ function WorkBody({ work }: { work: Work }) {
 
         if (section.type === "film") {
           return (
-            <section className="work-section work-film" key={`film-${index}`}>
+            <section
+              className="work-section work-film"
+              key={`film-${index}`}
+              data-leaf
+              data-leaf-type="film"
+              data-leaf-label={section.title}
+              data-leaf-index={String(index + 1).padStart(2, "0")}
+            >
               <div className="wrap">
                 <div className="work-section__head">
                   <span className="eyebrow">{section.eyebrow}</span>
@@ -286,7 +344,9 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      <WorkBody work={work} />
+      <WorkBook title={work.title} no={work.no}>
+        <WorkBody work={work} />
+      </WorkBook>
 
       <section className="work-end">
         <div className="wrap">

@@ -119,8 +119,8 @@ export default function ImageChapterPage() {
               从一张封面、一个角色、一条线稿，到一套完整的视觉系统。
             </p>
             <div className="chapter-hero__meta" data-reveal style={{ "--d": "240ms" } as React.CSSProperties}>
-              <div><b>{imageWorks.length}</b><span className="mono">PROJECTS / 项目</span></div>
-              <div><b>{STATS.images}</b><span className="mono">ASSETS / 素材</span></div>
+              <div><b data-count>{imageWorks.length}</b><span className="mono">PROJECTS / 项目</span></div>
+              <div><b data-count>{STATS.images}</b><span className="mono">ASSETS / 素材</span></div>
               <div><b>98</b><span className="mono">COVERS / 日更</span></div>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function ImageChapterPage() {
           <div className="section-head">
             <div>
               <div className="section-head__index"><b>A</b><span>COVERS &amp; THEMES</span></div>
-              <h2>封面不是单张图，<br />而是一套可持续的视觉语法。</h2>
+              <h2>封面不是单张图，<br />而是一套可持续的<br />视觉语法。</h2>
             </div>
             <div>
               <p className="section-head__note">日更系列、人格主题、亚文化议题、黑白影像与短视频封面。它们看起来各不相同，但都在回答同一个问题：怎样让一个想法在第一眼被看见。</p>
@@ -306,7 +306,7 @@ export default function ImageChapterPage() {
           <div className="section-head">
             <div>
               <div className="section-head__index"><b>B</b><span>IP &amp; CHARACTERS</span></div>
-              <h2>角色不是一张图，<br />是一条可以反复使用的视觉线索。</h2>
+              <h2>角色不是一张图，<br />是一条可以反复使用的<br />视觉线索。</h2>
             </div>
             <div>
               <p className="section-head__note">从原形象、角色一致性到不同场景的应用。这里展示的是「同一个人」如何在不同画面里被认出来。</p>
@@ -441,7 +441,7 @@ export default function ImageChapterPage() {
           <div className="section-head">
             <div>
               <div className="section-head__index"><b>E</b><span>DRAWING</span></div>
-              <h2>绘画是视觉能力的底层训练。</h2>
+              <h2>绘画是视觉能力的<br />底层训练。</h2>
             </div>
             <div>
               <p className="section-head__note">原作的笔触、纸张与光影被完整保留。不套滤镜，不做 AI 风格化，也不把素描处理成另一种东西。</p>
@@ -486,7 +486,7 @@ export default function ImageChapterPage() {
           <div className="section-head">
             <div>
               <div className="section-head__index"><b>F</b><span>DIGITAL CREATIVE</span></div>
-              <h2>让声音，变成看得见的界面。</h2>
+              <h2>让声音，<br />变成看得见的界面。</h2>
             </div>
             <div>
               <p className="section-head__note">游戏设计归入成象。这里展示的是游戏视觉、界面与组件，不虚构可玩版本。</p>
@@ -532,7 +532,7 @@ export default function ImageChapterPage() {
           <div className="section-head">
             <div>
               <div className="section-head__index"><b>G</b><span>INTERFACE &amp; SYSTEM</span></div>
-              <h2>把现场感，带进产品界面。</h2>
+              <h2>把现场感，<br />带进产品界面。</h2>
             </div>
             <div>
               <p className="section-head__note">第二文化小程序 UI：黑白影像、荧光绿点缀与大字号标题，同时保留卡片圆角、底部导航与清晰的阅读层级。</p>

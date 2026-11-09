@@ -96,6 +96,7 @@ async function audit(page, label, opts = {}) {
       serif: document.fonts.check('16px "Noto Serif SC"'),
       bodyHeight: document.body.scrollHeight,
       links: document.querySelectorAll("a").length,
+      overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
     };
   });
 
@@ -157,7 +158,9 @@ console.log("REPORT", JSON.stringify({
   withBrokenImages: report.pages.filter((p) => p.broken.length).map((p) => [p.label, p.broken.length]),
   withErrors: report.pages.filter((p) => p.errors.length).map((p) => [p.label, p.errors]),
   withFailed: report.pages.filter((p) => p.failed.length).map((p) => [p.label, p.failed.slice(0, 5)]),
+  withOverflow: report.pages.filter((p) => p.overflowX > 0).map((p) => [p.label, p.overflowX]),
 }, null, 2));
 
 await browser.close();
 await new Promise((resolve) => server.close(resolve));
+process.exit(0);

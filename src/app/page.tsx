@@ -79,9 +79,9 @@ export default function HomePage() {
               <p data-reveal style={{ "--d": "240ms" } as React.CSSProperties}><strong>创作，就是让无形拥有形态。</strong></p>
             </div>
             <div className="manifesto__counts mono" data-reveal>
-              <div><b>{STATS.images}</b><span>IMAGES / 素材</span></div>
-              <div><b>{STATS.videos}</b><span>FILMS / 影像</span></div>
-              <div><b>{STATS.audio}</b><span>AUDIO / 声音</span></div>
+              <div><b data-count>{STATS.images}</b><span>IMAGES / 素材</span></div>
+              <div><b data-count>{STATS.videos}</b><span>FILMS / 影像</span></div>
+              <div><b data-count>{STATS.audio}</b><span>AUDIO / 声音</span></div>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default function HomePage() {
           <div className="section-head">
             <div>
               <div className="section-head__index"><b>01</b><span>SELECTED WORKS</span></div>
-              <h2>从封面、角色到屏幕里的世界。</h2>
+              <h2>从封面、角色，<br />到屏幕里的世界。</h2>
             </div>
             <div>
               <p className="section-head__note">这里不是一张张孤立的图。每一个项目都保留完整的视觉逻辑：它为什么长成这样，以及它还能继续长成什么。</p>
@@ -107,7 +107,7 @@ export default function HomePage() {
               const work = workBySlug(item.slug);
               if (!work) return null;
               return (
-                <TransitionLink key={item.slug} href={`/work/${work.slug}/`} className={`work-card ${item.cls}`} ariaLabel={`查看项目：${work.title}`}>
+                <TransitionLink key={item.slug} href={`/work/${work.slug}/`} className={`work-card ${item.cls}`} ariaLabel={`查看项目：${work.title}`} data-tilt data-cursor-label="VIEW">
                   <div className="work-card__img" data-parallax={index % 2 === 0 ? "0.035" : "0.055"}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={work.cover.thumb || work.cover.src} alt={work.coverAlt} loading={index < 2 ? "eager" : "lazy"} decoding="async" />
