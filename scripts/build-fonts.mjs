@@ -1,9 +1,10 @@
 import fs from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import subsetFont from "subset-font";
 
-const SITE = "E:/整体的作品集/由意成形/site";
+const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = path.join(SITE, "src");
 const OUT = path.join(SITE, "public", "fonts");
 await fs.mkdir(OUT, { recursive: true });
@@ -33,8 +34,10 @@ async function make(src, out, opts = {}) {
   console.log(out, (woff.length / 1024).toFixed(1) + "KB");
 }
 
-await make("C:/Windows/Fonts/NotoSerifSC-VF.ttf", "noto-serif-sc.woff2");
-await make("C:/Windows/Fonts/NotoSansSC-VF.ttf", "noto-sans-sc.woff2");
+const SERIF = process.env.NOTO_SERIF ?? "C:/Windows/Fonts/NotoSerifSC-VF.ttf";
+const SANS = process.env.NOTO_SANS ?? "C:/Windows/Fonts/NotoSansSC-VF.ttf";
+await make(SERIF, "noto-serif-sc.woff2");
+await make(SANS, "noto-sans-sc.woff2");
 
 const latin = [
   ["node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2", "instrument-serif.woff2"],

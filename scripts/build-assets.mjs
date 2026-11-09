@@ -1,11 +1,12 @@
 import fs from "node:fs/promises";
 import { existsSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { execFileSync } from "node:child_process";
 import sharp from "sharp";
 
-const ROOT = "E:/整体的作品集/由意成形";
-const SITE = path.join(ROOT, "site");
+const SITE = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const ROOT = path.resolve(SITE, "..");
 const PUBLIC = path.join(SITE, "public");
 const MEDIA = path.join(PUBLIC, "media");
 const WORK = path.join(SITE, ".work");

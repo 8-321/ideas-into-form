@@ -89,15 +89,15 @@ site/
 ## 公网发布
 
 - 线上地址：https://8-321.github.io/
-- 源码仓库：私有 `8-321/ideas-into-form`
+- 源码仓库：公开 `8-321/ideas-into-form`
 - 成品仓库：公开 `8-321/8-321.github.io`（只放 `out/` 构建产物）
 
-GitHub Free 不支持私有仓库直接开启 Pages，因此采用「源码私有 + 成品公开」两仓库方案：源码和原始素材留在私有仓库，公开仓库只包含导出后的 HTML/CSS/JS/媒体。
+源码与成品分仓：成品站放在用户站点仓库 `8-321.github.io`，可以直接占用根域名 `https://8-321.github.io/`；源码仓库保留完整代码与素材。
 
 更新线上站点：
 
 ```powershell
-cd "E:/整体的作品集/由意成形/site"
+cd site
 npm run build
 robocopy out "D:/deploy/ideas-into-form-pages" /MIR /XD "D:/deploy/ideas-into-form-pages/.git"
 if ($LASTEXITCODE -ge 8) { throw "robocopy failed" }
