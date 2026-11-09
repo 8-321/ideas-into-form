@@ -86,3 +86,30 @@ site/
 - 18 个页面截图：0 破图、0 控制台错误、0 失败请求
 - 18 个详情页：全部可访问；6 个内部链接 200；79 个媒体引用全部存在
 - 音频真实播放、放映室打开即播并可切换、PPT 快速连点不越界、灯箱 98 张可翻页
+## 公网发布
+
+- 线上地址：https://8-321.github.io/
+- 源码仓库：私有 `8-321/ideas-into-form`
+- 成品仓库：公开 `8-321/8-321.github.io`（只放 `out/` 构建产物）
+
+GitHub Free 不支持私有仓库直接开启 Pages，因此采用「源码私有 + 成品公开」两仓库方案：源码和原始素材留在私有仓库，公开仓库只包含导出后的 HTML/CSS/JS/媒体。
+
+更新线上站点：
+
+```powershell
+cd "E:/整体的作品集/由意成形/site"
+npm run build
+robocopy out "D:/deploy/ideas-into-form-pages" /MIR /XD "D:/deploy/ideas-into-form-pages/.git"
+if ($LASTEXITCODE -ge 8) { throw "robocopy failed" }
+git -C "D:/deploy/ideas-into-form-pages" add -A
+git -C "D:/deploy/ideas-into-form-pages" commit -m "deploy: update site"
+git -C "D:/deploy/ideas-into-form-pages" push
+```
+
+若部署目录不存在，先克隆一次：
+
+```powershell
+git clone https://github.com/8-321/8-321.github.io.git "D:/deploy/ideas-into-form-pages"
+```
+
+注意：`robocopy` 退出码 `0` 表示无变化、`1` 表示成功复制，均属正常；`>= 8` 才是失败。
