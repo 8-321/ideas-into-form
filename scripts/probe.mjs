@@ -1,0 +1,24 @@
+import http from "node:http";
+import fs from "node:fs";
+import fsp from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import puppeteer from "puppeteer-core";
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "out");
+const MIME={".html":"text/html; charset=utf-8",".js":"text/javascript",".css":"text/css",".webp":"image/webp",".png":"image/png",".svg":"image/svg+xml",".woff2":"font/woff2",".mp4":"video/mp4",".m4a":"audio/mp4",".pdf":"application/pdf"};
+const server=http.createServer(async(req,res)=>{try{const u=new URL(req.url,"http://x");let f=path.join(ROOT,decodeURIComponent(u.pathname));if(f.endsWith(path.sep))f=path.join(f,"index.html");if(!path.extname(f)&&fs.existsSync(path.join(f,"index.html")))f=path.join(f,"index.html");const d=await fsp.readFile(f);res.writeHead(200,{"content-type":MIME[path.extname(f)]??"application/octet-stream"});res.end(d)}catch{res.writeHead(404);res.end("404")}});
+await new Promise(r=>server.listen(3012,"127.0.0.1",r));
+const browser=await puppeteer.launch({executablePath:"C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",headless:"new",args:["--no-sandbox","--hide-scrollbars"],defaultViewport:{width:1512,height:950}});
+const page=await browser.newPage();
+await page.goto("http://127.0.0.1:3012/experience/",{waitUntil:"networkidle2"});
+await new Promise(r=>setTimeout(r,800));
+await page.evaluate(()=>{document.documentElement.style.scrollBehavior="auto";document.querySelector("#d-decks").scrollIntoView({block:"start"});});
+await new Promise(r=>setTimeout(r,1800));
+const info=await page.evaluate(()=>{
+  const pick=(sel)=>{const el=document.querySelector(sel);if(!el)return null;const r=el.getBoundingClientRect();const cs=getComputedStyle(el);return {rect:{top:r.top,height:r.height},opacity:cs.opacity,transform:cs.transform,display:cs.display,text:el.textContent.trim().slice(0,60)}};
+  const img=document.querySelector(".deck-stage__image img");
+  return {scrollY:window.scrollY,body:document.body.scrollHeight,section:pick("#d-decks"),head:pick("#d-decks .section-head"),viewer:pick(".deck-viewer"),stage:pick(".deck-stage__frame"),img:img?{src:img.getAttribute("src"),nw:img.naturalWidth,complete:img.complete}:null,reveal:[...document.querySelectorAll("#d-decks [data-reveal]")].map(e=>({cls:e.className,op:e.getBoundingClientRect().top,opacity:getComputedStyle(e).opacity}))};
+});
+console.log(JSON.stringify(info,null,2));
+await page.screenshot({path:path.resolve(ROOT,"..",".shots","probe-decks.png")});
+await browser.close();await new Promise(r=>server.close(r));

@@ -1,0 +1,88 @@
+# 由意成形 · IDEAS INTO FORM
+
+个人数字创意作品集网站。三章结构：**成象 / IMAGE**、**成声 / SOUND**、**成境 / EXPERIENCE**。所有页面为静态导出，可直接部署到任意静态托管。
+
+## 快速启动
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
+
+生产构建与本地预览：
+
+```bash
+npm run build      # 输出到 out/
+npm start          # npx serve out -l 3000
+```
+
+要求：Node.js 20+。素材重建另需 **ffmpeg / ffprobe** 在 PATH 中。
+
+## 常用脚本
+
+| 命令 | 作用 |
+| --- | --- |
+| `npm run fonts` | 扫描页面用字，重新生成中文 WOFF2 子集；**新增中文文案后必须跑一次** |
+| `npm run assets` | 从原始素材目录转码图片、视频、音频、PPT，写入 `src/content/media.json` |
+| `npm run build` | Next.js 静态导出（`output: "export"`，`trailingSlash: true`） |
+| `node scripts/audit.mjs` | 18 个视口截图 + 破图、控制台、失败请求检查 |
+| `node scripts/interact.mjs` | 音频播放、放映室、PPT、灯箱、动效开关、18 个详情页、链接与媒体存在性检查 |
+
+`audit.mjs` / `interact.mjs` 使用本机 Edge（`C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe`）与 3011 / 3013 端口；换机器时改脚本顶部常量。
+
+## 内容结构
+
+```
+site/
+├─ src/
+│  ├─ app/
+│  │  ├─ page.tsx                 首页
+│  │  ├─ image/page.tsx           01 成象
+│  │  ├─ sound/page.tsx           02 成声
+│  │  ├─ experience/page.tsx      03 成境
+│  │  └─ work/[slug]/page.tsx     18 个作品详情（SSG）
+│  ├─ components/                 导航、动效、灯箱、播放器、放映室、PPT 浏览
+│  ├─ content/
+│  │  ├─ media.json               素材清单（由 npm run assets 生成）
+│  │  └─ works.ts                 作品文案、章节、分类与展示顺序
+│  └─ types/
+├─ public/
+│  ├─ media/image|video|audio|ppt 转码后的站内素材
+│  └─ fonts/                      中文子集与英文字体
+├─ scripts/                       素材、字体、验收脚本
+└─ out/                           静态导出结果（部署这个目录）
+```
+
+## 修改内容
+
+- **作品文案 / 顺序**：编辑 `src/content/works.ts`。每个作品含 `slug`、`no`、`chapter`、标题、摘要、封面、`sections`（text / steps / gallery / note / placeholder / audio / film）。
+- **素材**：原始文件放在仓库上一级的 `成象 IMAGE`、`成声 SOUND`、`成境 EXPERIENCE` 目录，然后运行 `npm run assets`。脚本顶部 `ROOT` 是绝对路径，移动项目后需同步修改。
+- **强制重建**：PowerShell 执行 `$env:FORCE=1; npm run assets`，结束后 `Remove-Item Env:FORCE`。
+- **钢琴 / 古筝封面**：专用封面位于 `成境 EXPERIENCE/影像创作/钢琴` 与 `古筝`，由素材脚本输出到 `public/media/image/filmCovers/`，在 `works.ts` 中以 `FILM_COVERS` 暴露。成境页主视觉、放映室节目首个画面、详情页封面使用该图；下方胶片条仍显示每段视频的真实画面，便于选片。
+- **新增中文文案**：跑 `npm run fonts`，否则子集字体可能缺字。
+- **占位规则**：缺素材时使用 `placeholder` section，页面明确显示「待上传作品素材」，不用网络图片或生成图冒充实拍作品。
+
+## 动效与可访问性
+
+- 全站滚动入场由 `data-reveal` + `IntersectionObserver` 驱动；支持 `prefers-reduced-motion`。
+- 右上角 `MOTION ON/OFF` 记忆在 `localStorage` 的 `iif-motion`。
+- 页面切换使用圆形遮罩转场；站内链接统一走 `TransitionLink`。
+- 图片均有 `alt`；灯箱、弹窗支持 ESC 关闭，放映室支持 ← → 切换。
+
+## 部署
+
+`npm run build` 后把 `out/` 整体上传到静态托管（Nginx、OSS、Vercel、GitHub Pages 均可）。站点使用相对根路径，部署在子目录时需在 `next.config.ts` 配置 `basePath` 并重新构建。
+
+## 当前规模
+
+- 静态页面 25 个（3 个章节页 + 18 个作品详情 + 首页等）
+- 图片 254 张、视频 12 段、音频 5 条、演示文稿 4 份（46 页）
+- 成象 16 个项目、成声 5 条音频、成境 11 段影像 + 4 份演示
+
+## 验收基线
+
+最近一次全量检查：
+
+- 18 个页面截图：0 破图、0 控制台错误、0 失败请求
+- 18 个详情页：全部可访问；6 个内部链接 200；79 个媒体引用全部存在
+- 音频真实播放、放映室打开即播并可切换、PPT 快速连点不越界、灯箱 98 张可翻页

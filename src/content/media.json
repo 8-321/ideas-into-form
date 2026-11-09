@@ -1,0 +1,2985 @@
+{
+  "images": {
+    "days": [
+      {
+        "key": "01-08",
+        "label": "01.08",
+        "src": "/media/image/days/01-08.webp",
+        "thumb": "/media/image/days/01-08@thumb.webp",
+        "width": 474,
+        "height": 672,
+        "ratio": 0.705,
+        "date": "2026-01-08",
+        "day": "01.08"
+      },
+      {
+        "key": "01-09",
+        "label": "01.09",
+        "src": "/media/image/days/01-09.webp",
+        "thumb": "/media/image/days/01-09@thumb.webp",
+        "width": 477,
+        "height": 684,
+        "ratio": 0.697,
+        "date": "2026-01-09",
+        "day": "01.09"
+      },
+      {
+        "key": "01-10",
+        "label": "01.10",
+        "src": "/media/image/days/01-10.webp",
+        "thumb": "/media/image/days/01-10@thumb.webp",
+        "width": 477,
+        "height": 672,
+        "ratio": 0.71,
+        "date": "2026-01-10",
+        "day": "01.10"
+      },
+      {
+        "key": "01-11",
+        "label": "01.11",
+        "src": "/media/image/days/01-11.webp",
+        "thumb": "/media/image/days/01-11@thumb.webp",
+        "width": 468,
+        "height": 675,
+        "ratio": 0.693,
+        "date": "2026-01-11",
+        "day": "01.11"
+      },
+      {
+        "key": "01-12",
+        "label": "01.12",
+        "src": "/media/image/days/01-12.webp",
+        "thumb": "/media/image/days/01-12@thumb.webp",
+        "width": 477,
+        "height": 684,
+        "ratio": 0.697,
+        "date": "2026-01-12",
+        "day": "01.12"
+      },
+      {
+        "key": "01-13",
+        "label": "01.13",
+        "src": "/media/image/days/01-13.webp",
+        "thumb": "/media/image/days/01-13@thumb.webp",
+        "width": 474,
+        "height": 669,
+        "ratio": 0.709,
+        "date": "2026-01-13",
+        "day": "01.13"
+      },
+      {
+        "key": "01-14",
+        "label": "01.14",
+        "src": "/media/image/days/01-14.webp",
+        "thumb": "/media/image/days/01-14@thumb.webp",
+        "width": 474,
+        "height": 684,
+        "ratio": 0.693,
+        "date": "2026-01-14",
+        "day": "01.14"
+      },
+      {
+        "key": "01-15",
+        "label": "01.15",
+        "src": "/media/image/days/01-15.webp",
+        "thumb": "/media/image/days/01-15@thumb.webp",
+        "width": 441,
+        "height": 626,
+        "ratio": 0.704,
+        "date": "2026-01-15",
+        "day": "01.15"
+      },
+      {
+        "key": "01-16",
+        "label": "01.16",
+        "src": "/media/image/days/01-16.webp",
+        "thumb": "/media/image/days/01-16@thumb.webp",
+        "width": 441,
+        "height": 630,
+        "ratio": 0.7,
+        "date": "2026-01-16",
+        "day": "01.16"
+      },
+      {
+        "key": "01-17",
+        "label": "01.17",
+        "src": "/media/image/days/01-17.webp",
+        "thumb": "/media/image/days/01-17@thumb.webp",
+        "width": 420,
+        "height": 600,
+        "ratio": 0.7,
+        "date": "2026-01-17",
+        "day": "01.17"
+      },
+      {
+        "key": "01-18",
+        "label": "01.18",
+        "src": "/media/image/days/01-18.webp",
+        "thumb": "/media/image/days/01-18@thumb.webp",
+        "width": 441,
+        "height": 630,
+        "ratio": 0.7,
+        "date": "2026-01-18",
+        "day": "01.18"
+      },
+      {
+        "key": "01-19",
+        "label": "01.19",
+        "src": "/media/image/days/01-19.webp",
+        "thumb": "/media/image/days/01-19@thumb.webp",
+        "width": 441,
+        "height": 636,
+        "ratio": 0.693,
+        "date": "2026-01-19",
+        "day": "01.19"
+      },
+      {
+        "key": "01-20",
+        "label": "01.20",
+        "src": "/media/image/days/01-20.webp",
+        "thumb": "/media/image/days/01-20@thumb.webp",
+        "width": 444,
+        "height": 636,
+        "ratio": 0.698,
+        "date": "2026-01-20",
+        "day": "01.20"
+      },
+      {
+        "key": "01-21",
+        "label": "01.21",
+        "src": "/media/image/days/01-21.webp",
+        "thumb": "/media/image/days/01-21@thumb.webp",
+        "width": 441,
+        "height": 629,
+        "ratio": 0.701,
+        "date": "2026-01-21",
+        "day": "01.21"
+      },
+      {
+        "key": "01-22",
+        "label": "01.22",
+        "src": "/media/image/days/01-22.webp",
+        "thumb": "/media/image/days/01-22@thumb.webp",
+        "width": 443,
+        "height": 627,
+        "ratio": 0.707,
+        "date": "2026-01-22",
+        "day": "01.22"
+      },
+      {
+        "key": "01-23",
+        "label": "01.23",
+        "src": "/media/image/days/01-23.webp",
+        "thumb": "/media/image/days/01-23@thumb.webp",
+        "width": 441,
+        "height": 624,
+        "ratio": 0.707,
+        "date": "2026-01-23",
+        "day": "01.23"
+      },
+      {
+        "key": "01-24",
+        "label": "01.24",
+        "src": "/media/image/days/01-24.webp",
+        "thumb": "/media/image/days/01-24@thumb.webp",
+        "width": 441,
+        "height": 618,
+        "ratio": 0.714,
+        "date": "2026-01-24",
+        "day": "01.24"
+      },
+      {
+        "key": "01-25",
+        "label": "01.25",
+        "src": "/media/image/days/01-25.webp",
+        "thumb": "/media/image/days/01-25@thumb.webp",
+        "width": 438,
+        "height": 614,
+        "ratio": 0.713,
+        "date": "2026-01-25",
+        "day": "01.25"
+      },
+      {
+        "key": "01-26",
+        "label": "01.26",
+        "src": "/media/image/days/01-26.webp",
+        "thumb": "/media/image/days/01-26@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-01-26",
+        "day": "01.26"
+      },
+      {
+        "key": "01-27",
+        "label": "01.27",
+        "src": "/media/image/days/01-27.webp",
+        "thumb": "/media/image/days/01-27@thumb.webp",
+        "width": 438,
+        "height": 633,
+        "ratio": 0.692,
+        "date": "2026-01-27",
+        "day": "01.27"
+      },
+      {
+        "key": "01-28",
+        "label": "01.28",
+        "src": "/media/image/days/01-28.webp",
+        "thumb": "/media/image/days/01-28@thumb.webp",
+        "width": 438,
+        "height": 633,
+        "ratio": 0.692,
+        "date": "2026-01-28",
+        "day": "01.28"
+      },
+      {
+        "key": "01-29",
+        "label": "01.29",
+        "src": "/media/image/days/01-29.webp",
+        "thumb": "/media/image/days/01-29@thumb.webp",
+        "width": 441,
+        "height": 630,
+        "ratio": 0.7,
+        "date": "2026-01-29",
+        "day": "01.29"
+      },
+      {
+        "key": "01-30",
+        "label": "01.30",
+        "src": "/media/image/days/01-30.webp",
+        "thumb": "/media/image/days/01-30@thumb.webp",
+        "width": 437,
+        "height": 621,
+        "ratio": 0.704,
+        "date": "2026-01-30",
+        "day": "01.30"
+      },
+      {
+        "key": "01-31",
+        "label": "01.31",
+        "src": "/media/image/days/01-31.webp",
+        "thumb": "/media/image/days/01-31@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-01-31",
+        "day": "01.31"
+      },
+      {
+        "key": "02-01",
+        "label": "02.01",
+        "src": "/media/image/days/02-01.webp",
+        "thumb": "/media/image/days/02-01@thumb.webp",
+        "width": 441,
+        "height": 612,
+        "ratio": 0.721,
+        "date": "2026-02-01",
+        "day": "02.01"
+      },
+      {
+        "key": "02-02",
+        "label": "02.02",
+        "src": "/media/image/days/02-02.webp",
+        "thumb": "/media/image/days/02-02@thumb.webp",
+        "width": 441,
+        "height": 620,
+        "ratio": 0.711,
+        "date": "2026-02-02",
+        "day": "02.02"
+      },
+      {
+        "key": "02-03",
+        "label": "02.03",
+        "src": "/media/image/days/02-03.webp",
+        "thumb": "/media/image/days/02-03@thumb.webp",
+        "width": 441,
+        "height": 639,
+        "ratio": 0.69,
+        "date": "2026-02-03",
+        "day": "02.03"
+      },
+      {
+        "key": "02-04",
+        "label": "02.04",
+        "src": "/media/image/days/02-04.webp",
+        "thumb": "/media/image/days/02-04@thumb.webp",
+        "width": 438,
+        "height": 627,
+        "ratio": 0.699,
+        "date": "2026-02-04",
+        "day": "02.04"
+      },
+      {
+        "key": "02-05",
+        "label": "02.05",
+        "src": "/media/image/days/02-05.webp",
+        "thumb": "/media/image/days/02-05@thumb.webp",
+        "width": 441,
+        "height": 627,
+        "ratio": 0.703,
+        "date": "2026-02-05",
+        "day": "02.05"
+      },
+      {
+        "key": "02-06",
+        "label": "02.06",
+        "src": "/media/image/days/02-06.webp",
+        "thumb": "/media/image/days/02-06@thumb.webp",
+        "width": 437,
+        "height": 627,
+        "ratio": 0.697,
+        "date": "2026-02-06",
+        "day": "02.06"
+      },
+      {
+        "key": "02-07",
+        "label": "02.07",
+        "src": "/media/image/days/02-07.webp",
+        "thumb": "/media/image/days/02-07@thumb.webp",
+        "width": 441,
+        "height": 609,
+        "ratio": 0.724,
+        "date": "2026-02-07",
+        "day": "02.07"
+      },
+      {
+        "key": "02-08",
+        "label": "02.08",
+        "src": "/media/image/days/02-08.webp",
+        "thumb": "/media/image/days/02-08@thumb.webp",
+        "width": 440,
+        "height": 615,
+        "ratio": 0.715,
+        "date": "2026-02-08",
+        "day": "02.08"
+      },
+      {
+        "key": "02-09",
+        "label": "02.09",
+        "src": "/media/image/days/02-09.webp",
+        "thumb": "/media/image/days/02-09@thumb.webp",
+        "width": 441,
+        "height": 623,
+        "ratio": 0.708,
+        "date": "2026-02-09",
+        "day": "02.09"
+      },
+      {
+        "key": "02-10",
+        "label": "02.10",
+        "src": "/media/image/days/02-10.webp",
+        "thumb": "/media/image/days/02-10@thumb.webp",
+        "width": 441,
+        "height": 636,
+        "ratio": 0.693,
+        "date": "2026-02-10",
+        "day": "02.10"
+      },
+      {
+        "key": "02-11",
+        "label": "02.11",
+        "src": "/media/image/days/02-11.webp",
+        "thumb": "/media/image/days/02-11@thumb.webp",
+        "width": 435,
+        "height": 623,
+        "ratio": 0.698,
+        "date": "2026-02-11",
+        "day": "02.11"
+      },
+      {
+        "key": "02-12",
+        "label": "02.12",
+        "src": "/media/image/days/02-12.webp",
+        "thumb": "/media/image/days/02-12@thumb.webp",
+        "width": 435,
+        "height": 630,
+        "ratio": 0.69,
+        "date": "2026-02-12",
+        "day": "02.12"
+      },
+      {
+        "key": "02-13",
+        "label": "02.13",
+        "src": "/media/image/days/02-13.webp",
+        "thumb": "/media/image/days/02-13@thumb.webp",
+        "width": 435,
+        "height": 624,
+        "ratio": 0.697,
+        "date": "2026-02-13",
+        "day": "02.13"
+      },
+      {
+        "key": "02-14",
+        "label": "02.14",
+        "src": "/media/image/days/02-14.webp",
+        "thumb": "/media/image/days/02-14@thumb.webp",
+        "width": 435,
+        "height": 621,
+        "ratio": 0.7,
+        "date": "2026-02-14",
+        "day": "02.14"
+      },
+      {
+        "key": "02-15",
+        "label": "02.15",
+        "src": "/media/image/days/02-15.webp",
+        "thumb": "/media/image/days/02-15@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-02-15",
+        "day": "02.15"
+      },
+      {
+        "key": "02-16",
+        "label": "02.16",
+        "src": "/media/image/days/02-16.webp",
+        "thumb": "/media/image/days/02-16@thumb.webp",
+        "width": 444,
+        "height": 624,
+        "ratio": 0.712,
+        "date": "2026-02-16",
+        "day": "02.16"
+      },
+      {
+        "key": "02-17",
+        "label": "02.17",
+        "src": "/media/image/days/02-17.webp",
+        "thumb": "/media/image/days/02-17@thumb.webp",
+        "width": 441,
+        "height": 609,
+        "ratio": 0.724,
+        "date": "2026-02-17",
+        "day": "02.17"
+      },
+      {
+        "key": "02-18",
+        "label": "02.18",
+        "src": "/media/image/days/02-18.webp",
+        "thumb": "/media/image/days/02-18@thumb.webp",
+        "width": 435,
+        "height": 624,
+        "ratio": 0.697,
+        "date": "2026-02-18",
+        "day": "02.18"
+      },
+      {
+        "key": "02-19",
+        "label": "02.19",
+        "src": "/media/image/days/02-19.webp",
+        "thumb": "/media/image/days/02-19@thumb.webp",
+        "width": 438,
+        "height": 626,
+        "ratio": 0.7,
+        "date": "2026-02-19",
+        "day": "02.19"
+      },
+      {
+        "key": "02-20",
+        "label": "02.20",
+        "src": "/media/image/days/02-20.webp",
+        "thumb": "/media/image/days/02-20@thumb.webp",
+        "width": 429,
+        "height": 612,
+        "ratio": 0.701,
+        "date": "2026-02-20",
+        "day": "02.20"
+      },
+      {
+        "key": "02-21",
+        "label": "02.21",
+        "src": "/media/image/days/02-21.webp",
+        "thumb": "/media/image/days/02-21@thumb.webp",
+        "width": 432,
+        "height": 624,
+        "ratio": 0.692,
+        "date": "2026-02-21",
+        "day": "02.21"
+      },
+      {
+        "key": "02-22",
+        "label": "02.22",
+        "src": "/media/image/days/02-22.webp",
+        "thumb": "/media/image/days/02-22@thumb.webp",
+        "width": 432,
+        "height": 615,
+        "ratio": 0.702,
+        "date": "2026-02-22",
+        "day": "02.22"
+      },
+      {
+        "key": "02-23",
+        "label": "02.23",
+        "src": "/media/image/days/02-23.webp",
+        "thumb": "/media/image/days/02-23@thumb.webp",
+        "width": 435,
+        "height": 612,
+        "ratio": 0.711,
+        "date": "2026-02-23",
+        "day": "02.23"
+      },
+      {
+        "key": "02-24",
+        "label": "02.24",
+        "src": "/media/image/days/02-24.webp",
+        "thumb": "/media/image/days/02-24@thumb.webp",
+        "width": 432,
+        "height": 624,
+        "ratio": 0.692,
+        "date": "2026-02-24",
+        "day": "02.24"
+      },
+      {
+        "key": "02-25",
+        "label": "02.25",
+        "src": "/media/image/days/02-25.webp",
+        "thumb": "/media/image/days/02-25@thumb.webp",
+        "width": 432,
+        "height": 636,
+        "ratio": 0.679,
+        "date": "2026-02-25",
+        "day": "02.25"
+      },
+      {
+        "key": "02-26",
+        "label": "02.26",
+        "src": "/media/image/days/02-26.webp",
+        "thumb": "/media/image/days/02-26@thumb.webp",
+        "width": 438,
+        "height": 627,
+        "ratio": 0.699,
+        "date": "2026-02-26",
+        "day": "02.26"
+      },
+      {
+        "key": "02-27",
+        "label": "02.27",
+        "src": "/media/image/days/02-27.webp",
+        "thumb": "/media/image/days/02-27@thumb.webp",
+        "width": 437,
+        "height": 633,
+        "ratio": 0.69,
+        "date": "2026-02-27",
+        "day": "02.27"
+      },
+      {
+        "key": "02-28",
+        "label": "02.28",
+        "src": "/media/image/days/02-28.webp",
+        "thumb": "/media/image/days/02-28@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-02-28",
+        "day": "02.28"
+      },
+      {
+        "key": "03-01",
+        "label": "03.01",
+        "src": "/media/image/days/03-01.webp",
+        "thumb": "/media/image/days/03-01@thumb.webp",
+        "width": 441,
+        "height": 618,
+        "ratio": 0.714,
+        "date": "2026-03-01",
+        "day": "03.01"
+      },
+      {
+        "key": "03-02",
+        "label": "03.02",
+        "src": "/media/image/days/03-02.webp",
+        "thumb": "/media/image/days/03-02@thumb.webp",
+        "width": 438,
+        "height": 636,
+        "ratio": 0.689,
+        "date": "2026-03-02",
+        "day": "03.02"
+      },
+      {
+        "key": "03-03",
+        "label": "03.03",
+        "src": "/media/image/days/03-03.webp",
+        "thumb": "/media/image/days/03-03@thumb.webp",
+        "width": 438,
+        "height": 618,
+        "ratio": 0.709,
+        "date": "2026-03-03",
+        "day": "03.03"
+      },
+      {
+        "key": "03-04",
+        "label": "03.04",
+        "src": "/media/image/days/03-04.webp",
+        "thumb": "/media/image/days/03-04@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-03-04",
+        "day": "03.04"
+      },
+      {
+        "key": "03-05",
+        "label": "03.05",
+        "src": "/media/image/days/03-05.webp",
+        "thumb": "/media/image/days/03-05@thumb.webp",
+        "width": 435,
+        "height": 620,
+        "ratio": 0.702,
+        "date": "2026-03-05",
+        "day": "03.05"
+      },
+      {
+        "key": "03-06",
+        "label": "03.06",
+        "src": "/media/image/days/03-06.webp",
+        "thumb": "/media/image/days/03-06@thumb.webp",
+        "width": 435,
+        "height": 621,
+        "ratio": 0.7,
+        "date": "2026-03-06",
+        "day": "03.06"
+      },
+      {
+        "key": "03-07",
+        "label": "03.07",
+        "src": "/media/image/days/03-07.webp",
+        "thumb": "/media/image/days/03-07@thumb.webp",
+        "width": 429,
+        "height": 612,
+        "ratio": 0.701,
+        "date": "2026-03-07",
+        "day": "03.07"
+      },
+      {
+        "key": "03-08",
+        "label": "03.08",
+        "src": "/media/image/days/03-08.webp",
+        "thumb": "/media/image/days/03-08@thumb.webp",
+        "width": 444,
+        "height": 636,
+        "ratio": 0.698,
+        "date": "2026-03-08",
+        "day": "03.08"
+      },
+      {
+        "key": "03-09",
+        "label": "03.09",
+        "src": "/media/image/days/03-09.webp",
+        "thumb": "/media/image/days/03-09@thumb.webp",
+        "width": 441,
+        "height": 618,
+        "ratio": 0.714,
+        "date": "2026-03-09",
+        "day": "03.09"
+      },
+      {
+        "key": "03-10",
+        "label": "03.10",
+        "src": "/media/image/days/03-10.webp",
+        "thumb": "/media/image/days/03-10@thumb.webp",
+        "width": 441,
+        "height": 635,
+        "ratio": 0.694,
+        "date": "2026-03-10",
+        "day": "03.10"
+      },
+      {
+        "key": "03-11",
+        "label": "03.11",
+        "src": "/media/image/days/03-11.webp",
+        "thumb": "/media/image/days/03-11@thumb.webp",
+        "width": 438,
+        "height": 621,
+        "ratio": 0.705,
+        "date": "2026-03-11",
+        "day": "03.11"
+      },
+      {
+        "key": "03-12",
+        "label": "03.12",
+        "src": "/media/image/days/03-12.webp",
+        "thumb": "/media/image/days/03-12@thumb.webp",
+        "width": 438,
+        "height": 639,
+        "ratio": 0.685,
+        "date": "2026-03-12",
+        "day": "03.12"
+      },
+      {
+        "key": "03-13",
+        "label": "03.13",
+        "src": "/media/image/days/03-13.webp",
+        "thumb": "/media/image/days/03-13@thumb.webp",
+        "width": 431,
+        "height": 627,
+        "ratio": 0.687,
+        "date": "2026-03-13",
+        "day": "03.13"
+      },
+      {
+        "key": "03-14",
+        "label": "03.14",
+        "src": "/media/image/days/03-14.webp",
+        "thumb": "/media/image/days/03-14@thumb.webp",
+        "width": 441,
+        "height": 627,
+        "ratio": 0.703,
+        "date": "2026-03-14",
+        "day": "03.14"
+      },
+      {
+        "key": "03-15",
+        "label": "03.15",
+        "src": "/media/image/days/03-15.webp",
+        "thumb": "/media/image/days/03-15@thumb.webp",
+        "width": 441,
+        "height": 627,
+        "ratio": 0.703,
+        "date": "2026-03-15",
+        "day": "03.15"
+      },
+      {
+        "key": "03-16",
+        "label": "03.16",
+        "src": "/media/image/days/03-16.webp",
+        "thumb": "/media/image/days/03-16@thumb.webp",
+        "width": 438,
+        "height": 621,
+        "ratio": 0.705,
+        "date": "2026-03-16",
+        "day": "03.16"
+      },
+      {
+        "key": "03-17",
+        "label": "03.17",
+        "src": "/media/image/days/03-17.webp",
+        "thumb": "/media/image/days/03-17@thumb.webp",
+        "width": 435,
+        "height": 630,
+        "ratio": 0.69,
+        "date": "2026-03-17",
+        "day": "03.17"
+      },
+      {
+        "key": "03-18",
+        "label": "03.18",
+        "src": "/media/image/days/03-18.webp",
+        "thumb": "/media/image/days/03-18@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-03-18",
+        "day": "03.18"
+      },
+      {
+        "key": "03-19",
+        "label": "03.19",
+        "src": "/media/image/days/03-19.webp",
+        "thumb": "/media/image/days/03-19@thumb.webp",
+        "width": 441,
+        "height": 594,
+        "ratio": 0.742,
+        "date": "2026-03-19",
+        "day": "03.19"
+      },
+      {
+        "key": "03-20",
+        "label": "03.20",
+        "src": "/media/image/days/03-20.webp",
+        "thumb": "/media/image/days/03-20@thumb.webp",
+        "width": 438,
+        "height": 621,
+        "ratio": 0.705,
+        "date": "2026-03-20",
+        "day": "03.20"
+      },
+      {
+        "key": "03-21",
+        "label": "03.21",
+        "src": "/media/image/days/03-21.webp",
+        "thumb": "/media/image/days/03-21@thumb.webp",
+        "width": 438,
+        "height": 627,
+        "ratio": 0.699,
+        "date": "2026-03-21",
+        "day": "03.21"
+      },
+      {
+        "key": "03-22",
+        "label": "03.22",
+        "src": "/media/image/days/03-22.webp",
+        "thumb": "/media/image/days/03-22@thumb.webp",
+        "width": 435,
+        "height": 609,
+        "ratio": 0.714,
+        "date": "2026-03-22",
+        "day": "03.22"
+      },
+      {
+        "key": "03-23",
+        "label": "03.23",
+        "src": "/media/image/days/03-23.webp",
+        "thumb": "/media/image/days/03-23@thumb.webp",
+        "width": 437,
+        "height": 624,
+        "ratio": 0.7,
+        "date": "2026-03-23",
+        "day": "03.23"
+      },
+      {
+        "key": "03-24",
+        "label": "03.24",
+        "src": "/media/image/days/03-24.webp",
+        "thumb": "/media/image/days/03-24@thumb.webp",
+        "width": 438,
+        "height": 627,
+        "ratio": 0.699,
+        "date": "2026-03-24",
+        "day": "03.24"
+      },
+      {
+        "key": "03-25",
+        "label": "03.25",
+        "src": "/media/image/days/03-25.webp",
+        "thumb": "/media/image/days/03-25@thumb.webp",
+        "width": 435,
+        "height": 606,
+        "ratio": 0.718,
+        "date": "2026-03-25",
+        "day": "03.25"
+      },
+      {
+        "key": "03-26",
+        "label": "03.26",
+        "src": "/media/image/days/03-26.webp",
+        "thumb": "/media/image/days/03-26@thumb.webp",
+        "width": 450,
+        "height": 654,
+        "ratio": 0.688,
+        "date": "2026-03-26",
+        "day": "03.26"
+      },
+      {
+        "key": "03-27",
+        "label": "03.27",
+        "src": "/media/image/days/03-27.webp",
+        "thumb": "/media/image/days/03-27@thumb.webp",
+        "width": 450,
+        "height": 657,
+        "ratio": 0.685,
+        "date": "2026-03-27",
+        "day": "03.27"
+      },
+      {
+        "key": "03-28",
+        "label": "03.28",
+        "src": "/media/image/days/03-28.webp",
+        "thumb": "/media/image/days/03-28@thumb.webp",
+        "width": 447,
+        "height": 639,
+        "ratio": 0.7,
+        "date": "2026-03-28",
+        "day": "03.28"
+      },
+      {
+        "key": "03-30",
+        "label": "03.30",
+        "src": "/media/image/days/03-30.webp",
+        "thumb": "/media/image/days/03-30@thumb.webp",
+        "width": 450,
+        "height": 636,
+        "ratio": 0.708,
+        "date": "2026-03-30",
+        "day": "03.30"
+      },
+      {
+        "key": "03-31",
+        "label": "03.31",
+        "src": "/media/image/days/03-31.webp",
+        "thumb": "/media/image/days/03-31@thumb.webp",
+        "width": 459,
+        "height": 630,
+        "ratio": 0.729,
+        "date": "2026-03-31",
+        "day": "03.31"
+      },
+      {
+        "key": "04-01",
+        "label": "04.01",
+        "src": "/media/image/days/04-01.webp",
+        "thumb": "/media/image/days/04-01@thumb.webp",
+        "width": 438,
+        "height": 597,
+        "ratio": 0.734,
+        "date": "2026-04-01",
+        "day": "04.01"
+      },
+      {
+        "key": "04-02",
+        "label": "04.02",
+        "src": "/media/image/days/04-02.webp",
+        "thumb": "/media/image/days/04-02@thumb.webp",
+        "width": 432,
+        "height": 621,
+        "ratio": 0.696,
+        "date": "2026-04-02",
+        "day": "04.02"
+      },
+      {
+        "key": "04-03",
+        "label": "04.03",
+        "src": "/media/image/days/04-03.webp",
+        "thumb": "/media/image/days/04-03@thumb.webp",
+        "width": 438,
+        "height": 624,
+        "ratio": 0.702,
+        "date": "2026-04-03",
+        "day": "04.03"
+      },
+      {
+        "key": "04-04",
+        "label": "04.04",
+        "src": "/media/image/days/04-04.webp",
+        "thumb": "/media/image/days/04-04@thumb.webp",
+        "width": 435,
+        "height": 578,
+        "ratio": 0.753,
+        "date": "2026-04-04",
+        "day": "04.04"
+      },
+      {
+        "key": "04-05",
+        "label": "04.05",
+        "src": "/media/image/days/04-05.webp",
+        "thumb": "/media/image/days/04-05@thumb.webp",
+        "width": 435,
+        "height": 624,
+        "ratio": 0.697,
+        "date": "2026-04-05",
+        "day": "04.05"
+      },
+      {
+        "key": "04-06",
+        "label": "04.06",
+        "src": "/media/image/days/04-06.webp",
+        "thumb": "/media/image/days/04-06@thumb.webp",
+        "width": 438,
+        "height": 620,
+        "ratio": 0.706,
+        "date": "2026-04-06",
+        "day": "04.06"
+      },
+      {
+        "key": "04-07",
+        "label": "04.07",
+        "src": "/media/image/days/04-07.webp",
+        "thumb": "/media/image/days/04-07@thumb.webp",
+        "width": 468,
+        "height": 657,
+        "ratio": 0.712,
+        "date": "2026-04-07",
+        "day": "04.07"
+      },
+      {
+        "key": "04-08",
+        "label": "04.08",
+        "src": "/media/image/days/04-08.webp",
+        "thumb": "/media/image/days/04-08@thumb.webp",
+        "width": 468,
+        "height": 669,
+        "ratio": 0.7,
+        "date": "2026-04-08",
+        "day": "04.08"
+      },
+      {
+        "key": "04-09",
+        "label": "04.09",
+        "src": "/media/image/days/04-09.webp",
+        "thumb": "/media/image/days/04-09@thumb.webp",
+        "width": 471,
+        "height": 666,
+        "ratio": 0.707,
+        "date": "2026-04-09",
+        "day": "04.09"
+      },
+      {
+        "key": "04-10",
+        "label": "04.10",
+        "src": "/media/image/days/04-10.webp",
+        "thumb": "/media/image/days/04-10@thumb.webp",
+        "width": 468,
+        "height": 666,
+        "ratio": 0.703,
+        "date": "2026-04-10",
+        "day": "04.10"
+      },
+      {
+        "key": "04-11",
+        "label": "04.11",
+        "src": "/media/image/days/04-11.webp",
+        "thumb": "/media/image/days/04-11@thumb.webp",
+        "width": 471,
+        "height": 657,
+        "ratio": 0.717,
+        "date": "2026-04-11",
+        "day": "04.11"
+      },
+      {
+        "key": "04-12",
+        "label": "04.12",
+        "src": "/media/image/days/04-12.webp",
+        "thumb": "/media/image/days/04-12@thumb.webp",
+        "width": 467,
+        "height": 669,
+        "ratio": 0.698,
+        "date": "2026-04-12",
+        "day": "04.12"
+      },
+      {
+        "key": "04-13",
+        "label": "04.13",
+        "src": "/media/image/days/04-13.webp",
+        "thumb": "/media/image/days/04-13@thumb.webp",
+        "width": 405,
+        "height": 575,
+        "ratio": 0.704,
+        "date": "2026-04-13",
+        "day": "04.13"
+      },
+      {
+        "key": "04-14",
+        "label": "04.14",
+        "src": "/media/image/days/04-14.webp",
+        "thumb": "/media/image/days/04-14@thumb.webp",
+        "width": 405,
+        "height": 579,
+        "ratio": 0.699,
+        "date": "2026-04-14",
+        "day": "04.14"
+      },
+      {
+        "key": "04-15",
+        "label": "04.15",
+        "src": "/media/image/days/04-15.webp",
+        "thumb": "/media/image/days/04-15@thumb.webp",
+        "width": 401,
+        "height": 570,
+        "ratio": 0.704,
+        "date": "2026-04-15",
+        "day": "04.15"
+      },
+      {
+        "key": "04-16",
+        "label": "04.16",
+        "src": "/media/image/days/04-16.webp",
+        "thumb": "/media/image/days/04-16@thumb.webp",
+        "width": 468,
+        "height": 666,
+        "ratio": 0.703,
+        "date": "2026-04-16",
+        "day": "04.16"
+      }
+    ],
+    "mbti": [
+      {
+        "key": "enfj-land",
+        "label": "ENFJ 温柔理想暴君 16：9.png",
+        "src": "/media/image/mbti/enfj-land.webp",
+        "thumb": "/media/image/mbti/enfj-land@thumb.webp",
+        "width": 1448,
+        "height": 1086,
+        "ratio": 1.333
+      },
+      {
+        "key": "enfj-port",
+        "label": "ENFJ 温柔理想暴君 9：16.png",
+        "src": "/media/image/mbti/enfj-port.webp",
+        "thumb": "/media/image/mbti/enfj-port@thumb.webp",
+        "width": 941,
+        "height": 1672,
+        "ratio": 0.563
+      },
+      {
+        "key": "intp-land",
+        "label": "INTP 理性的囚徒 16：9.png",
+        "src": "/media/image/mbti/intp-land.webp",
+        "thumb": "/media/image/mbti/intp-land@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "intp-port",
+        "label": "INTP 理性的囚徒 9：16.png",
+        "src": "/media/image/mbti/intp-port.webp",
+        "thumb": "/media/image/mbti/intp-port@thumb.webp",
+        "width": 941,
+        "height": 1672,
+        "ratio": 0.563
+      },
+      {
+        "key": "wolf-land",
+        "label": "为什么狼人杀凉了 16：9.jpg",
+        "src": "/media/image/mbti/wolf-land.webp",
+        "thumb": "/media/image/mbti/wolf-land@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "wolf-port",
+        "label": "为什么狼人杀凉了 9：16.jpg",
+        "src": "/media/image/mbti/wolf-port.webp",
+        "thumb": "/media/image/mbti/wolf-port@thumb.webp",
+        "width": 940,
+        "height": 1672,
+        "ratio": 0.562
+      },
+      {
+        "key": "intj-land",
+        "label": "你根本不懂INTJ! 16：9.jpg",
+        "src": "/media/image/mbti/intj-land.webp",
+        "thumb": "/media/image/mbti/intj-land@thumb.webp",
+        "width": 1900,
+        "height": 1068,
+        "ratio": 1.779
+      },
+      {
+        "key": "intj-port",
+        "label": "你根本不懂INTJ! 9：16.jpg",
+        "src": "/media/image/mbti/intj-port.webp",
+        "thumb": "/media/image/mbti/intj-port@thumb.webp",
+        "width": 1600,
+        "height": 2848,
+        "ratio": 0.562
+      },
+      {
+        "key": "enfp-land",
+        "label": "把情绪价值当毒品的ENFP 16：9.jpg",
+        "src": "/media/image/mbti/enfp-land.webp",
+        "thumb": "/media/image/mbti/enfp-land@thumb.webp",
+        "width": 1900,
+        "height": 1068,
+        "ratio": 1.779
+      },
+      {
+        "key": "enfp-port",
+        "label": "把情绪价值当毒品的ENFP 9：16.jpg",
+        "src": "/media/image/mbti/enfp-port.webp",
+        "thumb": "/media/image/mbti/enfp-port@thumb.webp",
+        "width": 1600,
+        "height": 2848,
+        "ratio": 0.562
+      }
+    ],
+    "subculture": [
+      {
+        "key": "majority-land",
+        "label": "为什么亚文化占85%，人们却把它当小众爱好 16：9.png",
+        "src": "/media/image/subculture/majority-land.webp",
+        "thumb": "/media/image/subculture/majority-land@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "majority-port",
+        "label": "为什么亚文化占85%，人们却把它当小众爱好 9：16.jpg",
+        "src": "/media/image/subculture/majority-port.webp",
+        "thumb": "/media/image/subculture/majority-port@thumb.webp",
+        "width": 1152,
+        "height": 2048,
+        "ratio": 0.563
+      },
+      {
+        "key": "rise-land",
+        "label": "为什么亚文化必然崛起 16：9.png",
+        "src": "/media/image/subculture/rise-land.webp",
+        "thumb": "/media/image/subculture/rise-land@thumb.webp",
+        "width": 941,
+        "height": 1672,
+        "ratio": 0.563
+      },
+      {
+        "key": "rise-port",
+        "label": "为什么亚文化必然崛起 9：16.png",
+        "src": "/media/image/subculture/rise-port.webp",
+        "thumb": "/media/image/subculture/rise-port@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "goth-land",
+        "label": "哥特文化正在网红化，你觉得这是出圈还是内核消亡？ 16：9.png",
+        "src": "/media/image/subculture/goth-land.webp",
+        "thumb": "/media/image/subculture/goth-land@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "goth-port",
+        "label": "哥特文化正在网红化，你觉得这是出圈还是内核消亡？ 9：16.png",
+        "src": "/media/image/subculture/goth-port.webp",
+        "thumb": "/media/image/subculture/goth-port@thumb.webp",
+        "width": 940,
+        "height": 1672,
+        "ratio": 0.562
+      },
+      {
+        "key": "lookism-land43",
+        "label": "外貌歧视，困住多少亚文化爱好者 4：3.png",
+        "src": "/media/image/subculture/lookism-land43.webp",
+        "thumb": "/media/image/subculture/lookism-land43@thumb.webp",
+        "width": 1448,
+        "height": 1086,
+        "ratio": 1.333
+      },
+      {
+        "key": "lookism-port",
+        "label": "外貌歧视，困住多少亚文化爱好者 9：16.png",
+        "src": "/media/image/subculture/lookism-port.webp",
+        "thumb": "/media/image/subculture/lookism-port@thumb.webp",
+        "width": 941,
+        "height": 1672,
+        "ratio": 0.563
+      }
+    ],
+    "bw": [
+      {
+        "key": "bw-01",
+        "label": "01de4229bfc384d3b9ab0f6b7f7ee1cb.jpg",
+        "src": "/media/image/bw/bw-01.webp",
+        "thumb": "/media/image/bw/bw-01@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-02",
+        "label": "09ea1ee6b7c691dde8d3783b082e5e0b.jpg",
+        "src": "/media/image/bw/bw-02.webp",
+        "thumb": "/media/image/bw/bw-02@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-03",
+        "label": "1ea8e4bdbc81c553578dff593e935c8d.jpg",
+        "src": "/media/image/bw/bw-03.webp",
+        "thumb": "/media/image/bw/bw-03@thumb.webp",
+        "width": 1728,
+        "height": 1296,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-04",
+        "label": "2f2aaa9bd8c1b8e1bf5300af1ba8d729.jpg",
+        "src": "/media/image/bw/bw-04.webp",
+        "thumb": "/media/image/bw/bw-04@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-05",
+        "label": "4ce74ab5f640ceffc122b04fccbde820.jpg",
+        "src": "/media/image/bw/bw-05.webp",
+        "thumb": "/media/image/bw/bw-05@thumb.webp",
+        "width": 1728,
+        "height": 1296,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-06",
+        "label": "4cf8bcf47e7c8e72d0d8f4cbc85a3133.jpg",
+        "src": "/media/image/bw/bw-06.webp",
+        "thumb": "/media/image/bw/bw-06@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-07",
+        "label": "4d87bb644d2aedeb72014cb52cca38a1.jpg",
+        "src": "/media/image/bw/bw-07.webp",
+        "thumb": "/media/image/bw/bw-07@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-08",
+        "label": "51c00c7b7d7ea20afda31381681d8548.jpg",
+        "src": "/media/image/bw/bw-08.webp",
+        "thumb": "/media/image/bw/bw-08@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-09",
+        "label": "537e75d0242be0198c5f701950e3714b.jpg",
+        "src": "/media/image/bw/bw-09.webp",
+        "thumb": "/media/image/bw/bw-09@thumb.webp",
+        "width": 1728,
+        "height": 1296,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-10",
+        "label": "56526e05d41f4d83a46089f0862f8d60.jpg",
+        "src": "/media/image/bw/bw-10.webp",
+        "thumb": "/media/image/bw/bw-10@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-11",
+        "label": "57218f14468b3cc1292bc28227147922.jpg",
+        "src": "/media/image/bw/bw-11.webp",
+        "thumb": "/media/image/bw/bw-11@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-12",
+        "label": "6002fe927e3eef03639026b73b9b4513.jpg",
+        "src": "/media/image/bw/bw-12.webp",
+        "thumb": "/media/image/bw/bw-12@thumb.webp",
+        "width": 1760,
+        "height": 1320,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-13",
+        "label": "6e7d8de3b2badaa4c5520d39cf47d39d.jpg",
+        "src": "/media/image/bw/bw-13.webp",
+        "thumb": "/media/image/bw/bw-13@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-14",
+        "label": "71d3d8e855fa645926dd719ae9dabd4d.jpg",
+        "src": "/media/image/bw/bw-14.webp",
+        "thumb": "/media/image/bw/bw-14@thumb.webp",
+        "width": 1344,
+        "height": 1008,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-15",
+        "label": "84d22e55ad5312e0600c3b3ab0cc438f.jpg",
+        "src": "/media/image/bw/bw-15.webp",
+        "thumb": "/media/image/bw/bw-15@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-16",
+        "label": "ab9320f4208be1bdef2554d8273108da.jpg",
+        "src": "/media/image/bw/bw-16.webp",
+        "thumb": "/media/image/bw/bw-16@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-17",
+        "label": "ac63f41c43db44225f0ce3c7660f21d5.jpg",
+        "src": "/media/image/bw/bw-17.webp",
+        "thumb": "/media/image/bw/bw-17@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-18",
+        "label": "b8b7a63a80f44c463bd2182021917f09.jpg",
+        "src": "/media/image/bw/bw-18.webp",
+        "thumb": "/media/image/bw/bw-18@thumb.webp",
+        "width": 1792,
+        "height": 1434,
+        "ratio": 1.25
+      },
+      {
+        "key": "bw-19",
+        "label": "b8fe21ae1b234a03bb47d0274e4c6c6a.jpg",
+        "src": "/media/image/bw/bw-19.webp",
+        "thumb": "/media/image/bw/bw-19@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-20",
+        "label": "c7c5514762415265c6b5174604f2a9fc.jpg",
+        "src": "/media/image/bw/bw-20.webp",
+        "thumb": "/media/image/bw/bw-20@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-21",
+        "label": "c88f7dc5a2d8172bf8bc6edbf7d11920.jpg",
+        "src": "/media/image/bw/bw-21.webp",
+        "thumb": "/media/image/bw/bw-21@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-22",
+        "label": "cb61ad95ec54c0d14297cf268ba6f948.jpg",
+        "src": "/media/image/bw/bw-22.webp",
+        "thumb": "/media/image/bw/bw-22@thumb.webp",
+        "width": 1900,
+        "height": 1425,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-23",
+        "label": "ccb80f26e5cc67108a41ccc4bdfa4208.jpg",
+        "src": "/media/image/bw/bw-23.webp",
+        "thumb": "/media/image/bw/bw-23@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-24",
+        "label": "dd32d416bcfc6764e4724b39f7af14f2.jpg",
+        "src": "/media/image/bw/bw-24.webp",
+        "thumb": "/media/image/bw/bw-24@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-25",
+        "label": "e0a96ecdb12b835273da6c488b0d7ba1.jpg",
+        "src": "/media/image/bw/bw-25.webp",
+        "thumb": "/media/image/bw/bw-25@thumb.webp",
+        "width": 1296,
+        "height": 972,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-26",
+        "label": "e4870958a52211c4ca61e004a593161a.jpg",
+        "src": "/media/image/bw/bw-26.webp",
+        "thumb": "/media/image/bw/bw-26@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-27",
+        "label": "e85e32b3877e7b92217ecc4dd678de57.jpg",
+        "src": "/media/image/bw/bw-27.webp",
+        "thumb": "/media/image/bw/bw-27@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-28",
+        "label": "f6bcff0fe5f14adbf06aa07e418f7d28.jpg",
+        "src": "/media/image/bw/bw-28.webp",
+        "thumb": "/media/image/bw/bw-28@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      },
+      {
+        "key": "bw-29",
+        "label": "f73606888b78ebf12a8e3db62ca17ec9.jpg",
+        "src": "/media/image/bw/bw-29.webp",
+        "thumb": "/media/image/bw/bw-29@thumb.webp",
+        "width": 1364,
+        "height": 1024,
+        "ratio": 1.332
+      },
+      {
+        "key": "bw-30",
+        "label": "fabb85ede5d3b5a286d991c151b49264.jpg",
+        "src": "/media/image/bw/bw-30.webp",
+        "thumb": "/media/image/bw/bw-30@thumb.webp",
+        "width": 1792,
+        "height": 1344,
+        "ratio": 1.333
+      }
+    ],
+    "talk": [
+      {
+        "key": "talk-ai-value",
+        "label": "光会用AI，反而不值钱.png",
+        "src": "/media/image/talk/talk-ai-value.webp",
+        "thumb": "/media/image/talk/talk-ai-value.webp",
+        "width": 573,
+        "height": 933,
+        "ratio": 0.614
+      },
+      {
+        "key": "talk-million",
+        "label": "普通人用AI，轻轻松松赚100万.png",
+        "src": "/media/image/talk/talk-million.webp",
+        "thumb": "/media/image/talk/talk-million.webp",
+        "width": 537,
+        "height": 936,
+        "ratio": 0.574
+      },
+      {
+        "key": "talk-weird",
+        "label": "真的​超魔幻的.png",
+        "src": "/media/image/talk/talk-weird.webp",
+        "thumb": "/media/image/talk/talk-weird.webp",
+        "width": 528,
+        "height": 921,
+        "ratio": 0.573
+      }
+    ],
+    "wolf": [
+      {
+        "key": "wolf-poster",
+        "label": "5ff69b9612de5faa662a591172f08750.png",
+        "src": "/media/image/wolf/wolf-poster.webp",
+        "thumb": "/media/image/wolf/wolf-poster@thumb.webp",
+        "width": 1254,
+        "height": 1254,
+        "ratio": 1
+      }
+    ],
+    "panda": [
+      {
+        "key": "panda-poster-2",
+        "label": "小含PPT海报 (2).jpg",
+        "src": "/media/image/panda/panda-poster-2.webp",
+        "thumb": "/media/image/panda/panda-poster-2@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-poster-3",
+        "label": "小含PPT海报 (3).jpg",
+        "src": "/media/image/panda/panda-poster-3.webp",
+        "thumb": "/media/image/panda/panda-poster-3@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-poster-4",
+        "label": "小含PPT海报 (4).jpg",
+        "src": "/media/image/panda/panda-poster-4.webp",
+        "thumb": "/media/image/panda/panda-poster-4@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-poster-5",
+        "label": "小含PPT海报 (5).jpg",
+        "src": "/media/image/panda/panda-poster-5.webp",
+        "thumb": "/media/image/panda/panda-poster-5@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-poster-6",
+        "label": "小含PPT海报 (6).jpg",
+        "src": "/media/image/panda/panda-poster-6.webp",
+        "thumb": "/media/image/panda/panda-poster-6@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-poster-7",
+        "label": "小含PPT海报 (7).jpg",
+        "src": "/media/image/panda/panda-poster-7.webp",
+        "thumb": "/media/image/panda/panda-poster-7@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-poster-8",
+        "label": "小含PPT海报 (8).jpg",
+        "src": "/media/image/panda/panda-poster-8.webp",
+        "thumb": "/media/image/panda/panda-poster-8@thumb.webp",
+        "width": 1440,
+        "height": 1870,
+        "ratio": 0.77
+      },
+      {
+        "key": "panda-poster-a",
+        "label": "小含PPT海报.jpg",
+        "src": "/media/image/panda/panda-poster-a.webp",
+        "thumb": "/media/image/panda/panda-poster-a@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "panda-original",
+        "label": "小含熊猫.jpg",
+        "src": "/media/image/panda/panda-original.webp",
+        "thumb": "/media/image/panda/panda-original@thumb.webp",
+        "width": 1280,
+        "height": 1280,
+        "ratio": 1
+      }
+    ],
+    "drama": [
+      {
+        "key": "drama-01",
+        "label": "00-adult-smoke-test.png",
+        "src": "/media/image/drama/drama-01.webp",
+        "thumb": "/media/image/drama/drama-01@thumb.webp",
+        "width": 1024,
+        "height": 1536,
+        "ratio": 0.667
+      },
+      {
+        "key": "drama-02",
+        "label": "00-child-cover-modern-green-xhs.png",
+        "src": "/media/image/drama/drama-02.webp",
+        "thumb": "/media/image/drama/drama-02@thumb.webp",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-03",
+        "label": "00-consistency-board-red-minguo.png",
+        "src": "/media/image/drama/drama-03.webp",
+        "thumb": "/media/image/drama/drama-03@thumb.webp",
+        "width": 1700,
+        "height": 1700,
+        "ratio": 1
+      },
+      {
+        "key": "drama-04",
+        "label": "01-adult-anchor-blue-lock.png",
+        "src": "/media/image/drama/drama-04.webp",
+        "thumb": "/media/image/drama/drama-04@thumb.webp",
+        "width": 1024,
+        "height": 1535,
+        "ratio": 0.667
+      },
+      {
+        "key": "drama-05",
+        "label": "01-adult-master-red.png",
+        "src": "/media/image/drama/drama-05.webp",
+        "thumb": "/media/image/drama/drama-05@thumb.webp",
+        "width": 1024,
+        "height": 1536,
+        "ratio": 0.667
+      },
+      {
+        "key": "drama-06",
+        "label": "01-adult-square-red-minguo-fast.png",
+        "src": "/media/image/drama/drama-06.webp",
+        "thumb": "/media/image/drama/drama-06@thumb.webp",
+        "width": 1024,
+        "height": 1536,
+        "ratio": 0.667
+      },
+      {
+        "key": "drama-07",
+        "label": "01-child-cover-red-xhs.png",
+        "src": "/media/image/drama/drama-07.webp",
+        "thumb": "/media/image/drama/drama-07@thumb.webp",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-08",
+        "label": "01-child-full-modern-green.png",
+        "src": "/media/image/drama/drama-08.webp",
+        "thumb": "/media/image/drama/drama-08@thumb.webp",
+        "width": 1024,
+        "height": 1536,
+        "ratio": 0.667
+      },
+      {
+        "key": "drama-09",
+        "label": "01-cover-master.png",
+        "src": "/media/image/drama/drama-09.webp",
+        "thumb": "/media/image/drama/drama-09@thumb.webp",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-10",
+        "label": "01-fig1-cover-anchor.png",
+        "src": "/media/image/drama/drama-10.webp",
+        "thumb": "/media/image/drama/drama-10@thumb.webp",
+        "width": 1086,
+        "height": 1448,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-11",
+        "label": "01-现代黑色男生成年脸部服饰竖版-cover-1200x1600.png",
+        "src": "/media/image/drama/drama-11.webp",
+        "thumb": "/media/image/drama/drama-11@thumb.webp",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-12",
+        "label": "02-adult-full-modern-green.png",
+        "src": "/media/image/drama/drama-12.webp",
+        "thumb": "/media/image/drama/drama-12@thumb.webp",
+        "width": 1024,
+        "height": 1536,
+        "ratio": 0.667
+      },
+      {
+        "key": "drama-13",
+        "label": "02-child-full-red-minguo.png",
+        "src": "/media/image/drama/drama-13.webp",
+        "thumb": "/media/image/drama/drama-13@thumb.webp",
+        "width": 1086,
+        "height": 1448,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-14",
+        "label": "02-现代黑色男生成年脸部服饰竖版-fullbody-1080x1920.png",
+        "src": "/media/image/drama/drama-14.webp",
+        "thumb": "/media/image/drama/drama-14@thumb.webp",
+        "width": 1080,
+        "height": 1920,
+        "ratio": 0.563
+      },
+      {
+        "key": "drama-15",
+        "label": "03-adult-turnaround-red-minguo-fast.png",
+        "src": "/media/image/drama/drama-15.webp",
+        "thumb": "/media/image/drama/drama-15@thumb.webp",
+        "width": 1536,
+        "height": 1024,
+        "ratio": 1.5
+      },
+      {
+        "key": "drama-16",
+        "label": "03-child-turnaround-modern-green.png",
+        "src": "/media/image/drama/drama-16.webp",
+        "thumb": "/media/image/drama/drama-16@thumb.webp",
+        "width": 1619,
+        "height": 971,
+        "ratio": 1.667
+      },
+      {
+        "key": "drama-17",
+        "label": "03-child-turnaround-red-minguo.png",
+        "src": "/media/image/drama/drama-17.webp",
+        "thumb": "/media/image/drama/drama-17@thumb.webp",
+        "width": 1693,
+        "height": 929,
+        "ratio": 1.822
+      },
+      {
+        "key": "drama-18",
+        "label": "03-reference-sheet.png",
+        "src": "/media/image/drama/drama-18.webp",
+        "thumb": "/media/image/drama/drama-18@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "drama-19",
+        "label": "03-现代黑色男生成年脸部服饰竖版-threeview-1920x1080.png",
+        "src": "/media/image/drama/drama-19.webp",
+        "thumb": "/media/image/drama/drama-19@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-20",
+        "label": "04-adult-detail-grid-blue-lock.png",
+        "src": "/media/image/drama/drama-20.webp",
+        "thumb": "/media/image/drama/drama-20@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-21",
+        "label": "04-adult-turnaround-reference-red.png",
+        "src": "/media/image/drama/drama-21.webp",
+        "thumb": "/media/image/drama/drama-21@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "drama-22",
+        "label": "04-child-detail-grid-modern-green.png",
+        "src": "/media/image/drama/drama-22.webp",
+        "thumb": "/media/image/drama/drama-22@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-23",
+        "label": "04-child-detail-grid-red-xhs.png",
+        "src": "/media/image/drama/drama-23.webp",
+        "thumb": "/media/image/drama/drama-23@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-24",
+        "label": "04-detail-grid-no-hand-error.png",
+        "src": "/media/image/drama/drama-24.webp",
+        "thumb": "/media/image/drama/drama-24@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      },
+      {
+        "key": "drama-25",
+        "label": "04-fig4-nongrid-details-1920x1080.png",
+        "src": "/media/image/drama/drama-25.webp",
+        "thumb": "/media/image/drama/drama-25@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-26",
+        "label": "04-现代黑色男生成年脸部服饰竖版-detail-grid-12parts-1920x1080.png",
+        "src": "/media/image/drama/drama-26.webp",
+        "thumb": "/media/image/drama/drama-26@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-27",
+        "label": "05-adult-cover-modern-green-xhs.png",
+        "src": "/media/image/drama/drama-27.webp",
+        "thumb": "/media/image/drama/drama-27@thumb.webp",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-28",
+        "label": "05-adult-cover-red-xhs.png",
+        "src": "/media/image/drama/drama-28.webp",
+        "thumb": "/media/image/drama/drama-28@thumb.webp",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75
+      },
+      {
+        "key": "drama-29",
+        "label": "07-adult-detail-grid-modern-green.png",
+        "src": "/media/image/drama/drama-29.webp",
+        "thumb": "/media/image/drama/drama-29@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      },
+      {
+        "key": "drama-30",
+        "label": "08-adult-detail-grid-red-xhs.png",
+        "src": "/media/image/drama/drama-30.webp",
+        "thumb": "/media/image/drama/drama-30@thumb.webp",
+        "width": 1700,
+        "height": 956,
+        "ratio": 1.778
+      }
+    ],
+    "interview": [
+      {
+        "key": "interview-cover",
+        "label": "大学生创业搞钱记.png",
+        "src": "/media/image/interview/interview-cover.webp",
+        "thumb": "/media/image/interview/interview-cover@thumb.webp",
+        "width": 1672,
+        "height": 941,
+        "ratio": 1.777
+      }
+    ],
+    "campus": [
+      {
+        "key": "arch-01",
+        "label": "微信图片_20251223125201_66_2651.png",
+        "src": "/media/image/campus/arch-01.webp",
+        "thumb": "/media/image/campus/arch-01@thumb.webp",
+        "width": 1284,
+        "height": 828,
+        "ratio": 1.551
+      },
+      {
+        "key": "arch-02",
+        "label": "微信图片_20251223125201_68_2651.png",
+        "src": "/media/image/campus/arch-02.webp",
+        "thumb": "/media/image/campus/arch-02@thumb.webp",
+        "width": 924,
+        "height": 594,
+        "ratio": 1.556
+      },
+      {
+        "key": "arch-03",
+        "label": "微信图片_20251223125201_69_2651.png",
+        "src": "/media/image/campus/arch-03.webp",
+        "thumb": "/media/image/campus/arch-03@thumb.webp",
+        "width": 908,
+        "height": 597,
+        "ratio": 1.521
+      },
+      {
+        "key": "arch-04",
+        "label": "微信图片_20251223125304_71_2651.png",
+        "src": "/media/image/campus/arch-04.webp",
+        "thumb": "/media/image/campus/arch-04@thumb.webp",
+        "width": 1269,
+        "height": 768,
+        "ratio": 1.652
+      },
+      {
+        "key": "arch-05",
+        "label": "微信图片_20251223125305_72_2651.png",
+        "src": "/media/image/campus/arch-05.webp",
+        "thumb": "/media/image/campus/arch-05@thumb.webp",
+        "width": 909,
+        "height": 558,
+        "ratio": 1.629
+      },
+      {
+        "key": "arch-06",
+        "label": "微信图片_20251223125321_73_2651.png",
+        "src": "/media/image/campus/arch-06.webp",
+        "thumb": "/media/image/campus/arch-06@thumb.webp",
+        "width": 1272,
+        "height": 804,
+        "ratio": 1.582
+      }
+    ],
+    "redpacket": [
+      {
+        "key": "red-packet",
+        "label": "终版.png",
+        "src": "/media/image/redpacket/red-packet.webp",
+        "thumb": "/media/image/redpacket/red-packet@thumb.webp",
+        "width": 2000,
+        "height": 851,
+        "ratio": 2.35
+      }
+    ],
+    "fifteen": [
+      {
+        "key": "fifteen-five",
+        "label": "聚焦十五五 喜迎党代会.png",
+        "src": "/media/image/fifteen/fifteen-five.webp",
+        "thumb": "/media/image/fifteen/fifteen-five.webp",
+        "width": 900,
+        "height": 383,
+        "ratio": 2.35
+      }
+    ],
+    "xinlingChild": [
+      {
+        "key": "xl-child-01",
+        "label": "1.png",
+        "src": "/media/image/xinlingChild/xl-child-01.webp",
+        "thumb": "/media/image/xinlingChild/xl-child-01@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-child-02",
+        "label": "2.png",
+        "src": "/media/image/xinlingChild/xl-child-02.webp",
+        "thumb": "/media/image/xinlingChild/xl-child-02@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-child-03",
+        "label": "3.png",
+        "src": "/media/image/xinlingChild/xl-child-03.webp",
+        "thumb": "/media/image/xinlingChild/xl-child-03@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-child-04",
+        "label": "4.png",
+        "src": "/media/image/xinlingChild/xl-child-04.webp",
+        "thumb": "/media/image/xinlingChild/xl-child-04@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-child-05",
+        "label": "5.png",
+        "src": "/media/image/xinlingChild/xl-child-05.webp",
+        "thumb": "/media/image/xinlingChild/xl-child-05@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-child-06",
+        "label": "6.png",
+        "src": "/media/image/xinlingChild/xl-child-06.webp",
+        "thumb": "/media/image/xinlingChild/xl-child-06@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      }
+    ],
+    "xinlingSword": [
+      {
+        "key": "xl-sword-01",
+        "label": "1.png",
+        "src": "/media/image/xinlingSword/xl-sword-01.webp",
+        "thumb": "/media/image/xinlingSword/xl-sword-01@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-sword-02",
+        "label": "2.png",
+        "src": "/media/image/xinlingSword/xl-sword-02.webp",
+        "thumb": "/media/image/xinlingSword/xl-sword-02@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-sword-03",
+        "label": "3.png",
+        "src": "/media/image/xinlingSword/xl-sword-03.webp",
+        "thumb": "/media/image/xinlingSword/xl-sword-03@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-sword-04",
+        "label": "4.png",
+        "src": "/media/image/xinlingSword/xl-sword-04.webp",
+        "thumb": "/media/image/xinlingSword/xl-sword-04@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-sword-05",
+        "label": "5.png",
+        "src": "/media/image/xinlingSword/xl-sword-05.webp",
+        "thumb": "/media/image/xinlingSword/xl-sword-05@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-sword-06",
+        "label": "6.png",
+        "src": "/media/image/xinlingSword/xl-sword-06.webp",
+        "thumb": "/media/image/xinlingSword/xl-sword-06@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      }
+    ],
+    "xinlingWisdom": [
+      {
+        "key": "xl-wisdom-01",
+        "label": "1.png",
+        "src": "/media/image/xinlingWisdom/xl-wisdom-01.webp",
+        "thumb": "/media/image/xinlingWisdom/xl-wisdom-01@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-wisdom-02",
+        "label": "2.png",
+        "src": "/media/image/xinlingWisdom/xl-wisdom-02.webp",
+        "thumb": "/media/image/xinlingWisdom/xl-wisdom-02@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-wisdom-03",
+        "label": "3.png",
+        "src": "/media/image/xinlingWisdom/xl-wisdom-03.webp",
+        "thumb": "/media/image/xinlingWisdom/xl-wisdom-03@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-wisdom-04",
+        "label": "4.png",
+        "src": "/media/image/xinlingWisdom/xl-wisdom-04.webp",
+        "thumb": "/media/image/xinlingWisdom/xl-wisdom-04@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-wisdom-05",
+        "label": "5.png",
+        "src": "/media/image/xinlingWisdom/xl-wisdom-05.webp",
+        "thumb": "/media/image/xinlingWisdom/xl-wisdom-05@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      },
+      {
+        "key": "xl-wisdom-06",
+        "label": "6.png",
+        "src": "/media/image/xinlingWisdom/xl-wisdom-06.webp",
+        "thumb": "/media/image/xinlingWisdom/xl-wisdom-06@thumb.webp",
+        "width": 1242,
+        "height": 1660,
+        "ratio": 0.748
+      }
+    ],
+    "xiumi": [
+      {
+        "key": "xm-01",
+        "label": "1.png",
+        "src": "/media/image/xiumi/xm-01.webp",
+        "thumb": "/media/image/xiumi/xm-01@thumb.webp",
+        "width": 800,
+        "height": 1795,
+        "ratio": 0.446
+      },
+      {
+        "key": "xm-02",
+        "label": "2.png",
+        "src": "/media/image/xiumi/xm-02.webp",
+        "thumb": "/media/image/xiumi/xm-02@thumb.webp",
+        "width": 800,
+        "height": 1829,
+        "ratio": 0.437
+      },
+      {
+        "key": "xm-03",
+        "label": "3 (2).png",
+        "src": "/media/image/xiumi/xm-03.webp",
+        "thumb": "/media/image/xiumi/xm-03@thumb.webp",
+        "width": 800,
+        "height": 1427,
+        "ratio": 0.561
+      },
+      {
+        "key": "xm-04",
+        "label": "3.png",
+        "src": "/media/image/xiumi/xm-04.webp",
+        "thumb": "/media/image/xiumi/xm-04@thumb.webp",
+        "width": 800,
+        "height": 1427,
+        "ratio": 0.561
+      }
+    ],
+    "drawing": [
+      {
+        "key": "draw-01",
+        "label": "A1429073DE08F2AB59B1BCE47294621B.jpg",
+        "src": "/media/image/drawing/draw-01.webp",
+        "thumb": "/media/image/drawing/draw-01.webp",
+        "width": 788,
+        "height": 883,
+        "ratio": 0.892
+      },
+      {
+        "key": "draw-02",
+        "label": "D58EF370DED6A7DC733A68E8413B460D.jpg",
+        "src": "/media/image/drawing/draw-02.webp",
+        "thumb": "/media/image/drawing/draw-02.webp",
+        "width": 667,
+        "height": 464,
+        "ratio": 1.438
+      },
+      {
+        "key": "draw-03",
+        "label": "wechat_2025-10-21_234308_707.png",
+        "src": "/media/image/drawing/draw-03.webp",
+        "thumb": "/media/image/drawing/draw-03@thumb.webp",
+        "width": 1161,
+        "height": 999,
+        "ratio": 1.162
+      },
+      {
+        "key": "draw-04",
+        "label": "微信图片_20251021234644_18_160.jpg",
+        "src": "/media/image/drawing/draw-04.webp",
+        "thumb": "/media/image/drawing/draw-04@thumb.webp",
+        "width": 1222,
+        "height": 1416,
+        "ratio": 0.863
+      }
+    ],
+    "sketch": [
+      {
+        "key": "sketch-01",
+        "label": "A771468ADE397BE2B7FDFBD1F7A85182.jpg",
+        "src": "/media/image/sketch/sketch-01.webp",
+        "thumb": "/media/image/sketch/sketch-01.webp",
+        "width": 442,
+        "height": 576,
+        "ratio": 0.767
+      }
+    ],
+    "game": [
+      {
+        "key": "game-ball",
+        "label": "ball.png",
+        "src": "/media/image/game/game-ball.webp",
+        "thumb": "/media/image/game/game-ball.webp",
+        "width": 66,
+        "height": 63,
+        "ratio": 1.048
+      },
+      {
+        "key": "game-button",
+        "label": "button.png",
+        "src": "/media/image/game/game-button.webp",
+        "thumb": "/media/image/game/game-button.webp",
+        "width": 318,
+        "height": 279,
+        "ratio": 1.14
+      },
+      {
+        "key": "game-close",
+        "label": "close.png",
+        "src": "/media/image/game/game-close.webp",
+        "thumb": "/media/image/game/game-close.webp",
+        "width": 189,
+        "height": 69,
+        "ratio": 2.739
+      },
+      {
+        "key": "game-image",
+        "label": "image.png",
+        "src": "/media/image/game/game-image.webp",
+        "thumb": "/media/image/game/game-image@thumb.webp",
+        "width": 1203,
+        "height": 819,
+        "ratio": 1.469
+      },
+      {
+        "key": "game-name",
+        "label": "name.png",
+        "src": "/media/image/game/game-name.webp",
+        "thumb": "/media/image/game/game-name@thumb.webp",
+        "width": 1689,
+        "height": 318,
+        "ratio": 5.311
+      },
+      {
+        "key": "game-range",
+        "label": "range.png",
+        "src": "/media/image/game/game-range.webp",
+        "thumb": "/media/image/game/game-range.webp",
+        "width": 176,
+        "height": 177,
+        "ratio": 0.994
+      },
+      {
+        "key": "game-rocker",
+        "label": "rocker.png",
+        "src": "/media/image/game/game-rocker.webp",
+        "thumb": "/media/image/game/game-rocker.webp",
+        "width": 339,
+        "height": 300,
+        "ratio": 1.13
+      },
+      {
+        "key": "game-rule",
+        "label": "rule.png",
+        "src": "/media/image/game/game-rule.webp",
+        "thumb": "/media/image/game/game-rule.webp",
+        "width": 180,
+        "height": 177,
+        "ratio": 1.017
+      },
+      {
+        "key": "game-start",
+        "label": "start.png",
+        "src": "/media/image/game/game-start.webp",
+        "thumb": "/media/image/game/game-start.webp",
+        "width": 459,
+        "height": 138,
+        "ratio": 3.326
+      },
+      {
+        "key": "game-tell",
+        "label": "tell.png",
+        "src": "/media/image/game/game-tell.webp",
+        "thumb": "/media/image/game/game-tell.webp",
+        "width": 687,
+        "height": 123,
+        "ratio": 5.585
+      },
+      {
+        "key": "game-volume",
+        "label": "volumn.png",
+        "src": "/media/image/game/game-volume.webp",
+        "thumb": "/media/image/game/game-volume.webp",
+        "width": 171,
+        "height": 171,
+        "ratio": 1
+      },
+      {
+        "key": "game-cover",
+        "label": "封面.png",
+        "src": "/media/image/game/game-cover.webp",
+        "thumb": "/media/image/game/game-cover@thumb.webp",
+        "width": 2400,
+        "height": 1350,
+        "ratio": 1.778
+      },
+      {
+        "key": "game-play",
+        "label": "玩法示例 .png",
+        "src": "/media/image/game/game-play.webp",
+        "thumb": "/media/image/game/game-play@thumb.webp",
+        "width": 2400,
+        "height": 1350,
+        "ratio": 1.778
+      },
+      {
+        "key": "game-inner",
+        "label": "里页.png",
+        "src": "/media/image/game/game-inner.webp",
+        "thumb": "/media/image/game/game-inner@thumb.webp",
+        "width": 2400,
+        "height": 1350,
+        "ratio": 1.778
+      }
+    ],
+    "ui": [
+      {
+        "key": "01-home",
+        "label": "01-home",
+        "src": "/media/image/ui/01-home.webp",
+        "thumb": "/media/image/ui/01-home.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "02-test-intro",
+        "label": "02-test-intro",
+        "src": "/media/image/ui/02-test-intro.webp",
+        "thumb": "/media/image/ui/02-test-intro.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "02-tests",
+        "label": "02-tests",
+        "src": "/media/image/ui/02-tests.webp",
+        "thumb": "/media/image/ui/02-tests.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "03-question",
+        "label": "03-question",
+        "src": "/media/image/ui/03-question.webp",
+        "thumb": "/media/image/ui/03-question.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "04b-report-2",
+        "label": "04b-report-2",
+        "src": "/media/image/ui/04b-report-2.webp",
+        "thumb": "/media/image/ui/04b-report-2.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "04c-report-3",
+        "label": "04c-report-3",
+        "src": "/media/image/ui/04c-report-3.webp",
+        "thumb": "/media/image/ui/04c-report-3.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "05b-filter",
+        "label": "05b-filter",
+        "src": "/media/image/ui/05b-filter.webp",
+        "thumb": "/media/image/ui/05b-filter.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      },
+      {
+        "key": "07-register",
+        "label": "07-register",
+        "src": "/media/image/ui/07-register.webp",
+        "thumb": "/media/image/ui/07-register.webp",
+        "width": 375,
+        "height": 812,
+        "ratio": 0.462
+      }
+    ],
+    "soundCovers": [
+      {
+        "key": "cover-main",
+        "label": "4c8107d2801b35fda653ff1ba1ada56e.jpg",
+        "src": "/media/image/soundCovers/cover-main.webp",
+        "thumb": "/media/image/soundCovers/cover-main@thumb.webp",
+        "width": 1194,
+        "height": 1193,
+        "ratio": 1.001
+      },
+      {
+        "key": "cover-e02",
+        "label": "493eb0a9423d08e3bf73f722e5371dee.jpg",
+        "src": "/media/image/soundCovers/cover-e02.webp",
+        "thumb": "/media/image/soundCovers/cover-e02@thumb.webp",
+        "width": 1129,
+        "height": 1128,
+        "ratio": 1.001
+      },
+      {
+        "key": "cover-e03",
+        "label": "a5723d214e0e5bda2032d4c026d5f15a.jpg",
+        "src": "/media/image/soundCovers/cover-e03.webp",
+        "thumb": "/media/image/soundCovers/cover-e03@thumb.webp",
+        "width": 1169,
+        "height": 1169,
+        "ratio": 1
+      },
+      {
+        "key": "cover-e04",
+        "label": "71c4e1c53d234f1cb6ecbc7a77546ca3.jpg",
+        "src": "/media/image/soundCovers/cover-e04.webp",
+        "thumb": "/media/image/soundCovers/cover-e04@thumb.webp",
+        "width": 1100,
+        "height": 1101,
+        "ratio": 0.999
+      },
+      {
+        "key": "cover-e05",
+        "label": "a18b50093362935baf400b8fa6789093.jpg",
+        "src": "/media/image/soundCovers/cover-e05.webp",
+        "thumb": "/media/image/soundCovers/cover-e05@thumb.webp",
+        "width": 1194,
+        "height": 1194,
+        "ratio": 1
+      }
+    ],
+    "filmCovers": [
+      {
+        "key": "piano-cover",
+        "label": "钢琴封面图",
+        "src": "/media/image/filmCovers/piano-cover.webp",
+        "thumb": "/media/image/filmCovers/piano-cover@thumb.webp",
+        "width": 996,
+        "height": 546,
+        "ratio": 1.824
+      },
+      {
+        "key": "guzheng-cover",
+        "label": "古筝封面",
+        "src": "/media/image/filmCovers/guzheng-cover.webp",
+        "thumb": "/media/image/filmCovers/guzheng-cover@thumb.webp",
+        "width": 981,
+        "height": 552,
+        "ratio": 1.777
+      }
+    ]
+  },
+  "videos": {
+    "piano": [
+      {
+        "key": "piano-flower",
+        "label": "钢琴-花之舞前奏之后奏",
+        "src": "/media/video/piano/piano-flower.mp4",
+        "poster": "/media/video/piano/piano-flower-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": 22.35,
+        "sizeMB": 2.3
+      },
+      {
+        "key": "piano-tea",
+        "label": "来杯好茶摇一摇",
+        "src": "/media/video/piano/piano-tea.mp4",
+        "poster": "/media/video/piano/piano-tea-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": 15.19,
+        "sizeMB": 2.4
+      },
+      {
+        "key": "piano-wedding",
+        "label": "梦中的婚礼",
+        "src": "/media/video/piano/piano-wedding.mp4",
+        "poster": "/media/video/piano/piano-wedding-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": 138.46,
+        "sizeMB": 12.4
+      },
+      {
+        "key": "piano-sky",
+        "label": "天空之子幻",
+        "src": "/media/video/piano/piano-sky.mp4",
+        "poster": "/media/video/piano/piano-sky-poster.webp",
+        "width": 1280,
+        "height": 640,
+        "duration": 16.2,
+        "sizeMB": 2
+      },
+      {
+        "key": "piano-rain",
+        "label": "雨爱",
+        "src": "/media/video/piano/piano-rain.mp4",
+        "poster": "/media/video/piano/piano-rain-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": 34.56,
+        "sizeMB": 5.2
+      }
+    ],
+    "guzheng": [
+      {
+        "key": "guzheng-love",
+        "label": "爱情讯息",
+        "src": "/media/video/guzheng/guzheng-love.mp4",
+        "poster": "/media/video/guzheng/guzheng-love-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "duration": 23.17,
+        "sizeMB": 3.9
+      },
+      {
+        "key": "guzheng-sea",
+        "label": "沧海一声笑",
+        "src": "/media/video/guzheng/guzheng-sea.mp4",
+        "poster": "/media/video/guzheng/guzheng-sea-poster.webp",
+        "width": 720,
+        "height": 1280,
+        "duration": 17.53,
+        "sizeMB": 2.5
+      }
+    ],
+    "painting": [
+      {
+        "key": "paint-day",
+        "label": "大学牲的一天",
+        "src": "/media/video/painting/paint-day.mp4",
+        "poster": "/media/video/painting/paint-day-poster.webp",
+        "width": 840,
+        "height": 1280,
+        "duration": 59.09,
+        "sizeMB": 1.2
+      },
+      {
+        "key": "paint-boss",
+        "label": "领导来了吐槽停了",
+        "src": "/media/video/painting/paint-boss.mp4",
+        "poster": "/media/video/painting/paint-boss-poster.webp",
+        "width": 834,
+        "height": 1280,
+        "duration": 41.21,
+        "sizeMB": 0.9
+      },
+      {
+        "key": "paint-class",
+        "label": "另类上课扮演-随便画画篇",
+        "src": "/media/video/painting/paint-class.mp4",
+        "poster": "/media/video/painting/paint-class-poster.webp",
+        "width": 720,
+        "height": 1104,
+        "duration": 36.91,
+        "sizeMB": 0.8
+      }
+    ],
+    "ppt": [
+      {
+        "key": "ppt-growth",
+        "label": "向阳而生野蛮生长",
+        "src": "/media/video/ppt/ppt-growth.mp4",
+        "poster": "/media/video/ppt/ppt-growth-poster.webp",
+        "width": 1280,
+        "height": 762,
+        "duration": 170.71,
+        "sizeMB": 16.6
+      }
+    ],
+    "ui": [
+      {
+        "key": "ui-demo",
+        "label": "第二文化小程序界面演示",
+        "src": "/media/video/ui/ui-demo.mp4",
+        "poster": "/media/video/ui/ui-demo-poster.webp",
+        "width": 1280,
+        "height": 720,
+        "duration": 12.52,
+        "sizeMB": 1
+      }
+    ]
+  },
+  "audio": [
+    {
+      "key": "red-dust-main",
+      "title": "万丈红尘，体验为王",
+      "src": "/media/audio/red-dust-main.m4a",
+      "duration": 462.9,
+      "sizeMB": 7.2,
+      "cover": "/media/image/soundCovers/cover-main.webp",
+      "coverThumb": "/media/image/soundCovers/cover-main@thumb.webp"
+    },
+    {
+      "key": "red-dust-e02",
+      "title": "你只是经历了，却从来没有成长",
+      "src": "/media/audio/red-dust-e02.m4a",
+      "duration": 252.1,
+      "sizeMB": 3.9,
+      "cover": "/media/image/soundCovers/cover-e02.webp",
+      "coverThumb": "/media/image/soundCovers/cover-e02@thumb.webp"
+    },
+    {
+      "key": "red-dust-e03",
+      "title": "你很敢体验，却不懂筛选体验",
+      "src": "/media/audio/red-dust-e03.m4a",
+      "duration": 223.3,
+      "sizeMB": 3.5,
+      "cover": "/media/image/soundCovers/cover-e03.webp",
+      "coverThumb": "/media/image/soundCovers/cover-e03@thumb.webp"
+    },
+    {
+      "key": "red-dust-e04",
+      "title": "你总想体验高光，却容不下普通",
+      "src": "/media/audio/red-dust-e04.m4a",
+      "duration": 182.4,
+      "sizeMB": 2.8,
+      "cover": "/media/image/soundCovers/cover-e04.webp",
+      "coverThumb": "/media/image/soundCovers/cover-e04@thumb.webp"
+    },
+    {
+      "key": "red-dust-e05",
+      "title": "你太想要结果，所以体验不到生活",
+      "src": "/media/audio/red-dust-e05.m4a",
+      "duration": 163.5,
+      "sizeMB": 2.5,
+      "cover": "/media/image/soundCovers/cover-e05.webp",
+      "coverThumb": "/media/image/soundCovers/cover-e05@thumb.webp"
+    }
+  ],
+  "files": [
+    {
+      "key": "zengguofan",
+      "title": "曾国藩传阅读分享",
+      "format": "PPTX",
+      "sizeMB": 21.3,
+      "slideCount": 12,
+      "slides": [
+        {
+          "src": "/media/ppt/zengguofan/slide-01.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-02.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-03.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-04.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-05.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-06.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-07.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-08.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-09.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-10.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-11.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/zengguofan/slide-12.webp",
+          "width": 1600,
+          "height": 900
+        }
+      ],
+      "pdf": "/media/files/zengguofan.pdf",
+      "sourceName": "曾国藩传阅读分享.pptx"
+    },
+    {
+      "key": "ai-product",
+      "title": "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品",
+      "format": "PPTX",
+      "sizeMB": 84.5,
+      "slideCount": 12,
+      "slides": [
+        {
+          "src": "/media/ppt/ai-product/slide-01.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-02.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-03.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-04.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-05.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-06.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-07.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-08.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-09.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-10.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-11.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-12.webp",
+          "width": 1600,
+          "height": 900
+        }
+      ],
+      "pdf": "/media/files/ai-product.pdf",
+      "sourceName": "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品.pptx"
+    },
+    {
+      "key": "defense",
+      "title": "个人答辩作品集",
+      "format": "PPTX",
+      "sizeMB": 48.4,
+      "slideCount": 12,
+      "slides": [
+        {
+          "src": "/media/ppt/defense/slide-01.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-02.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-03.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-04.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-05.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-06.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-07.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-08.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-09.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-10.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-11.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/defense/slide-12.webp",
+          "width": 1600,
+          "height": 900
+        }
+      ],
+      "pdf": "/media/files/defense.pdf",
+      "sourceName": "个人答辩作品集——柯孟含.pptx"
+    },
+    {
+      "key": "growth",
+      "title": "化学与医药工程学院 · 成长赛道",
+      "format": "PDF",
+      "sizeMB": 10.2,
+      "slideCount": 10,
+      "slides": [
+        {
+          "src": "/media/ppt/growth/slide-01.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-02.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-03.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-04.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-05.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-06.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-07.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-08.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-09.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/growth/slide-10.webp",
+          "width": 1600,
+          "height": 900
+        }
+      ],
+      "pdf": "/media/files/growth.pdf",
+      "sourceName": "化学与医药工程学院-成长赛道-柯孟含.pdf"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "ideas-into-form",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve out -l 3000",
+    "assets": "node scripts/build-assets.mjs",
+    "fonts": "node scripts/build-fonts.mjs"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "next": "^15.5.7",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.1.0",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "pdfjs-dist": "^6.5.438",
+    "puppeteer-core": "^25.16.0",
+    "sharp": "^0.33.5",
+    "subset-font": "^2.9.0",
+    "typescript": "^5.9.3"
+  }
+}
