@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, Close } from "@/components/Icons";
 import { useLightbox } from "@/components/Lightbox";
 import { useMotion } from "@/components/MotionProvider";
 import type { ArchivePage, ImageFolder, ImageShape } from "@/content/imageArchive";
-import { accentForSeries, paletteForFolder, type ImagePalette } from "@/content/imagePalette";
+import { accentForSeries, paletteForFolder } from "@/content/imagePalette";
 import type { ImageAsset } from "@/content/works";
 import { CoverOrbit } from "./CoverOrbit";
 
@@ -48,79 +48,82 @@ function splitRows(count: number, maxCols: number) {
   return Array.from({ length: rows }, (_, index) => base + (index < extra ? 1 : 0));
 }
 
-function FolderCard({
+function FolderFeature({
   folder,
-  index,
   onOpen,
-  onAccent,
 }: {
   folder: ImageFolder;
-  index: number;
   onOpen: (folder: ImageFolder, trigger: HTMLButtonElement) => void;
-  onAccent: (palette: ImagePalette) => void;
 }) {
   const palette = paletteForFolder(folder.letter);
   const cover = folder.cover;
+  const echoes = folder.previews.filter((image) => image.src !== cover.src).slice(0, 2);
 
   return (
-    <button
-      type="button"
-      className="image-folder"
-      data-accent={palette.accent}
+    <div
+      className="catalog-cover-stage"
       style={{
-        "--order": index,
         "--folder-accent": palette.accent,
         "--folder-deep": palette.deep,
         "--folder-wash": palette.wash,
         "--folder-paper": palette.paper,
       } as React.CSSProperties}
-      aria-label={`打开 ${folder.letter} ${folder.zh}，${folder.count} 张图片`}
-      onClick={(event) => onOpen(folder, event.currentTarget)}
-      onPointerEnter={(event) => {
-        event.currentTarget.style.setProperty("--reveal", "1");
-        onAccent(palette);
-      }}
-      onFocus={(event) => {
-        event.currentTarget.style.setProperty("--reveal", "1");
-        onAccent(palette);
-      }}
-      onBlur={(event) => {
-        event.currentTarget.style.setProperty("--reveal", "0");
-      }}
-      onPointerMove={(event) => {
-        const element = event.currentTarget;
-        const rect = element.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width;
-        const y = (event.clientY - rect.top) / rect.height;
-        element.style.setProperty("--pointer-x", `${(x * 100).toFixed(2)}%`);
-        element.style.setProperty("--pointer-y", `${(y * 100).toFixed(2)}%`);
-      }}
-      onPointerLeave={(event) => {
-        const element = event.currentTarget;
-        element.style.setProperty("--reveal", "0");
-        element.style.setProperty("--pointer-x", "50%");
-        element.style.setProperty("--pointer-y", "42%");
-      }}
+      data-letter={folder.letter}
     >
-      <span className="image-folder__media">
-        <span className="image-folder__art" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="image-folder__base" src={cover.thumb || cover.src} alt="" loading={index < 4 ? "eager" : "lazy"} decoding="async" />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="image-folder__color" src={cover.thumb || cover.src} alt="" loading={index < 4 ? "eager" : "lazy"} decoding="async" />
-        </span>
-        <span className="image-folder__index mono">{folder.letter}</span>
-        <span className="image-folder__open mono">OPEN</span>
-      </span>
-      <span className="image-folder__meta">
-        <span className="image-folder__letter mono">{folder.letter}</span>
-        <span className="image-folder__names">
-          <b>{folder.zh}</b>
-          <em>{folder.en}</em>
-        </span>
-        <span className="image-folder__count mono">{pad(folder.count, 3)}</span>
-      </span>
-    </button>
+      <div className="catalog-cover-stack">
+        {echoes.map((image, index) => (
+          <figure className={`catalog-echo catalog-echo--${index + 1}`} key={image.key} aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={image.thumb || image.src} alt="" loading="eager" decoding="async" />
+          </figure>
+        ))}
+
+        <button
+          type="button"
+          className="catalog-feature"
+          data-accent={palette.accent}
+          data-letter={folder.letter}
+          data-cursor-label="OPEN"
+          aria-label={`打开 ${folder.letter} ${folder.zh}，${folder.count} 张图片`}
+          onClick={(event) => onOpen(folder, event.currentTarget)}
+          onPointerEnter={(event) => {
+            event.currentTarget.style.setProperty("--reveal", "1");
+          }}
+          onFocus={(event) => {
+            event.currentTarget.style.setProperty("--reveal", "1");
+          }}
+          onBlur={(event) => {
+            event.currentTarget.style.setProperty("--reveal", "0");
+          }}
+          onPointerMove={(event) => {
+            const element = event.currentTarget;
+            const rect = element.getBoundingClientRect();
+            const x = (event.clientX - rect.left) / rect.width;
+            const y = (event.clientY - rect.top) / rect.height;
+            element.style.setProperty("--pointer-x", `${(x * 100).toFixed(2)}%`);
+            element.style.setProperty("--pointer-y", `${(y * 100).toFixed(2)}%`);
+          }}
+          onPointerLeave={(event) => {
+            const element = event.currentTarget;
+            element.style.setProperty("--reveal", "0");
+            element.style.setProperty("--pointer-x", "50%");
+            element.style.setProperty("--pointer-y", "42%");
+          }}
+        >
+          <span className="catalog-feature__media">
+            <span className="catalog-feature__art" aria-hidden="true">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="catalog-feature__base" src={cover.thumb || cover.src} alt="" loading="eager" decoding="async" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="catalog-feature__color" src={cover.thumb || cover.src} alt="" loading="eager" decoding="async" />
+            </span>
+            <span className="catalog-feature__index mono">{folder.letter}</span>
+            <span className="catalog-feature__open mono">OPEN</span>
+            <span className="catalog-feature__sheen" aria-hidden="true" />
+          </span>
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -494,79 +497,127 @@ function Archive({
 
 export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
   const [selected, setSelected] = useState<ImageFolder | null>(null);
-  const [activePalette, setActivePalette] = useState<ImagePalette>(() => paletteForFolder(folders[0]?.letter ?? "A"));
+  const [activeIndex, setActiveIndex] = useState(0);
   const triggerRef = useRef<HTMLElement | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const total = folders.reduce((sum, folder) => sum + folder.count, 0);
-  const heroFolders = [folders[0], folders[1]].filter(Boolean);
+  const active = folders[activeIndex] ?? folders[0];
+  const palette = paletteForFolder(active?.letter ?? "A");
+
+  const step = useCallback((direction: number) => {
+    if (!folders.length) return;
+    setActiveIndex((current) => (current + direction + folders.length) % folders.length);
+  }, [folders.length]);
+
+  useEffect(() => {
+    if (selected) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") step(-1);
+      if (event.key === "ArrowRight") step(1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [selected, step]);
+
+  if (!active) return null;
 
   return (
     <div
       ref={rootRef}
       className="image-catalog"
       style={{
-        "--page-accent": activePalette.accent,
-        "--page-wash": activePalette.wash,
+        "--page-accent": palette.accent,
+        "--page-wash": palette.wash,
       } as React.CSSProperties}
       onPointerMove={(event) => {
         const element = rootRef.current;
         if (!element) return;
         const rect = element.getBoundingClientRect();
-        element.style.setProperty("--mx", `${(((event.clientX - rect.left) / rect.width) * 100).toFixed(2)}%`);
-        element.style.setProperty("--my", `${(((event.clientY - rect.top) / rect.height) * 100).toFixed(2)}%`);
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        element.style.setProperty("--mx", `${(x * 100).toFixed(2)}%`);
+        element.style.setProperty("--my", `${(y * 100).toFixed(2)}%`);
+        element.style.setProperty("--tilt-x", (x - 0.5).toFixed(4));
+        element.style.setProperty("--tilt-y", (y - 0.5).toFixed(4));
+      }}
+      onPointerLeave={() => {
+        const element = rootRef.current;
+        if (!element) return;
+        element.style.setProperty("--tilt-x", "0");
+        element.style.setProperty("--tilt-y", "0");
       }}
     >
-      <section className="wrap catalog-masthead">
-        <div className="catalog-masthead__copy">
-          <span className="mono catalog-masthead__kicker">CHAPTER 01 / IMAGE</span>
-          <div className="catalog-masthead__title">
+      <section className="wrap catalog-shell" aria-label="成象作品文件夹">
+        <header className="catalog-head">
+          <span className="mono catalog-head__kicker">CHAPTER 01 / IMAGE</span>
+          <div className="catalog-head__title">
             <h1>成象</h1>
-            <span className="catalog-masthead__en display">IMAGE</span>
+            <span className="catalog-head__en display">IMAGE</span>
           </div>
-          <div className="catalog-masthead__meta mono">
-            <div><b>{pad(folders.length)}</b><span>FOLDERS</span></div>
-            <div><b>{pad(total, 3)}</b><span>IMAGES</span></div>
+          <div className="catalog-head__meta mono">
+            <span>{pad(folders.length)} FOLDERS</span>
+            <span>{pad(total, 3)} IMAGES</span>
           </div>
-        </div>
-        <div className="catalog-masthead__plates" aria-hidden="true">
-          {heroFolders.map((folder) => {
-            const palette = paletteForFolder(folder.letter);
-            return (
-              <figure
-                className="catalog-plate"
-                key={folder.letter}
-                style={{ "--plate-accent": palette.accent, "--plate-wash": palette.wash } as React.CSSProperties}
-              >
-                <span className="catalog-plate__frame">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={folder.cover.thumb || folder.cover.src} alt="" loading="eager" decoding="async" />
-                </span>
-                <span className="catalog-plate__letter mono">{folder.letter}</span>
-              </figure>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="wrap catalog-index" aria-label="成象作品文件夹">
-        <header className="catalog-index__head mono">
-          <span>ARCHIVE / A — G</span>
-          <span>SELECT A FOLDER</span>
         </header>
-        <div className="catalog-grid">
-          {folders.map((folder, index) => (
-            <FolderCard
-              key={folder.letter}
-              folder={folder}
-              index={index}
-              onAccent={setActivePalette}
+
+        <div
+          className="catalog-stage"
+          data-total={folders.length}
+          data-active={active.letter}
+          onContextMenu={(event) => {
+            event.preventDefault();
+            step(1);
+          }}
+        >
+          <div className="catalog-slide" key={active.letter}>
+            <div className="catalog-detail">
+              <span className="mono catalog-detail__index">FOLDER {active.letter} / {pad(activeIndex + 1)} OF {pad(folders.length)}</span>
+              <h2 className="serif">{active.zh}</h2>
+              <p className="catalog-detail__en">{active.en}</p>
+              <div className="catalog-detail__stats mono">
+                <span><b>{pad(active.count, 3)}</b> IMAGES</span>
+                <span><b>{pad(active.pages.length + 1)}</b> PAGES</span>
+              </div>
+            </div>
+            <FolderFeature
+              folder={active}
               onOpen={(next, trigger) => {
                 triggerRef.current = trigger;
                 setSelected(next);
               }}
             />
-          ))}
+          </div>
         </div>
+
+        <footer className="catalog-nav" aria-label="文件夹导航">
+          <button type="button" onClick={() => step(-1)} aria-label="上一个文件夹">
+            <ChevronLeft />
+          </button>
+          <div className="catalog-rail" aria-label="文件夹索引">
+            {folders.map((folder, index) => {
+              const itemPalette = paletteForFolder(folder.letter);
+              return (
+                <button
+                  type="button"
+                  key={folder.letter}
+                  className={`catalog-rail__tick${index === activeIndex ? " is-active" : ""}`}
+                  style={{
+                    "--tick-accent": itemPalette.accent,
+                    "--tick-wash": itemPalette.wash,
+                  } as React.CSSProperties}
+                  aria-label={`前往 ${folder.letter} ${folder.zh}`}
+                  aria-current={index === activeIndex ? "true" : undefined}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <span className="mono">{folder.letter}</span>
+                </button>
+              );
+            })}
+          </div>
+          <button type="button" onClick={() => step(1)} aria-label="下一个文件夹">
+            <ChevronRight />
+          </button>
+        </footer>
       </section>
 
       {selected ? (

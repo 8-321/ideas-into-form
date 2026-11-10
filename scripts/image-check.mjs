@@ -77,48 +77,118 @@ async function shot(name) {
 
 async function imageState() {
   return page.evaluate(() => {
-    const folders = [...document.querySelectorAll(".image-folder")];
-    const boxes = folders.map((node) => {
-      const rect = node.getBoundingClientRect();
-      return { width: +rect.width.toFixed(1), height: +rect.height.toFixed(1) };
-    });
+    const stage = document.querySelector(".catalog-stage");
+    const folders = [...document.querySelectorAll(".catalog-feature")];
+    const slides = [...document.querySelectorAll(".catalog-slide")];
+    const folder = folders[0];
+    const box = folder ? { width: folder.offsetWidth, height: folder.offsetHeight } : null;
+    const nav = document.querySelector(".catalog-nav");
+    const navBox = nav?.getBoundingClientRect();
     const images = [...document.images];
     return {
+      total: Number(stage?.getAttribute("data-total") ?? 0),
+      active: stage?.getAttribute("data-active"),
+      slides: slides.length,
       folders: folders.length,
       accents: folders.map((node) => node.getAttribute("data-accent")),
-      boxes,
+      boxes: box ? [{ width: box.width, height: box.height }] : [],
       defaultReveal: folders.map((node) => getComputedStyle(node).getPropertyValue("--reveal").trim()),
-      defaultColorOpacity: folders.map((node) => getComputedStyle(node.querySelector(".image-folder__color")).opacity),
-      baseFit: folders.map((node) => getComputedStyle(node.querySelector(".image-folder__base")).objectFit),
-      colorFit: folders.map((node) => getComputedStyle(node.querySelector(".image-folder__color")).objectFit),
+      defaultColorOpacity: folders.map((node) => getComputedStyle(node.querySelector(".catalog-feature__color")).opacity),
+      baseFit: folders.map((node) => getComputedStyle(node.querySelector(".catalog-feature__base")).objectFit),
+      colorFit: folders.map((node) => getComputedStyle(node.querySelector(".catalog-feature__color")).objectFit),
+      echoes: [...document.querySelectorAll(".catalog-echo")].map((node) => ({
+        display: getComputedStyle(node).display,
+        fit: getComputedStyle(node.querySelector("img")).objectFit,
+      })),
+      railTicks: document.querySelectorAll(".catalog-rail__tick").length,
+      railActive: document.querySelector(".catalog-rail__tick.is-active span")?.textContent?.trim(),
+      legacy: document.querySelectorAll(".catalog-grid, .image-folder").length,
       broken: images.filter((image) => image.complete && image.naturalWidth === 0).map((image) => image.currentSrc || image.src),
       overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      navBottom: navBox ? +navBox.bottom.toFixed(1) : null,
+      viewportHeight: window.innerHeight,
+      pageHeight: document.documentElement.scrollHeight,
       text: document.body.innerText,
     };
   });
 }
 
-async function hoverThirdFolder() {
-  const folder = await page.$(".image-folder:nth-child(3)");
-  if (!folder) throw new Error("Missing third image folder");
+async function stageState() {
+  return page.evaluate(() => {
+    const stage = document.querySelector(".catalog-stage");
+    const folder = document.querySelector(".catalog-feature");
+    const color = folder?.querySelector(".catalog-feature__color");
+    const box = folder ? { width: folder.offsetWidth, height: folder.offsetHeight } : null;
+    const root = document.querySelector(".image-catalog");
+    return {
+      active: stage?.getAttribute("data-active"),
+      folderCount: document.querySelectorAll(".catalog-feature").length,
+      slideCount: document.querySelectorAll(".catalog-slide").length,
+      accent: folder?.getAttribute("data-accent"),
+      pageAccent: root ? getComputedStyle(root).getPropertyValue("--page-accent").trim() : null,
+      box,
+      baseFit: folder ? getComputedStyle(folder.querySelector(".catalog-feature__base")).objectFit : null,
+      colorFit: color ? getComputedStyle(color).objectFit : null,
+      echoCount: document.querySelectorAll(".catalog-echo").length,
+      railActive: document.querySelector(".catalog-rail__tick.is-active span")?.textContent?.trim(),
+    };
+  });
+}
+
+async function clickNextFolder() {
+  const clicked = await page.evaluate(() => {
+    const button = document.querySelector('.catalog-nav button[aria-label="下一个文件夹"]');
+    if (!button) return false;
+    button.click();
+    return true;
+  });
+  if (!clicked) throw new Error("Missing next folder button");
+  await wait(1040);
+  return stageState();
+}
+
+async function hoverFolder() {
+  const folder = await page.$(".catalog-feature");
+  if (!folder) throw new Error("Missing image folder");
   const box = await folder.boundingBox();
   if (!box) throw new Error("Image folder has no box");
   await page.mouse.move(box.x + box.width * 0.64, box.y + box.height * 0.42, { steps: 8 });
   await wait(650);
   return page.evaluate(() => {
-    const folder = document.querySelector(".image-folder:nth-child(3)");
-    const color = folder?.querySelector(".image-folder__color");
+    const folder = document.querySelector(".catalog-feature");
+    const color = folder?.querySelector(".catalog-feature__color");
     const root = document.querySelector(".image-catalog");
     return {
       reveal: folder ? getComputedStyle(folder).getPropertyValue("--reveal").trim() : null,
       opacity: color ? getComputedStyle(color).opacity : null,
       accent: folder?.getAttribute("data-accent"),
       pageAccent: root ? root.style.getPropertyValue("--page-accent").trim() : null,
+      echoFilter: document.querySelector(".catalog-echo img") ? getComputedStyle(document.querySelector(".catalog-echo img")).filter : null,
+      stackTransform: document.querySelector(".catalog-cover-stack") ? getComputedStyle(document.querySelector(".catalog-cover-stack")).transform : null,
     };
   });
 }
 
-async function openFolder(selector = ".image-folder:nth-child(1)") {
+async function rightClickNextFolder() {
+  await page.evaluate(() => {
+    window.__catalogContextPrevented = null;
+    document.addEventListener("contextmenu", (event) => {
+      window.__catalogContextPrevented = event.defaultPrevented;
+    }, { once: true });
+  });
+  const stage = await page.$(".catalog-stage");
+  if (!stage) throw new Error("Missing catalog stage");
+  const box = await stage.boundingBox();
+  if (!box) throw new Error("Catalog stage has no box");
+  await page.mouse.click(box.x + box.width * 0.58, box.y + box.height * 0.48, { button: "right" });
+  await wait(1040);
+  return page.evaluate(() => ({
+    prevented: window.__catalogContextPrevented,
+    active: document.querySelector(".catalog-stage")?.getAttribute("data-active"),
+  }));
+}
+
+async function openFolder(selector = ".catalog-feature") {
   const trigger = await page.$(selector);
   if (!trigger) throw new Error(`Missing folder trigger ${selector}`);
   await trigger.click();
@@ -222,18 +292,49 @@ async function selectTab(label) {
   await wait(650);
 }
 
-// Image desktop: one frame size, seven palettes, grey by default, colour on hover.
+// Image desktop: one folder at a time, seven palettes, grey by default, colour on hover.
 await go("/image/");
 report.image.desktop = await imageState();
-report.image.hover = await hoverThirdFolder();
-await page.evaluate(() => document.querySelector(".catalog-grid")?.scrollIntoView({ block: "start", behavior: "instant" }));
-await wait(500);
-await shot("check-image-grid-1512");
-await hoverThirdFolder();
+await page.mouse.move(2, 2);
+await wait(300);
+await shot("check-image-stage-1512");
+report.image.hover = await hoverFolder();
 await shot("check-image-hover-1512");
+report.image.motion = await page.evaluate(() => ({
+  coverAnimation: getComputedStyle(document.querySelector(".catalog-cover-stage")).animationName,
+  detailAnimation: getComputedStyle(document.querySelector(".catalog-detail")).animationName,
+  tilt: getComputedStyle(document.querySelector(".image-catalog")).getPropertyValue("--tilt-x").trim(),
+}));
+report.image.reduced = await page.evaluate(() => {
+  document.documentElement.dataset.reduce = "true";
+  const stage = document.querySelector(".catalog-cover-stage");
+  const detail = document.querySelector(".catalog-detail");
+  const stack = document.querySelector(".catalog-cover-stack");
+  const result = {
+    coverAnimation: stage ? getComputedStyle(stage).animationName : null,
+    detailAnimation: detail ? getComputedStyle(detail).animationName : null,
+    stackTransform: stack ? getComputedStyle(stack).transform : null,
+  };
+  document.documentElement.dataset.reduce = "false";
+  return result;
+});
+
+const tour = [await stageState()];
+tour.push(await clickNextFolder());
+await page.keyboard.press("ArrowRight");
+await wait(1040);
+tour.push(await stageState());
+report.image.rightClick = await rightClickNextFolder();
+tour.push(await stageState());
+while (tour.length < 7) tour.push(await clickNextFolder());
+await shot("check-image-stage-G-1512");
+report.image.tour = {
+  states: tour,
+  wrap: await clickNextFolder(),
+};
 
 // Folder book: cover collage, page turn, 98-item 100 DAYS orbit.
-await openFolder(".image-folder:nth-child(1)");
+await openFolder(".catalog-feature");
 report.image.cover = await readerState();
 await shot("check-image-cover-1512");
 await page.keyboard.press("ArrowRight");
@@ -244,14 +345,12 @@ await closeOverlay();
 
 report.removedCopy.image = ["所有画面", "HONESTY", "视觉档案", "长理建筑线稿", "MATERIAL NOTE", "01 / VIDEO", "02 / DECK"].filter((copy) => report.image.desktop.text.includes(copy));
 
-// Image mobile: two columns, last card centred, no horizontal overflow, overlay still complete.
+// Image mobile: one folder at a time, no horizontal overflow, overlay still complete.
 await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 1, isMobile: true, hasTouch: true });
 await go("/image/");
 report.responsive.image390 = await imageState();
-await page.evaluate(() => document.querySelector(".catalog-grid")?.scrollIntoView({ block: "start", behavior: "instant" }));
-await wait(350);
-await shot("check-image-grid-390");
-await openFolder(".image-folder:nth-child(1)");
+await shot("check-image-stage-390");
+await openFolder(".catalog-feature");
 report.responsive.image390Cover = await readerState();
 await shot("check-image-cover-390");
 await closeOverlay();
@@ -301,19 +400,36 @@ await shot("check-experience-guzheng-390");
 await page.setViewport({ width: 1280, height: 800, deviceScaleFactor: 1 });
 await go("/image/");
 report.responsive.image1280 = await imageState();
+await shot("check-image-stage-1280");
 await go("/experience/");
 report.responsive.experience1280 = await experienceState();
 
 const checks = [
-  ["image folder count", report.image.desktop.folders === 7],
-  ["image unique palettes", new Set(report.image.desktop.accents).size === 7],
-  ["image uniform card size", same(report.image.desktop.boxes.map((box) => box.width)) && same(report.image.desktop.boxes.map((box) => box.height))],
+  ["image folder total", report.image.desktop.total === 7],
+  ["image one folder per stage", report.image.desktop.folders === 1 && report.image.desktop.slides === 1],
+  ["image echo stack present", report.image.desktop.echoes.length === 2 && report.image.desktop.echoes.every((echo) => echo.display !== "none" && echo.fit === "contain")],
+  ["image folder rail present", report.image.desktop.railTicks === 7 && report.image.desktop.railActive === "A"],
+  ["image legacy grid removed", report.image.desktop.legacy === 0],
+  ["image tour reaches all folders", report.image.tour.states.map((state) => state.active).join("") === "ABCDEFG"],
+  ["image tour wraps", report.image.tour.wrap.active === "A"],
+  ["image right click advances", report.image.rightClick.prevented === true && report.image.rightClick.active === "D"],
+  ["image one folder after navigation", report.image.tour.states.every((state) => state.folderCount === 1 && state.slideCount === 1 && state.echoCount === 2)],
+  ["image rail follows folder", report.image.tour.states.every((state) => state.railActive === state.active)],
+  ["image unique palettes", new Set(report.image.tour.states.map((state) => state.accent)).size === 7],
+  ["image palette follows folder", report.image.tour.states.every((state) => state.pageAccent === state.accent)],
+  ["image uniform card size", report.image.tour.states.every((state) => state.box && same([state.box.width, report.image.desktop.boxes[0].width])) && same(report.image.tour.states.map((state) => state.box?.height ?? 0))],
   ["image starts grey", report.image.desktop.defaultColorOpacity.every((value) => value === "0")],
-  ["image contains originals", [...report.image.desktop.baseFit, ...report.image.desktop.colorFit].every((value) => value === "contain")],
-  ["image hover reveals colour", report.image.hover.reveal === "1" && report.image.hover.opacity === "1" && report.image.hover.pageAccent === report.image.hover.accent],
+  ["image contains originals", report.image.tour.states.every((state) => state.baseFit === "contain" && state.colorFit === "contain")],
+  ["image hover reveals colour", report.image.hover.reveal === "1" && Number(report.image.hover.opacity) > 0.95 && report.image.hover.pageAccent === report.image.hover.accent],
+  ["image hover chroma echoes", String(report.image.hover.echoFilter).includes("grayscale(0)")],
+  ["image cover follows pointer", report.image.motion.tilt !== "" && report.image.hover.stackTransform !== "none"],
+  ["image stage animates", String(report.image.motion.coverAnimation).includes("catalog-cover-in") && String(report.image.motion.detailAnimation).includes("catalog-detail-in")],
+  ["image motion off is static", report.image.reduced.coverAnimation === "none" && report.image.reduced.detailAnimation === "none" && report.image.reduced.stackTransform === "none"],
   ["image no overflow desktop", report.image.desktop.overflowX === 0],
   ["image no overflow mobile", report.responsive.image390.overflowX === 0],
   ["image no overflow 1280", report.responsive.image1280.overflowX === 0],
+  ["image mobile stays minimal", report.responsive.image390.echoes.every((echo) => echo.display === "none")],
+  ["image stage fits first viewport", [report.image.desktop, report.responsive.image390, report.responsive.image1280].every((state) => state.navBottom <= state.viewportHeight + 0.5)],
   ["cover collage complete", report.image.cover.photos.length === 4 && report.image.cover.photoFit.every((value) => value === "contain")],
   ["cover collage uniform", same(report.image.cover.photos.map((box) => box.width)) && same(report.image.cover.photos.map((box) => box.height))],
   ["100 DAYS orbit complete", report.image.orbit.orbit && report.image.orbit.orbitTotal === 98],
@@ -347,8 +463,11 @@ await fsp.writeFile(path.join(SHOTS, "image-check.json"), JSON.stringify(report,
 
 console.log(JSON.stringify({
   failures,
-  folders: report.image.desktop.folders,
-  palettes: new Set(report.image.desktop.accents).size,
+  folders: report.image.desktop.total,
+  visibleFolders: report.image.desktop.folders,
+  tour: report.image.tour.states.map((state) => state.active).join(""),
+  rightClick: report.image.rightClick,
+  palettes: new Set(report.image.tour.states.map((state) => state.accent)).size,
   coverPhotos: report.image.cover.photos.length,
   orbit: report.image.orbit.orbitTotal,
   guzhengScreen: report.experience.guzheng.screen,
