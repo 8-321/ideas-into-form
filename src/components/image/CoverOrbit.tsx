@@ -63,6 +63,7 @@ export function CoverOrbit({
       className={`cover-orbit${dragging ? " is-dragging" : ""}`}
       data-auto={reduced ? "off" : "on"}
       data-active={active}
+      data-total={total}
       role="region"
       aria-roledescription="carousel"
       aria-label={label}

@@ -3,9 +3,10 @@ import "./experience.css";
 import { ChapterNav } from "@/components/ChapterNav";
 import { Cinema, type CinemaGroup } from "@/components/experience/Cinema";
 import { DeckViewer } from "@/components/experience/DeckViewer";
+import { FilmArtwork } from "@/components/experience/FilmArtwork";
 import { ArrowRight, ArrowUpRight, Play } from "@/components/Icons";
 import { TransitionLink } from "@/components/TransitionLink";
-import { DECKS, FILM_COVERS, filmVideos, group as imageGroup, vid } from "@/content/works";
+import { DECKS, FILM_COVERS, filmVideos, vid } from "@/content/works";
 
 export const metadata: Metadata = {
   title: "03 成境 / EXPERIENCE",
@@ -17,7 +18,6 @@ const nav = [
   { id: "b-screenings", no: "B", label: "数字放映室" },
   { id: "c-programme", no: "C", label: "四类节目" },
   { id: "d-decks", no: "D", label: "演示文稿" },
-  { id: "e-notes", no: "E", label: "素材说明" },
 ];
 
 const fmt = (value: number) => {
@@ -64,18 +64,18 @@ const totalRuntime = allVideos.reduce((sum, video) => sum + video.duration, 0);
 const totalDecks = DECKS.reduce((sum, deck) => sum + deck.slideCount, 0);
 const heroPoster = vid("piano", "piano-wedding");
 const heroCover = FILM_COVERS.piano;
-const reel = [vid("piano", "piano-wedding"), vid("piano", "piano-flower"), vid("guzheng", "guzheng-sea"), vid("painting", "paint-day"), vid("ppt", "ppt-growth")];
-const campus = imageGroup("campus");
+const reel = groups.map((item) => ({
+  key: item.key,
+  label: item.label,
+  src: item.cover?.thumb ?? item.cover?.src ?? item.videos[0]?.poster,
+  portrait: item.key === "guzheng" || item.key === "painting",
+})).filter((item) => Boolean(item.src));
 
 const programme = groups.map((item) => ({
   ...item,
   total: item.videos.reduce((sum, video) => sum + video.duration, 0),
-  stills: [
-    ...(item.cover
-      ? [{ key: `${item.key}-cover`, label: `${item.label}封面`, src: item.cover.src, width: item.cover.width, height: item.cover.height }]
-      : []),
-    ...item.videos.map((video) => ({ key: video.key, label: video.label, src: video.poster, width: video.width, height: video.height })),
-  ].slice(0, 3),
+  portrait: item.key === "guzheng" || item.key === "painting",
+  still: item.cover?.src ?? item.videos[0]?.poster,
 }));
 
 export default function ExperienceChapterPage() {
@@ -135,16 +135,21 @@ export default function ExperienceChapterPage() {
             </div>
 
             <div className="film-hero__reel" aria-hidden="true">
-              {reel.map((video, index) => (
-                <span key={video.key} className={`film-hero__still film-hero__still--${index + 1}`}>
-                  <img src={index === 0 ? (heroCover?.thumb ?? video.poster) : video.poster} alt="" loading="lazy" />
+              {reel.map((item, index) => (
+                <span
+                  key={item.key}
+                  className={`film-hero__still film-hero__still--${index + 1}`}
+                  data-group={item.key}
+                  data-artwork={item.key}
+                >
+                  <FilmArtwork src={item.src ?? ""} alt="" portrait={item.portrait} loading="lazy" />
                 </span>
               ))}
             </div>
 
             <p className="film-hero__caption mono muted">
-              <span>FRAME 001 / COVER / PIANO</span>
-              <span>SCROLL TO SCREEN</span>
+              <span>11 FILMS / 4 SERIES</span>
+              <span>PIANO COVER / 001</span>
             </p>
           </div>
         </div>
@@ -232,12 +237,8 @@ export default function ExperienceChapterPage() {
                   <p>{item.note}</p>
                   <a href="#b-screenings" className="link-line">进入放映室 <ArrowRight size={12} /></a>
                 </div>
-                <div className="programme-row__stills">
-                  {item.stills.map((still) => (
-                    <span key={still.key} className={still.height > still.width ? "is-tall" : ""}>
-                      <img src={still.src} alt={`${still.label} 画面`} loading="lazy" />
-                    </span>
-                  ))}
+                <div className={`programme-row__still${item.portrait ? " is-portrait" : ""}`} data-group={item.key} data-artwork={item.still}>
+                  {item.still ? <FilmArtwork src={item.still} alt={`${item.label}封面`} portrait={item.portrait} loading="lazy" /> : null}
                 </div>
                 <div className="programme-row__runtime">
                   <span className="mono">TOTAL</span>
@@ -277,45 +278,6 @@ export default function ExperienceChapterPage() {
                 <em className="mono">{deck.format} / {deck.slideCount} P</em>
               </span>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="film-notes section" id="e-notes">
-        <div className="wrap">
-          <div className="film-notes__grid">
-            <div className="film-notes__head">
-              <span className="eyebrow" data-reveal>E / MATERIAL NOTE</span>
-              <h2 className="serif" data-reveal>所有画面，<br />都来自真实文件。</h2>
-            </div>
-
-            <div className="film-notes__list stagger">
-              <article style={{ "--i": 0 } as React.CSSProperties}>
-                <span className="mono">01 / VIDEO</span>
-                <h3 className="serif">原始视频转码，不生成。</h3>
-                <p>11 段视频均来自原始素材，统一转码为 720p MP4 并保留原声；钢琴、古筝使用专门制作的封面图，其余封面由视频关键帧抽取。</p>
-              </article>
-              <article style={{ "--i": 1 } as React.CSSProperties}>
-                <span className="mono">02 / DECK</span>
-                <h3 className="serif">演示文稿逐页导出。</h3>
-                <p>4 份演示文稿共 {totalDecks} 页，由原始 PPTX / PDF 导出为图片；页面不补写演讲者备注或虚构数据。</p>
-              </article>
-              <article style={{ "--i": 2 } as React.CSSProperties}>
-                <span className="mono">03 / HONESTY</span>
-                <h3 className="serif">没有网络视频冒充。</h3>
-                <p>页面不使用图库视频或生成式影像替代作品。缺失素材会以「待上传作品素材」占位，而不是补一张看起来相似的作品。</p>
-              </article>
-            </div>
-          </div>
-
-          <div className="film-notes__aside" data-reveal>
-            <div className="film-notes__still">
-              <img src={campus[0]?.thumb ?? heroPoster.poster} alt="长理建筑线稿" loading="lazy" />
-            </div>
-            <p className="mono">
-              <span>STILL / 视觉档案</span>
-              <span>成象 · 校园与空间 / 线稿</span>
-            </p>
           </div>
         </div>
       </section>

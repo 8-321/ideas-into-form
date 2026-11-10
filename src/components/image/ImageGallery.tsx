@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight, Close } from "@/components/Icons";
 import { useLightbox } from "@/components/Lightbox";
 import { useMotion } from "@/components/MotionProvider";
 import type { ArchivePage, ImageFolder, ImageShape } from "@/content/imageArchive";
+import { accentForSeries, paletteForFolder, type ImagePalette } from "@/content/imagePalette";
 import type { ImageAsset } from "@/content/works";
 import { CoverOrbit } from "./CoverOrbit";
 
@@ -12,9 +13,9 @@ const pad = (value: number, size = 2) => String(value).padStart(size, "0");
 
 const SHAPE_LABEL: Record<ImageShape, string> = {
   square: "SQUARE",
-  portrait: "RECTANGLE / PORTRAIT",
-  landscape: "RECTANGLE / LANDSCAPE",
-  wide: "RECTANGLE / WIDE",
+  portrait: "PORTRAIT",
+  landscape: "LANDSCAPE",
+  wide: "WIDE",
 };
 
 type Tier = "desktop" | "tablet" | "mobile";
@@ -51,61 +52,73 @@ function FolderCard({
   folder,
   index,
   onOpen,
+  onAccent,
 }: {
   folder: ImageFolder;
   index: number;
   onOpen: (folder: ImageFolder, trigger: HTMLButtonElement) => void;
+  onAccent: (palette: ImagePalette) => void;
 }) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const palette = paletteForFolder(folder.letter);
+  const cover = folder.cover;
 
   return (
     <button
-      ref={ref}
       type="button"
       className="image-folder"
-      style={{ "--order": index } as React.CSSProperties}
+      data-accent={palette.accent}
+      style={{
+        "--order": index,
+        "--folder-accent": palette.accent,
+        "--folder-deep": palette.deep,
+        "--folder-wash": palette.wash,
+        "--folder-paper": palette.paper,
+      } as React.CSSProperties}
       aria-label={`打开 ${folder.letter} ${folder.zh}，${folder.count} 张图片`}
       onClick={(event) => onOpen(folder, event.currentTarget)}
+      onPointerEnter={(event) => {
+        event.currentTarget.style.setProperty("--reveal", "1");
+        onAccent(palette);
+      }}
+      onFocus={(event) => {
+        event.currentTarget.style.setProperty("--reveal", "1");
+        onAccent(palette);
+      }}
+      onBlur={(event) => {
+        event.currentTarget.style.setProperty("--reveal", "0");
+      }}
       onPointerMove={(event) => {
-        const element = ref.current;
-        if (!element) return;
+        const element = event.currentTarget;
         const rect = element.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width;
         const y = (event.clientY - rect.top) / rect.height;
         element.style.setProperty("--pointer-x", `${(x * 100).toFixed(2)}%`);
         element.style.setProperty("--pointer-y", `${(y * 100).toFixed(2)}%`);
-        element.style.setProperty("--tilt-x", `${((0.5 - y) * 5.2).toFixed(2)}deg`);
-        element.style.setProperty("--tilt-y", `${((x - 0.5) * 6.2).toFixed(2)}deg`);
       }}
-      onPointerLeave={() => {
-        const element = ref.current;
-        if (!element) return;
+      onPointerLeave={(event) => {
+        const element = event.currentTarget;
+        element.style.setProperty("--reveal", "0");
         element.style.setProperty("--pointer-x", "50%");
-        element.style.setProperty("--pointer-y", "38%");
-        element.style.setProperty("--tilt-x", "0deg");
-        element.style.setProperty("--tilt-y", "0deg");
+        element.style.setProperty("--pointer-y", "42%");
       }}
     >
-      <span className="image-folder__tab" aria-hidden="true">
-        <span>{folder.letter}</span>
+      <span className="image-folder__media">
+        <span className="image-folder__art" aria-hidden="true">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="image-folder__base" src={cover.thumb || cover.src} alt="" loading={index < 4 ? "eager" : "lazy"} decoding="async" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="image-folder__color" src={cover.thumb || cover.src} alt="" loading={index < 4 ? "eager" : "lazy"} decoding="async" />
+        </span>
+        <span className="image-folder__index mono">{folder.letter}</span>
+        <span className="image-folder__open mono">OPEN</span>
       </span>
-      <span className="image-folder__body">
-        <span className="image-folder__stack" aria-hidden="true">
-          {folder.previews.map((asset, previewIndex) => (
-            <span className="image-folder__photo" key={asset.key} style={{ "--preview": previewIndex } as React.CSSProperties}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={asset.thumb || asset.src} alt="" loading="lazy" decoding="async" />
-            </span>
-          ))}
+      <span className="image-folder__meta">
+        <span className="image-folder__letter mono">{folder.letter}</span>
+        <span className="image-folder__names">
+          <b>{folder.zh}</b>
+          <em>{folder.en}</em>
         </span>
-        <span className="image-folder__front">
-          <span className="image-folder__meta mono">
-            <span>{folder.letter}</span>
-            <span>{pad(folder.count, 3)}</span>
-          </span>
-          <span className="image-folder__zh">{folder.zh}</span>
-          <span className="image-folder__en">{folder.en}</span>
-        </span>
+        <span className="image-folder__count mono">{pad(folder.count, 3)}</span>
       </span>
     </button>
   );
@@ -116,7 +129,7 @@ function ArchiveCoverCollage({ folder }: { folder: ImageFolder }) {
   const images: ImageAsset[] = [];
   folder.pages.forEach((page) => {
     page.items.forEach((item) => {
-      if (seen.has(item.src) || images.length >= 5) return;
+      if (seen.has(item.src) || images.length >= 4) return;
       seen.add(item.src);
       images.push(item);
     });
@@ -136,6 +149,11 @@ function ArchiveCoverCollage({ folder }: { folder: ImageFolder }) {
 }
 
 function ArchiveCover({ folder }: { folder: ImageFolder }) {
+  const series = new Map<string, number>();
+  folder.pages.forEach((page) => {
+    series.set(page.series, (series.get(page.series) ?? 0) + page.items.length);
+  });
+
   return (
     <div className="archive-cover">
       <div className="archive-cover__identity">
@@ -147,6 +165,15 @@ function ArchiveCover({ folder }: { folder: ImageFolder }) {
           <span>{pad(folder.count, 3)} IMAGES</span>
           <span>{pad(folder.pages.length + 1)} PAGES</span>
         </div>
+        <ul className="archive-cover__contents" aria-label={`${folder.zh}目录`}>
+          {Array.from(series.entries()).map(([title, count]) => (
+            <li key={title} style={{ "--series-accent": accentForSeries(title) } as React.CSSProperties}>
+              <i aria-hidden="true" />
+              <span>{title}</span>
+              <em>{pad(count, 3)}</em>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="archive-cover__art" aria-hidden="true">
         <ArchiveCoverCollage folder={folder} />
@@ -171,7 +198,12 @@ function GridPage({
   let cursor = 0;
 
   return (
-    <div className={`archive-page archive-page--${page.shape}`} data-shape={page.shape}>
+    <div
+      className={`archive-page archive-page--${page.shape}`}
+      data-shape={page.shape}
+      data-series={page.series}
+      style={{ "--series-accent": accentForSeries(page.series) } as React.CSSProperties}
+    >
       <header className="archive-page__head">
         <div className="archive-page__title">
           <span className="mono">{pad(pageNumber)}</span>
@@ -192,11 +224,10 @@ function GridPage({
             <div className="archive-page__row" key={`${page.id}-row-${rowIndex}`}>
               {rowItems.map((item, itemIndex) => {
                 const imageIndex = rowStart + itemIndex;
-                const contain = item.width / item.height > 2.4 || item.width / item.height < 0.52;
                 return (
                   <button
                     type="button"
-                    className={`archive-tile${contain ? " is-contain" : ""}`}
+                    className="archive-tile"
                     key={`${item.key}-${imageIndex}`}
                     onClick={() => onOpen(page, imageIndex)}
                     aria-label={`放大查看 ${page.series} ${pad(imageIndex + 1)}`}
@@ -226,14 +257,19 @@ function OrbitPage({
   onOpen: (page: ArchivePage, index: number) => void;
 }) {
   return (
-    <div className="archive-page archive-page--orbit" data-shape={page.shape}>
+    <div
+      className="archive-page archive-page--orbit"
+      data-shape={page.shape}
+      data-series={page.series}
+      style={{ "--series-accent": accentForSeries(page.series) } as React.CSSProperties}
+    >
       <header className="archive-page__head">
         <div className="archive-page__title">
           <span className="mono">{pad(pageNumber)}</span>
           <h2>{page.series}</h2>
         </div>
         <div className="archive-page__shape mono">
-          <span>RECTANGLE / ORBIT</span>
+          <span>ORBIT</span>
           <span>{pad(page.items.length)}</span>
         </div>
       </header>
@@ -258,6 +294,7 @@ function Archive({
   const [turn, setTurn] = useState<{ id: number; dir: 1 | -1 } | null>(null);
   const tier = useTier();
   const total = folder.pages.length + 1;
+  const palette = paletteForFolder(folder.letter);
   const overlayRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -363,6 +400,13 @@ function Archive({
       aria-modal="true"
       aria-label={`${folder.letter} ${folder.zh} 作品阅读层`}
       data-folder={folder.letter}
+      data-accent={palette.accent}
+      style={{
+        "--folder-accent": palette.accent,
+        "--folder-deep": palette.deep,
+        "--folder-wash": palette.wash,
+        "--folder-paper": palette.paper,
+      } as React.CSSProperties}
       inert={lightboxOpen || undefined}
       aria-hidden={lightboxOpen || undefined}
     >
@@ -450,15 +494,20 @@ function Archive({
 
 export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
   const [selected, setSelected] = useState<ImageFolder | null>(null);
+  const [activePalette, setActivePalette] = useState<ImagePalette>(() => paletteForFolder(folders[0]?.letter ?? "A"));
   const triggerRef = useRef<HTMLElement | null>(null);
   const rootRef = useRef<HTMLDivElement>(null);
   const total = folders.reduce((sum, folder) => sum + folder.count, 0);
-  const heroImages = [folders[0], folders[1], folders[2], folders[4], folders[5], folders[6]].filter(Boolean).map((folder) => folder.cover);
+  const heroFolders = [folders[0], folders[1]].filter(Boolean);
 
   return (
     <div
       ref={rootRef}
-      className="image-index"
+      className="image-catalog"
+      style={{
+        "--page-accent": activePalette.accent,
+        "--page-wash": activePalette.wash,
+      } as React.CSSProperties}
       onPointerMove={(event) => {
         const element = rootRef.current;
         if (!element) return;
@@ -467,47 +516,56 @@ export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
         element.style.setProperty("--my", `${(((event.clientY - rect.top) / rect.height) * 100).toFixed(2)}%`);
       }}
     >
-      <section className="wrap image-masthead">
-        <div className="image-masthead__title">
-          <span className="mono image-masthead__eyebrow">CHAPTER 01 / IMAGE ARCHIVE</span>
-          <h1>成象</h1>
-          <span className="image-masthead__en display">IMAGE</span>
+      <section className="wrap catalog-masthead">
+        <div className="catalog-masthead__copy">
+          <span className="mono catalog-masthead__kicker">CHAPTER 01 / IMAGE</span>
+          <div className="catalog-masthead__title">
+            <h1>成象</h1>
+            <span className="catalog-masthead__en display">IMAGE</span>
+          </div>
+          <div className="catalog-masthead__meta mono">
+            <div><b>{pad(folders.length)}</b><span>FOLDERS</span></div>
+            <div><b>{pad(total, 3)}</b><span>IMAGES</span></div>
+          </div>
         </div>
-        <div className="image-masthead__collage" aria-hidden="true">
-          {heroImages.map((item, index) => (
-            <figure className="image-masthead__photo" key={item.key} style={{ "--hero-photo": index } as React.CSSProperties}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={item.thumb || item.src} alt="" loading="eager" decoding="async" />
-            </figure>
-          ))}
-        </div>
-        <div className="image-masthead__counts mono">
-          <div><b>{pad(folders.length)}</b><span>FOLDERS</span></div>
-          <div><b>{pad(total, 3)}</b><span>IMAGES</span></div>
+        <div className="catalog-masthead__plates" aria-hidden="true">
+          {heroFolders.map((folder) => {
+            const palette = paletteForFolder(folder.letter);
+            return (
+              <figure
+                className="catalog-plate"
+                key={folder.letter}
+                style={{ "--plate-accent": palette.accent, "--plate-wash": palette.wash } as React.CSSProperties}
+              >
+                <span className="catalog-plate__frame">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={folder.cover.thumb || folder.cover.src} alt="" loading="eager" decoding="async" />
+                </span>
+                <span className="catalog-plate__letter mono">{folder.letter}</span>
+              </figure>
+            );
+          })}
         </div>
       </section>
 
-      <section className="wrap image-folders" aria-label="成象作品文件夹">
-        {folders.map((folder, index) => (
-          <FolderCard
-            key={folder.letter}
-            folder={folder}
-            index={index}
-            onOpen={(next, trigger) => {
-              triggerRef.current = trigger;
-              setSelected(next);
-            }}
-          />
-        ))}
-        <div className="image-folders__contact" aria-hidden="true">
-          {folders.map((folder) => (
-            <span key={folder.letter}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={folder.cover.thumb || folder.cover.src} alt="" loading="lazy" decoding="async" />
-            </span>
+      <section className="wrap catalog-index" aria-label="成象作品文件夹">
+        <header className="catalog-index__head mono">
+          <span>ARCHIVE / A — G</span>
+          <span>SELECT A FOLDER</span>
+        </header>
+        <div className="catalog-grid">
+          {folders.map((folder, index) => (
+            <FolderCard
+              key={folder.letter}
+              folder={folder}
+              index={index}
+              onAccent={setActivePalette}
+              onOpen={(next, trigger) => {
+                triggerRef.current = trigger;
+                setSelected(next);
+              }}
+            />
           ))}
-          <span className="is-blank" />
-          <span className="is-blank" />
         </div>
       </section>
 

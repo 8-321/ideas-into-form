@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./image.css";
+import "./catalog.css";
 import { ImageGallery } from "@/components/image/ImageGallery";
 import { ArrowRight } from "@/components/Icons";
 import { TransitionLink } from "@/components/TransitionLink";
