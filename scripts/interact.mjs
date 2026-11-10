@@ -15,9 +15,24 @@ const server = http.createServer(async (req, res) => {
     let f = path.join(ROOT, decodeURIComponent(u.pathname));
     if (f.endsWith(path.sep)) f = path.join(f, "index.html");
     if (!path.extname(f) && fs.existsSync(path.join(f, "index.html"))) f = path.join(f, "index.html");
-    const d = await fsp.readFile(f);
-    res.writeHead(200, { "content-type": MIME[path.extname(f)] ?? "application/octet-stream" });
-    res.end(d);
+    const stat = fs.statSync(f);
+    const type = MIME[path.extname(f)] ?? "application/octet-stream";
+    const range = req.headers.range;
+    if (range) {
+      const match = /bytes=(\d*)-(\d*)/.exec(range);
+      const start = match && match[1] ? Number(match[1]) : 0;
+      const end = match && match[2] ? Math.min(Number(match[2]), stat.size - 1) : stat.size - 1;
+      res.writeHead(206, {
+        "content-type": type,
+        "content-range": `bytes ${start}-${end}/${stat.size}`,
+        "accept-ranges": "bytes",
+        "content-length": end - start + 1,
+      });
+      fs.createReadStream(f, { start, end }).pipe(res);
+    } else {
+      res.writeHead(200, { "content-type": type, "content-length": stat.size, "accept-ranges": "bytes" });
+      fs.createReadStream(f).pipe(res);
+    }
   } catch { res.writeHead(404); res.end("404"); }
 });
 await new Promise((r) => server.listen(PORT, "127.0.0.1", r));
@@ -40,7 +55,7 @@ const go = async (p) => { await page.goto(`http://127.0.0.1:${PORT}${p}`, { wait
 await go("/sound/");
 await page.evaluate(() => document.querySelector("#c-player").scrollIntoView({ block: "center", behavior: "instant" }));
 await wait(400);
-await page.click(".issue .btn");
+await page.click(".sound-track");
 await wait(2200);
 results.audioPlaying = await page.evaluate(() => {
   const a = document.querySelector("audio");

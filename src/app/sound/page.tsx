@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./sound.css";
 import { ChapterNav } from "@/components/ChapterNav";
 import { ArrowRight, ArrowUpRight, Play } from "@/components/Icons";
-import { MediaImage } from "@/components/MediaImage";
+import { CoverAtlas } from "@/components/sound/CoverAtlas";
+import { CoverOrbit } from "@/components/sound/CoverOrbit";
 import { SoundArchive } from "@/components/sound/SoundArchive";
 import { TransitionLink } from "@/components/TransitionLink";
 import { AUDIO, group, worksByChapter } from "@/content/works";
@@ -41,6 +42,21 @@ const coverGallery = covers.map((cover, index) => ({
   alt: `${coverCaptions[index]} 封面`,
   caption: `${String(index + 1).padStart(2, "0")} / ${coverCaptions[index]} · 1:1`,
 }));
+
+const tickerItems = [
+  "RED DUST / 2026",
+  "万丈红尘，体验为王",
+  "05 TRACKS",
+  "21:24",
+  "SIDE A · 33 ⅓ RPM",
+  "THE VOICE OF IDEAS",
+  "五张封面，同一扇窗",
+];
+
+const floor = Array.from({ length: 64 }, (_, index) => {
+  const a = Math.abs(Math.sin(index * 0.33) * 0.56 + Math.sin(index * 0.11 + 2.1) * 0.44);
+  return Math.max(6, Math.round(a * 100));
+});
 
 const wave = Array.from({ length: 58 }, (_, index) => {
   const a = Math.abs(Math.sin(index * 0.51) * 0.62 + Math.sin(index * 0.17 + 1.2) * 0.38);
@@ -88,7 +104,7 @@ export default function SoundChapterPage() {
           </div>
 
           <div className="sound-hero__aside" data-reveal="mask" style={{ "--d": "200ms" } as React.CSSProperties}>
-            <div className="sound-hero__disc-wrap">
+            <div className="sound-hero__disc-wrap" data-tilt="0.45" data-cursor-label="33 RPM">
               <div className="sound-hero__orbit sound-hero__orbit--a" aria-hidden="true"><i /></div>
               <div className="sound-hero__orbit sound-hero__orbit--b" aria-hidden="true"><i /></div>
               <div className="sound-hero__disc" aria-hidden="true">
@@ -115,6 +131,7 @@ export default function SoundChapterPage() {
       <ChapterNav items={nav} />
 
       <section className="sound-statement section" id="a-statement">
+        <span className="sound-statement__ghost display" data-parallax="0.05" aria-hidden="true">SOUND</span>
         <div className="wrap sound-statement__grid">
           <div className="sound-statement__title">
             <span className="eyebrow" data-reveal>A.01 / POSITION</span>
@@ -122,9 +139,7 @@ export default function SoundChapterPage() {
               <span className="split-line"><span>声音，是思想的</span></span>
               <span className="split-line"><span>另一种形态。</span></span>
             </h2>
-            <div className="sound-statement__rings" aria-hidden="true">
-              <span /><span /><span />
-            </div>
+            <CoverOrbit covers={covers} captions={coverCaptions} gallery={coverGallery} />
           </div>
 
           <div className="sound-statement__body">
@@ -141,15 +156,27 @@ export default function SoundChapterPage() {
               频谱来自当前声音本身，暂停时它就安静下来。
             </p>
 
-            <div className="sound-statement__stats stagger">
-              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{tracks.length}</b><span className="mono">TRACKS / 音轨</span></div>
-              <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{totalLabel}</b><span className="mono">TOTAL / 总时长</span></div>
-              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display" data-count>01</b><span className="mono">LONG FORM / 长音频</span></div>
-              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display" data-count>04</b><span className="mono">NOTES / 手记</span></div>
-            </div>
+          </div>
+          <div className="sound-statement__stats stagger">
+            <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{tracks.length}</b><span className="mono">TRACKS / 音轨</span></div>
+            <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{totalLabel}</b><span className="mono">TOTAL / 总时长</span></div>
+            <div style={{ "--i": 2 } as React.CSSProperties}><b className="display">01</b><span className="mono">LONG FORM / 长音频</span></div>
+            <div style={{ "--i": 3 } as React.CSSProperties}><b className="display">04</b><span className="mono">NOTES / 手记</span></div>
           </div>
         </div>
       </section>
+
+      <div className="sound-ticker" aria-hidden="true">
+        <div className="sound-ticker__track">
+          {[0, 1].map((copy) => (
+            <div className="sound-ticker__group" key={copy}>
+              {tickerItems.map((item, index) => (
+                <span className="sound-ticker__item" key={`${copy}-${index}`}>{item}<i /></span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
       <section className="sound-archive section" id="b-archive">
         <div className="wrap">
@@ -168,9 +195,16 @@ export default function SoundChapterPage() {
         <div className="wrap sound-archive__stage" id="c-player">
           <SoundArchive tracks={tracks} />
         </div>
+
+        <div className="sound-archive__floor" aria-hidden="true">
+          {floor.map((height, index) => (
+            <span key={index} style={{ "--i": `${index}`, "--h": `${height}%` } as React.CSSProperties} />
+          ))}
+        </div>
       </section>
 
       <section className="sound-covers section" id="d-covers">
+        <span className="sound-covers__ghost display" data-parallax="0.04" aria-hidden="true">05</span>
         <div className="wrap">
           <div className="section-head">
             <div>
@@ -182,66 +216,43 @@ export default function SoundChapterPage() {
             </p>
           </div>
 
-          <div className="cover-wall">
-            {covers.map((cover, index) => (
-              <figure className={`cover-card cover-card--${index + 1}`} key={cover.key} data-reveal style={{ "--d": `${index * 70}ms` } as React.CSSProperties}>
-                <MediaImage
-                  asset={cover}
-                  alt={coverCaptions[index]}
-                  caption={`${String(index + 1).padStart(2, "0")} / ${coverCaptions[index]} · 1:1`}
-                  gallery={coverGallery}
-                  index={index}
-                />
-                <figcaption>
-                  <span className="mono">{String(index + 1).padStart(2, "0")}</span>
-                  <span className="serif">{coverCaptions[index].split(" / ")[0]}</span>
-                  <span className="mono muted">{index === 0 ? "LONG FORM" : "NOTE"}</span>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <p className="cover-wall__note mono" data-reveal>
-            <span>COVER RATIO 1:1</span>
-            <span>SOURCE: ORIGINAL JPG / 1100–1194 PX</span>
-            <span>NO CROP / NO FILTER</span>
-          </p>
+          <CoverAtlas covers={covers} captions={coverCaptions} gallery={coverGallery} />
         </div>
       </section>
 
       <section className="sound-notes section" id="e-notes">
         <div className="wrap">
-          <div className="sound-notes__grid">
+          <div className="sound-notes__top">
             <div className="sound-notes__head">
               <span className="eyebrow" data-reveal>E / MATERIAL NOTE</span>
               <h2 className="serif" data-reveal>真实，是这组作品的<br />最低要求。</h2>
             </div>
 
-            <div className="sound-notes__list stagger">
-              <article style={{ "--i": 0 } as React.CSSProperties}>
-                <span className="mono">01 / AUDIO</span>
-                <h3 className="serif">原始音频，不模拟。</h3>
-                <p>5 条 m4a 原文件，总时长 {totalLabel}。播放器使用 HTMLAudioElement，不生成、不替换、不循环伪造时长。</p>
-              </article>
-              <article style={{ "--i": 1 } as React.CSSProperties}>
-                <span className="mono">02 / SPECTRUM</span>
-                <h3 className="serif">频谱来自声音本身。</h3>
-                <p>Web Audio AnalyserNode 读取当前音轨的频域数据，驱动 56 根对称柱。暂停时归为静止的低电平。</p>
-              </article>
-              <article style={{ "--i": 2 } as React.CSSProperties}>
-                <span className="mono">03 / COVERS</span>
-                <h3 className="serif">封面保持原样。</h3>
-                <p>五张封面按原始比例展示，不裁切、不加滤镜。它们与音频同属一组内容，不做跨项目混用。</p>
-              </article>
+            <div className="sound-quote" data-reveal>
+              <span className="mono">ON LISTENING</span>
+              <p className="serif">「先听见，再理解。<br />声音比观点更早抵达。」</p>
+              <TransitionLink href="/work/audio-collection/" className="link-line">
+                展开这组声音档案 <ArrowRight size={13} />
+              </TransitionLink>
             </div>
           </div>
 
-          <div className="sound-quote" data-reveal>
-            <span className="mono">ON LISTENING</span>
-            <p className="serif">「先听见，再理解。<br />声音比观点更早抵达。」</p>
-            <TransitionLink href="/work/audio-collection/" className="link-line">
-              展开这组声音档案 <ArrowRight size={13} />
-            </TransitionLink>
+          <div className="sound-notes__list stagger">
+            <article style={{ "--i": 0 } as React.CSSProperties}>
+              <span className="mono">01 / AUDIO</span>
+              <h3 className="serif">原始音频，不模拟。</h3>
+              <p>5 条 m4a 原文件，总时长 {totalLabel}。播放器使用 HTMLAudioElement，不生成、不替换、不循环伪造时长。</p>
+            </article>
+            <article style={{ "--i": 1 } as React.CSSProperties}>
+              <span className="mono">02 / SPECTRUM</span>
+              <h3 className="serif">频谱来自声音本身。</h3>
+              <p>Web Audio AnalyserNode 读取当前音轨的频域数据，驱动环形频谱与线性波形。暂停时归为静止的低电平。</p>
+            </article>
+            <article style={{ "--i": 2 } as React.CSSProperties}>
+              <span className="mono">03 / COVERS</span>
+              <h3 className="serif">封面保持原样。</h3>
+              <p>五张封面按原始比例展示，不裁切、不加滤镜。它们与音频同属一组内容，不做跨项目混用。</p>
+            </article>
           </div>
         </div>
       </section>

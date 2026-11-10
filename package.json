@@ -13,7 +13,8 @@
     "check:reader": "node scripts/reader-check.mjs",
     "check:motion": "node scripts/motion-check.mjs",
     "check:layout": "node scripts/layout-check.mjs",
-    "check:image": "node scripts/image-check.mjs"
+    "check:image": "node scripts/image-check.mjs",
+    "check:sound": "node scripts/sound-check.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",
