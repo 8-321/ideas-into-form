@@ -9,9 +9,9 @@ export type LightboxItem = {
   caption?: string;
 };
 
-type Ctx = { open: (items: LightboxItem[], index?: number) => void };
+type Ctx = { open: (items: LightboxItem[], index?: number) => void; isOpen: boolean };
 
-const LightboxCtx = createContext<Ctx>({ open: () => {} });
+const LightboxCtx = createContext<Ctx>({ open: () => {}, isOpen: false });
 
 export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<LightboxItem[]>([]);
@@ -20,11 +20,13 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const [origin, setOrigin] = useState({ x: "50%", y: "50%" });
   const closeRef = useRef<HTMLButtonElement>(null);
   const priorFocus = useRef<HTMLElement | null>(null);
+  const priorOverflow = useRef("");
   const touchX = useRef<number | null>(null);
 
   const open = useCallback((next: LightboxItem[], start = 0) => {
     if (!next.length) return;
     priorFocus.current = document.activeElement as HTMLElement;
+    priorOverflow.current = document.body.style.overflow;
     setItems(next);
     setIndex(Math.max(0, Math.min(start, next.length - 1)));
     setZoom(false);
@@ -34,7 +36,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const close = useCallback(() => {
     setItems([]);
     setZoom(false);
-    document.body.style.overflow = "";
+    document.body.style.overflow = priorOverflow.current;
     priorFocus.current?.focus?.();
   }, []);
 
@@ -65,7 +67,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
   const current = items[index];
 
   return (
-    <LightboxCtx.Provider value={{ open }}>
+    <LightboxCtx.Provider value={{ open, isOpen: Boolean(current) }}>
       {children}
       {current ? (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label="作品图片放大预览">
