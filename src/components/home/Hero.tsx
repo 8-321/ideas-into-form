@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { OriginCanvas } from "./OriginCanvas";
+import { OriginArchive } from "./OriginArchive";
 
 export function Hero() {
   const [loaded, setLoaded] = useState(false);
@@ -14,7 +14,7 @@ export function Hero() {
     <section className={`hero${loaded ? " is-loaded" : ""}`} id="top" aria-label="由意成形 首屏">
       <div className="hero__stage">
         <div className="hero__sculpture" aria-hidden="true">
-          <OriginCanvas />
+          <OriginArchive />
         </div>
         <div className="hero__grid" aria-hidden="true" />
         <div className="hero__content wrap">
@@ -51,8 +51,8 @@ export function Hero() {
           </div>
 
           <div className="hero__caption mono" aria-hidden="true">
-            <span>XIAOHAN PANDA</span>
-            <span>IMAGE / 06</span>
+            <span>REAL FILES / 05</span>
+            <span>SPATIAL ARCHIVE</span>
           </div>
         </div>
       </div>

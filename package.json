@@ -14,20 +14,23 @@
     "check:motion": "node scripts/motion-check.mjs",
     "check:layout": "node scripts/layout-check.mjs",
     "check:image": "node scripts/image-check.mjs",
-    "check:sound": "node scripts/sound-check.mjs"
+    "check:sound": "node scripts/sound-check.mjs",
+    "check:3d": "node scripts/spatial-check.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.3.0",
     "@fontsource/instrument-serif": "^5.3.0",
     "next": "^15.5.7",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@napi-rs/canvas": "^1.1.0",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.180.0",
     "pdfjs-dist": "^6.5.438",
     "puppeteer-core": "^25.16.0",
     "sharp": "^0.33.5",

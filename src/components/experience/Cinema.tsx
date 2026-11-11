@@ -182,7 +182,7 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
               >
                 <span className="film-frame__holes" aria-hidden="true" />
                 <span className="film-frame__img">
-                  <FilmArtwork src={coverSrc} alt="" portrait={portrait} loading="lazy" />
+                  <FilmArtwork src={coverSrc} alt="" portrait={portrait} loading={index < 4 ? "eager" : "lazy"} />
                   <span className="film-frame__play"><Play size={13} /></span>
                   <span className="film-frame__dur mono">{fmt(video.duration)}</span>
                 </span>

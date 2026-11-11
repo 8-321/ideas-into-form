@@ -28,7 +28,7 @@ npm start          # npx serve out -l 3000
 | `node scripts/audit.mjs` | 18 个视口截图 + 破图、控制台、失败请求检查 |
 | `node scripts/interact.mjs` | 音频播放、放映室、PPT、灯箱、动效开关、18 个详情页、链接与媒体存在性检查 |
 | `node scripts/reader-check.mjs` | 翻书模式、七种内容页转场、键盘 / 滚轮回翻、移动端、动效关闭与数字 / 倾斜动效检查 |
-| `node scripts/motion-check.mjs` | 标题折页、CTA 磁吸、作品掠光、点击墨点与 MOTION OFF 检查 |
+| `node scripts/motion-check.mjs` | 标题折页、CTA 磁吸、作品掠光、点击墨点与 MOTION OFF 检查 |`r`n| `npm run check:3d` | 真实浏览器验证 Three.js WebGL、5 张纹理、滚动/指针动效、移动端间距、减少动效与 WebGL 回退 |
 | `node scripts/layout-check.mjs` | 5 个桌面宽度 × 4 个总览页的标题断行检查 |
 
 `audit.mjs` / `interact.mjs` / `reader-check.mjs` / `motion-check.mjs` / `layout-check.mjs` 使用本机 Edge（`C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe`），端口分别为 3011 / 3013 / 3012 / 3014 / 3015；换机器时改脚本顶部常量。
@@ -65,9 +65,9 @@ site/
 - **新增中文文案**：跑 `npm run fonts`，否则子集字体可能缺字。
 - **占位规则**：缺素材时使用 `placeholder` section，页面明确显示「待上传作品素材」，不用网络图片或生成图冒充实拍作品。
 
-## 动效与可访问性
+## 设计执行书\n\n完整定位、视觉系统、图片/视频嵌入规范、Three.js 架构、性能预算与验收标准见 [`BRIEF.md`](./BRIEF.md)。\n\n## 动效与可访问性
 
-- **氛围背景**：`AmbientField` 使用单个全屏 Canvas，按成象 / 成声 / 成境切换纸纤维、唱片沟槽、片门光束三套粒子语言；DPR 上限 2，页面隐藏时暂停。
+- **原点档案（WebGL）**：`OriginArchive` 用 Three.js 把 5 件真实作品做成有纸张厚度的悬浮档案；滚动展开、指针阻尼视差，`Texture / Geometry / Material` 在卸载时释放。3D 包延迟加载，不进入首屏公共包；WebGL 失败时回退为 3 张真实图片。\n- **氛围背景**：`AmbientField` 使用单个全屏 Canvas，按成象 / 成声 / 成境切换纸纤维、唱片沟槽、片门光束三套粒子语言；DPR 上限 2，页面隐藏时暂停。
 - **自定义光标**：`Cursor` 只在细指针设备启用，环形延迟跟随，链接 / 媒体 / 播放 / 拖拽显示不同标签；触屏与动效关闭时自动退回系统光标。
 - **阅读版翻书**：作品详情由 `WorkBook` 提供全书目录、翻页阅读、方向键 / PageUp / PageDown / 滚轮 / 触屏翻页，打开时锁定滚动并暂停非当前页音视频。
 - **分类型转场**：文本翻纸、过程卡片抬升、图像贴纸错峰、说明印章落下、占位蓝图展开、声音声纹上浮、影像幕布拉开；方向键前后翻页各有对应方向。
@@ -83,19 +83,19 @@ site/
 ## 当前规模
 
 - 静态页面 25 个（3 个章节页 + 18 个作品详情 + 首页等）
-- 图片 254 张、视频 12 段、音频 5 条、演示文稿 4 份（46 页）
+- 图片 254 张、视频 12 段、音频 5 条、演示文稿 4 份（46 页）\n- 首页首屏：Three.js 5 张真实纹理，桌面 / 移动 / 减少动效 / WebGL 回退四条路径全部有自动化验收
 - 成象 16 个项目、成声 5 条音频、成境 11 段影像 + 4 份演示
 
 ## 验收基线
 
-2026-11-09 全量检查：
+2026-11-11 全量检查：
 
 - 18 个视口截图：0 破图、0 控制台错误、0 失败请求、0 横向溢出
 - 18 个详情页：全部可访问；6 个内部链接 200；79 个媒体引用全部存在
 - 音频真实播放、放映室打开即播并可切换、PPT 快速连点不越界、灯箱 98 张可翻页
 - 翻书验收：7 种内容页分别命中 `leaf-text / steps / gallery / note / placeholder / audio / film` 动画；键盘、滚轮回翻、ESC、移动端与 MOTION OFF 全部通过
 - 动效验收：标题折页从 `rotateX(-88deg)` 过渡到 `none`，磁吸位移约 `2.9px`，掠光跟随到约 `22%`，点击生成 5 个墨点并自动清理；MOTION OFF 下全部归零
-- 排版验收：5 个桌面宽度 × 4 个总览页，共 65 个章节标题，无非预期折行
+- 排版验收：5 个桌面宽度 × 4 个总览页，30 个章节标题，无非预期折行\n- 3D 验收：WebGL 真实创建、5 张作品纹理、桌面 / 移动、0 溢出、减少动效静态帧、WebGL 回退全部通过；impeccable detect 0 违规
 - 截图基线：`.shots/audit.json`、`.shots/reader-report.json`、`.shots/motion-report.json`、`.shots/layout-report.json`、`.shots/book-*.png`
 
 ## 公网发布
