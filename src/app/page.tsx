@@ -82,7 +82,7 @@ export default function HomePage() {
                     <img
                       src={work.cover.thumb || work.cover.src}
                       alt={work.coverAlt}
-                      loading={index < 3 ? "eager" : "lazy"}
+                      loading="eager"
                       decoding="async"
                     />
                   </figure>
@@ -119,7 +119,7 @@ export default function HomePage() {
               >
                 <figure className="home-chapter__frame">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={previews[chapter.id].src} alt={previews[chapter.id].alt} loading="lazy" decoding="async" />
+                  <img src={previews[chapter.id].src} alt={previews[chapter.id].alt} loading="eager" decoding="async" />
                 </figure>
                 <div className="home-chapter__meta">
                   <span className="home-chapter__no">{chapter.no}</span>

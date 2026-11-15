@@ -10,7 +10,7 @@
   --image-paper-2: #ebe8df;
   --image-paper-3: #e2ded3;
   --image-ink: #181818;
-  --image-mint: #84b39e;
+  --image-mint: #84937f;
   --image-mint-pale: #dce9e2;
   position: relative;
   min-height: 100vh;
@@ -35,7 +35,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(520px circle at var(--mx, 70%) var(--my, 28%), rgba(132, 179, 158, 0.16), transparent 64%);
+  background: radial-gradient(520px circle at var(--mx, 70%) var(--my, 28%), rgba(132, 147, 127, 0.16), transparent 64%);
 }
 
 /* ---------- masthead ---------- */
@@ -105,7 +105,7 @@
 }
 
 .image-masthead__ring--one { width: 100%; height: 100%; animation: image-ring 24s linear infinite; }
-.image-masthead__ring--two { width: 70%; height: 70%; border-color: rgba(132, 179, 158, 0.7); animation: image-ring 18s linear infinite reverse; }
+.image-masthead__ring--two { width: 70%; height: 70%; border-color: rgba(132, 147, 127, 0.7); animation: image-ring 18s linear infinite reverse; }
 .image-masthead__ring--three { width: 36%; height: 36%; background: rgba(165, 203, 185, 0.16); animation: image-ring 12s linear infinite; }
 .image-masthead__ring--one::before,
 .image-masthead__ring--two::before,
@@ -251,7 +251,7 @@
   z-index: 4;
   border-radius: inherit;
   pointer-events: none;
-  background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(132, 179, 158, 0.26), transparent 38%);
+  background: radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(132, 147, 127, 0.26), transparent 38%);
   opacity: 0;
   transition: opacity 0.42s ease;
 }
@@ -820,7 +820,7 @@
 
 .archive-cover__art::after {
   inset: 19%;
-  border: 1px solid rgba(132, 179, 158, 0.44);
+  border: 1px solid rgba(132, 147, 127, 0.44);
 }
 
 .archive-mark {

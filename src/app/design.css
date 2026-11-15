@@ -44,7 +44,7 @@ html[data-theme="image"] {
   --line: var(--rule);
   --line-strong: var(--rule-strong);
   --bg-2: var(--surface-1);
-  --accent: #84b39e;
+  --accent: #84937f;
   --accent-ink: #143b2d;
 }
 
@@ -208,7 +208,7 @@ body {
   position: absolute;
   inset: -24%;
   background:
-    radial-gradient(42vw 36vw at 76% 16%, rgba(132, 179, 158, 0.11), transparent 68%),
+    radial-gradient(42vw 36vw at 76% 16%, rgba(132, 147, 127, 0.11), transparent 68%),
     radial-gradient(40vw 32vw at 18% 78%, rgba(24, 24, 24, 0.035), transparent 70%);
   animation: ambient-breathe 26s var(--ease-io) infinite alternate;
 }
@@ -229,17 +229,15 @@ html[data-theme="experience"] .ambient-field::before {
   content: "";
   position: absolute;
   inset: 0;
-  opacity: 0.22;
-  background-image: linear-gradient(to right, rgba(24, 24, 24, 0.04) 1px, transparent 1px);
-  background-size: calc(100vw / 12) 100%;
-  background-position: var(--pad) 0;
-  mask-image: linear-gradient(to bottom, transparent 4%, #000 22%, #000 78%, transparent 96%);
+  background: radial-gradient(ellipse at 50% 44%, transparent 42%, rgba(24, 24, 24, 0.032) 100%);
+  opacity: 0.72;
+  pointer-events: none;
 }
 
 html[data-theme="sound"] .ambient-field::after,
 html[data-theme="experience"] .ambient-field::after {
-  opacity: 0.14;
-  background-image: linear-gradient(to right, rgba(239, 233, 220, 0.055) 1px, transparent 1px);
+  background: radial-gradient(ellipse at 50% 44%, transparent 34%, rgba(0, 0, 0, 0.14) 100%);
+  opacity: 0.8;
 }
 
 .ambient-field canvas {

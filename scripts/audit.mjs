@@ -122,8 +122,8 @@ const page = await browser.newPage();
 
 const desktop = [
   ["home-top", "/", { y: 0 }],
-  ["home-selected", "/", { selector: ".selected" }],
-  ["home-chapters", "/", { selector: ".chapters" }],
+  ["home-selected", "/", { selector: "#selected" }],
+  ["home-chapters", "/", { selector: "#chapters" }],
   ["image-top", "/image/", { y: 0 }],
   ["sound-top", "/sound/", { y: 0 }],
   ["sound-archive", "/sound/", { selector: "#c-player" }],

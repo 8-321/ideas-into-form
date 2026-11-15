@@ -51,15 +51,15 @@
   --ink: #181818;
   --ink-soft: #3b3a36;
   --muted: #85847f;
-  --mint: #a5cbb9;
-  --mint-deep: #6e9c88;
+  --mint: #8f9f8b;
+  --mint-deep: #70806d;
   --line: rgba(24, 24, 24, 0.13);
   --line-strong: rgba(24, 24, 24, 0.32);
   --bg: var(--paper);
   --bg-2: var(--paper-deep);
   --fg: var(--ink);
   --accent: var(--mint);
-  --accent-ink: #173c2f;
+  --accent-ink: #22332b;
 
   --font-serif: "Noto Serif SC", "Songti SC", "SimSun", serif;
   --font-sans: "Noto Sans SC", "Microsoft YaHei", "PingFang SC", sans-serif;
