@@ -11,26 +11,26 @@ function hitFor(target: Element | null): Hit {
   const explicit = target.closest<HTMLElement>("[data-cursor-label]");
   if (explicit) {
     return {
-      label: explicit.dataset.cursorLabel || "OPEN",
+      label: explicit.dataset.cursorLabel || "打开",
       scale: 2.05,
       hover: true,
     };
   }
 
   const play = target.closest(".screening__screen, .film-frame, .screening__play, .player__play, .cine-modal__stage, video");
-  if (play) return { label: "PLAY", scale: 2.1, hover: true };
+  if (play) return { label: "播放", scale: 2.1, hover: true };
 
   const drag = target.closest(".rail__viewport, .book-reader__stage");
-  if (drag) return { label: "DRAG", scale: 1.85, hover: true };
+  if (drag) return { label: "拖动", scale: 1.85, hover: true };
 
   const media = target.closest(".media-btn, .work-card__img, .image-hero__collage figure, .mbti-card__frame, .issue__visual, .deck-stage__slide, .art-piece, .cover-card, .story-card__stack");
-  if (media) return { label: "VIEW", scale: 2, hover: true };
+  if (media) return { label: "查看", scale: 2, hover: true };
 
   const link = target.closest("a[href]");
-  if (link) return { label: "OPEN", scale: 1.7, hover: true };
+  if (link) return { label: "进入", scale: 1.7, hover: true };
 
   const control = target.closest("button, [role='button'], input, select, textarea, label");
-  if (control) return { label: control.tagName === "INPUT" || control.tagName === "TEXTAREA" ? "TYPE" : "PRESS", scale: 1.55, hover: true };
+  if (control) return { label: control.tagName === "INPUT" || control.tagName === "TEXTAREA" ? "输入" : "按下", scale: 1.55, hover: true };
 
   return { label: "", scale: 1, hover: false };
 }

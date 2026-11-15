@@ -5,6 +5,7 @@ import "../../sound/sound.css";
 import "../../experience/experience.css";
 import "../../book.css";
 import { WorkBook } from "@/components/WorkBook";
+import { zhOnly } from "@/content/works";
 import { Cinema, type CinemaGroup } from "@/components/experience/Cinema";
 import { DeckViewer } from "@/components/experience/DeckViewer";
 import { ArrowRight, ArrowUpRight, Play } from "@/components/Icons";
@@ -36,17 +37,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const work = workBySlug(slug);
   if (!work) return { title: "作品未找到" };
   return {
-    title: `${work.no} ${work.title} / ${work.titleEn}`,
+    title: `${work.no} ${work.title}`,
     description: work.summary,
     openGraph: { title: `${work.title} · 由意成形`, description: work.summary, images: [work.cover.src] },
   };
 }
 
 const filmGroups: CinemaGroup[] = [
-  { key: "piano", label: "钢琴", en: "PIANO", note: "手指落下，声音有了时间。演奏段落保留原声与完整画幅。", cover: FILM_COVERS.piano, videos: filmVideos.piano },
-  { key: "guzheng", label: "古筝", en: "GUZHENG", note: "竖屏记录弦与手的关系，两支短片两种情绪。", cover: FILM_COVERS.guzheng, videos: filmVideos.guzheng },
-  { key: "painting", label: "画画", en: "PAINTING", note: "线条不是结果，是过程。三段竖屏记录把「画」还原成时间里的动作。", videos: filmVideos.painting },
-  { key: "ppt", label: "PPT", en: "DECK FILM", note: "信息如何被组织成叙事。演示视频与演示文稿节选互为证据。", videos: filmVideos.ppt },
+  { key: "piano", label: "钢琴", note: "手指落下，声音有了时间。演奏段落保留原声与完整画幅。", cover: FILM_COVERS.piano, videos: filmVideos.piano },
+  { key: "guzheng", label: "古筝", note: "竖屏记录弦与手的关系，两支短片两种情绪。", cover: FILM_COVERS.guzheng, videos: filmVideos.guzheng },
+  { key: "painting", label: "画画", note: "线条不是结果，是过程。三段竖屏记录把「画」还原成时间里的动作。", videos: filmVideos.painting },
+  { key: "ppt", label: "演示", note: "信息如何被组织成叙事。演示视频与演示文稿节选互为证据。", videos: filmVideos.ppt },
 ];
 
 function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafIndex: string }) {
@@ -67,7 +68,7 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
     >
       <div className="wrap">
         <div className="work-section__head">
-          <span className="eyebrow">{section.eyebrow}</span>
+          <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
           <h2 className="serif">{section.title}</h2>
           {section.note ? <p className="work-section__note mono">{section.note}</p> : null}
         </div>
@@ -120,7 +121,7 @@ function WorkBody({ work }: { work: Work }) {
             >
               <div className="wrap work-text__grid">
                 <div className="work-text__side">
-                  <span className="eyebrow">{section.eyebrow}</span>
+                  <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
                   <span className="mono work-text__index">{String(index + 1).padStart(2, "0")}</span>
                 </div>
                 <div className="work-text__body">
@@ -146,7 +147,7 @@ function WorkBody({ work }: { work: Work }) {
             >
               <div className="wrap">
                 <div className="work-section__head">
-                  <span className="eyebrow">{section.eyebrow}</span>
+                  <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
                   <h2 className="serif">{section.title}</h2>
                 </div>
                 <ol className="work-steps__list">
@@ -186,7 +187,7 @@ function WorkBody({ work }: { work: Work }) {
               data-leaf-index={String(index + 1).padStart(2, "0")}
             >
               <div className="wrap work-note__inner">
-                <span className="mono">NOTE / 素材说明</span>
+                <span className="mono">素材说明</span>
                 <div>
                   <h3 className="serif">{section.title}</h3>
                   <p>{section.body}</p>
@@ -208,14 +209,14 @@ function WorkBody({ work }: { work: Work }) {
             >
               <div className="wrap">
                 <div className="work-section__head">
-                  <span className="eyebrow">PENDING MATERIAL / 占位</span>
+                  <span className="eyebrow">占位</span>
                   <h2 className="serif">{section.title}</h2>
                   <p className="work-section__note">{section.body}</p>
                 </div>
                 <div className="work-placeholder__grid">
                   {section.items.map((item, itemIndex) => (
                     <div className="work-placeholder__slot" key={item}>
-                      <span className="mono">SLOT {String(itemIndex + 1).padStart(2, "0")}</span>
+                      <span className="mono">位置 {String(itemIndex + 1).padStart(2, "0")}</span>
                       <b className="serif">{item}</b>
                       <em className="mono">待上传作品素材</em>
                     </div>
@@ -238,7 +239,7 @@ function WorkBody({ work }: { work: Work }) {
             >
               <div className="wrap">
                 <div className="work-section__head">
-                  <span className="eyebrow">{section.eyebrow}</span>
+                  <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
                   <h2 className="serif">{section.title}</h2>
                   {section.note ? <p className="work-section__note">{section.note}</p> : null}
                 </div>
@@ -260,14 +261,14 @@ function WorkBody({ work }: { work: Work }) {
             >
               <div className="wrap">
                 <div className="work-section__head">
-                  <span className="eyebrow">{section.eyebrow}</span>
+                  <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
                   <h2 className="serif">{section.title}</h2>
                   {section.note ? <p className="work-section__note">{section.note}</p> : null}
                 </div>
                 <Cinema groups={filmGroups} />
                 <div className="work-film__decks">
                   <div className="work-film__decks-head">
-                    <span className="mono">DECK SELECTION / 演示文稿节选</span>
+                    <span className="mono">演示文稿节选</span>
                     <TransitionLink href="/experience/#d-decks" className="link-line">在成境中查看 <ArrowRight size={12} /></TransitionLink>
                   </div>
                   <DeckViewer decks={DECKS} />
@@ -300,18 +301,15 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <div className="wrap">
           <div className="work-hero__top" data-reveal>
             <TransitionLink href={`/${work.chapter}/`} className="mono work-hero__back">
-              ← 返回{chapter?.zh} / {chapter?.en}
+              ← 返回{chapter?.zh}
             </TransitionLink>
-            <span className="mono work-hero__no">PROJECT {work.no} / {String(siblings.length).padStart(2, "0")}</span>
+            <span className="mono work-hero__no">项目 {work.no} / {String(siblings.length).padStart(2, "0")}</span>
           </div>
 
           <div className="work-hero__grid">
             <div className="work-hero__title">
-              <span className="eyebrow" data-reveal>{work.category} / {work.year}</span>
+              <span className="eyebrow" data-reveal>{zhOnly(work.category)} · {work.year}</span>
               <h1 className="serif" data-reveal>{work.title}</h1>
-              <p className="work-hero__en display" data-reveal style={{ "--d": "110ms" } as React.CSSProperties}>
-                {work.titleEn}
-              </p>
             </div>
 
             <div className="work-hero__intro">
@@ -322,9 +320,9 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
                 ))}
               </ul>
               <dl className="work-hero__meta" data-reveal style={{ "--d": "240ms" } as React.CSSProperties}>
-                <div><dt className="mono">CHAPTER</dt><dd>{chapter?.no} {chapter?.zh}</dd></div>
-                <div><dt className="mono">YEAR</dt><dd>{work.year}</dd></div>
-                <div><dt className="mono">SECTIONS</dt><dd>{String(work.sections.length).padStart(2, "0")}</dd></div>
+                <div><dt className="mono">章节</dt><dd>{chapter?.no} {chapter?.zh}</dd></div>
+                <div><dt className="mono">年份</dt><dd>{work.year}</dd></div>
+                <div><dt className="mono">页数</dt><dd>{String(work.sections.length).padStart(2, "0")}</dd></div>
               </dl>
             </div>
           </div>
@@ -335,11 +333,11 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <div className="wrap">
           <figure className="work-cover__frame" data-reveal="mask">
             <img src={work.cover.src} alt={work.coverAlt} />
-            <span className="work-cover__badge mono">PROJECT COVER / {work.no}</span>
+            <span className="work-cover__badge mono">项目封面 · {work.no}</span>
           </figure>
           <div className="work-cover__bar mono">
             <span>{work.coverAlt}</span>
-            <span>{work.cover.width} × {work.cover.height} / ORIGINAL</span>
+            <span>{work.cover.width} × {work.cover.height} · 原图</span>
           </div>
         </div>
       </section>
@@ -351,26 +349,26 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       <section className="work-end">
         <div className="wrap">
           <div className="work-end__top">
-            <span className="mono">END OF PROJECT / {work.no}</span>
+            <span className="mono">项目结束 · {work.no}</span>
             <TransitionLink href={`/${work.chapter}/`} className="link-line">回到{chapter?.zh}章节 <ArrowUpRight size={12} /></TransitionLink>
           </div>
 
           <div className="work-end__nav">
             <TransitionLink href={`/work/${prev.slug}/`} className="work-end__card">
-              <span className="mono">PREVIOUS / 上一个</span>
+              <span className="mono">上一个项目</span>
               <b className="serif">{prev.title}</b>
-              <em className="mono">{prev.titleEn}</em>
+              <em className="mono">{zhOnly(prev.category)}</em>
             </TransitionLink>
             <TransitionLink href={`/work/${next.slug}/`} className="work-end__card work-end__card--next">
-              <span className="mono">NEXT / 下一个</span>
+              <span className="mono">下一个项目</span>
               <b className="serif">{next.title}</b>
-              <em className="mono">{next.titleEn}</em>
+              <em className="mono">{zhOnly(next.category)}</em>
             </TransitionLink>
           </div>
 
           <TransitionLink href={`/${work.chapter === "experience" ? "" : work.chapter + "/"}`} className="work-end__return">
-            <span className="mono">RETURN TO</span>
-            <span className="serif">{work.chapter === "experience" ? "首页 / HOME" : `${chapter?.zh} / ${chapter?.en}`}</span>
+            <span className="mono">返回</span>
+            <span className="serif">{work.chapter === "experience" ? "首页" : chapter?.zh}</span>
             <ArrowRight size={18} />
           </TransitionLink>
         </div>

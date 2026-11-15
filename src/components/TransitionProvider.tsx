@@ -72,7 +72,7 @@ export function TransitionProvider({ children }: { children: React.ReactNode }) 
         style={{ "--tx": point.x, "--ty": point.y, "--tr-color": color } as React.CSSProperties}
         aria-hidden="true"
       >
-        <span className="page-transition__mark">由意成形 · IDEAS INTO FORM.</span>
+        <span className="page-transition__mark">由意成形</span>
       </div>
     </Ctx.Provider>
   );

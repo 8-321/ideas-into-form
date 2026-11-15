@@ -46,17 +46,17 @@ export function CoverAtlas({
             <span className="cover-atlas__big display" aria-hidden="true">
               {String(active + 1).padStart(2, "0")}
             </span>
-            <span className="cover-atlas__stamp mono">{active === 0 ? "LONG FORM" : "RED DUST NOTE"}</span>
+            <span className="cover-atlas__stamp mono">{active === 0 ? "长音频" : "红尘手记"}</span>
           </div>
           <div className="cover-atlas__read mono">
-            <span>COVER / {String(active + 1).padStart(2, "0")}</span>
+            <span>封面 {String(active + 1).padStart(2, "0")}</span>
             <span>{activeTitle}</span>
           </div>
         </div>
 
         <div className="cover-atlas__rail">
           <div className="cover-atlas__rail-head mono">
-            <span>COVER SYSTEM / 05</span>
+            <span>封面系统 · 五张</span>
             <span>1:1</span>
           </div>
           {covers.map((cover, index) => (
@@ -74,13 +74,13 @@ export function CoverAtlas({
                 <img src={cover.thumb} alt="" loading="lazy" decoding="async" />
               </span>
               <span className="cover-atlas__name serif">{captions[index].split(" / ")[0]}</span>
-              <span className="cover-atlas__kind mono">{index === 0 ? "LONG FORM" : "NOTE"}</span>
+              <span className="cover-atlas__kind mono">{index === 0 ? "长音频" : "手记"}</span>
               <ArrowUpRight size={12} />
             </button>
           ))}
           <p className="cover-atlas__foot mono">
-            <span>ORIGINAL JPG</span>
-            <span>NO CROP / NO FILTER</span>
+            <span>原始图像</span>
+            <span>不裁切 · 不滤镜</span>
           </p>
         </div>
       </div>

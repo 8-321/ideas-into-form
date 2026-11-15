@@ -11,16 +11,16 @@ import { TransitionProvider } from "@/components/TransitionProvider";
 
 export const metadata: Metadata = {
   title: {
-    default: "由意成形 · IDEAS INTO FORM.",
+    default: "由意成形 · 个人作品集",
     template: "%s · 由意成形",
   },
   description: "从想法出发，让创造拥有形态。一个以原点为视觉线索的个人数字创意作品档案馆。",
   applicationName: "由意成形",
-  authors: [{ name: "PERSONAL PORTFOLIO" }],
-  keywords: ["由意成形", "IDEAS INTO FORM", "作品集", "视觉设计", "IP", "影像", "声音"],
+  authors: [{ name: "由意成形" }],
+  keywords: ["由意成形", "作品集", "视觉设计", "角色设计", "影像", "声音"],
   icons: { icon: "/icon.svg" },
   openGraph: {
-    title: "由意成形 · IDEAS INTO FORM.",
+    title: "由意成形 · 个人作品集",
     description: "从想法出发，让创造拥有形态。",
     type: "website",
     locale: "zh_CN",

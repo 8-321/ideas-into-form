@@ -74,6 +74,11 @@ export function group(name: string): ImageAsset[] {
 }
 
 const cap = (asset: ImageAsset, caption?: string) => ({ ...asset, caption });
+export function zhOnly(value: string): string {
+  const parts = value.split("/").map((part) => part.trim()).filter(Boolean);
+  const chinese = parts.filter((part) => /[\u3400-\u9fff]/.test(part));
+  return chinese[chinese.length - 1] ?? parts[0] ?? value;
+}
 
 export type TextSection = {
   type: "text";
@@ -229,7 +234,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "页面收录的是已归档的 98 张日更封面，按原始日期排序；未重新绘制封面内容。系列名称「100 天实验」来自原始栏目。",
       },
       {
@@ -247,14 +252,14 @@ export const WORKS: Work[] = [
     slug: "mbti-covers",
     no: "02",
     chapter: "image",
-    title: "MBTI 系列",
-    titleEn: "MBTI COVERS",
+    title: "人格类型系列",
+    titleEn: "PERSONALITY COVERS",
     category: "视频封面 / VIDEO COVERS",
     year: "2025",
     summary: "五个人格关键词，五种情绪温度。同一主题同时输出横版与竖版两套构图。",
     tags: ["视频封面", "双比例", "人格主题"],
     cover: img("mbti", "enfj-land"),
-    coverAlt: "ENFJ 温柔理想暴君封面",
+    coverAlt: "温柔理想型人格封面",
     order: 2,
     sections: [
       {
@@ -262,7 +267,7 @@ export const WORKS: Work[] = [
         eyebrow: "OVERVIEW / 概述",
         title: "先用一张脸，建立一个人格。",
         paragraphs: [
-          "围绕 ENFJ、INTP、INTJ、ENFP 与「狼人杀为什么凉了」五个主题制作的视频封面，每个主题同时输出 16:9 与 9:16 两个版本。",
+          "围绕主人公型、逻辑学家型、建筑师型、竞选者型与「狼人杀为什么凉了」五个主题制作的视频封面，每个主题同时输出横版与竖版两个版本。",
           "五张封面共享电影剧照式的黑白影像与高对比手写标题，但各自用不同的道具、光线与色彩温度区分人格气质。",
         ],
       },
@@ -286,7 +291,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "封面中的人物与场景为原始作品的视觉素材；标题、人格关键词与版式为该系列的设计内容。",
       },
     ],
@@ -323,7 +328,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "封面上的标题、数据与观点来自原始作品，未改动文字内容。",
       },
     ],
@@ -360,7 +365,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "原图保留黑白影调，未额外套滤镜；页面仅做尺寸压缩以适配网页。",
       },
     ],
@@ -376,7 +381,7 @@ export const WORKS: Work[] = [
     summary: "三张竖版口播封面，三种注意力入口。",
     tags: ["竖版封面", "标题设计", "口播"],
     cover: img("talk", "talk-ai-value"),
-    coverAlt: "光会用AI反而不值钱封面",
+    coverAlt: "只会用人工智能反而不值钱封面",
     order: 5,
     sections: [
       {
@@ -397,14 +402,14 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "封面文字与人物为原始作品内容，未重新撰写标题。",
       },
     ],
   },
   {
     slug: "wolf-design",
-    no: "04A",
+    no: "04-1",
     chapter: "image",
     title: "狼人杀形象设计",
     titleEn: "WOLF POSTER",
@@ -434,7 +439,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "单张角色群像海报为原始素材；未虚构客户、投放数据或使用场景。",
       },
     ],
@@ -443,12 +448,12 @@ export const WORKS: Work[] = [
     slug: "panda-ip",
     no: "06",
     chapter: "image",
-    title: "小含熊猫 IP",
+    title: "小含熊猫",
     titleEn: "XIAOHAN PANDA",
-    category: "IP 与角色 / CHARACTER IP",
+    category: "角色与形象",
     year: "2026",
     summary: "保留原角色的比例、粗描边与圆润轮廓，只改变它出现的场景。",
-    tags: ["IP", "角色一致性", "社媒应用"],
+    tags: ["熊猫角色", "角色一致性", "社媒应用"],
     cover: img("panda", "panda-original"),
     coverAlt: "小含熊猫原始标准形象",
     featured: true,
@@ -459,7 +464,7 @@ export const WORKS: Work[] = [
         eyebrow: "OVERVIEW / 概述",
         title: "先守住角色，再谈延展。",
         paragraphs: [
-          "以小含熊猫原始形象为标准，延展到小红书与 PPT 教学内容的封面、场景海报与账号视觉。角色本身不做重新设计，变化发生在道具、版式与叙事场景。",
+          "以小含熊猫原始形象为标准，延展到小红书与演示文稿教学内容的封面、场景海报与账号视觉。角色本身不做重新设计，变化发生在道具、版式与叙事场景。",
           "原形象的关键特征被固定下来：圆润的头部比例、粗黑描边、浅色身体、低饱和蓝底与橙色点缀。每次应用只替换它手里的物件与所处的场景。",
         ],
       },
@@ -470,8 +475,8 @@ export const WORKS: Work[] = [
         items: [
           { no: "01", title: "确认标准形象", body: "以原始熊猫图作为唯一角色依据，锁定比例、描边、五官与配色。" },
           { no: "02", title: "提取视觉规则", body: "记录主色、辅助色、线条粗细与圆形底盘的构成方式。" },
-          { no: "03", title: "延展应用场景", body: "把角色放进 PPT 教学、社媒封面与内容栏目，保持同一张脸。" },
-          { no: "04", title: "统一版式", body: "用固定的标题位置与账号信息，让不同内容看起来仍属于同一个 IP。" },
+          { no: "03", title: "延展应用场景", body: "把角色放进演示文稿教学、社媒封面与内容栏目，保持同一张脸。" },
+          { no: "04", title: "统一版式", body: "用固定的标题位置与账号信息，让不同内容看起来仍属于同一个角色。" },
         ],
       },
       {
@@ -480,25 +485,25 @@ export const WORKS: Work[] = [
         title: "同一张脸，不同的场景。",
         note: "原始标准形象与 8 张内容应用海报。",
         layout: "grid",
-        items: [cap(img("panda", "panda-original"), "原始标准形象 / ORIGINAL"), ...pandaPosters.map((item) => cap(item, "内容应用 / APPLICATION"))],
+        items: [cap(img("panda", "panda-original"), "原始标准形象"), ...pandaPosters.map((item) => cap(item, "内容应用"))],
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
-        body: "角色标准形象以原始图为唯一依据；场景海报为 IP 应用与 AI 辅助延展，不作为新的角色设定，也不改变原 IP 的外观。",
+        title: "素材说明",
+        body: "角色标准形象以原始图为唯一依据；场景海报为角色应用与人工智能辅助延展，不作为新的角色设定，也不改变原角色的外观。",
       },
       {
         type: "placeholder",
-        title: "IP 延展 / 待上传",
+        title: "角色延展 / 待上传",
         body: "以下为计划中的延展内容，目前没有对应的真实成品素材，因此以占位方式呈现。",
-        items: ["九宫格表情包", "角色三视图", "书包 / 帆布袋 / 手机壳 / 贴纸", "IP 视觉规范页"],
+        items: ["九宫格表情包", "角色三视图", "书包 / 帆布袋 / 手机壳 / 贴纸", "角色视觉规范页"],
       },
       {
         type: "text",
         eyebrow: "REFLECTION / 复盘",
         title: "让角色成为可复用的资产。",
         paragraphs: [
-          "下一步优先补齐三视图与表情包，让角色从「单张形象」变成可复用的 IP 资产；再把颜色、描边与版式写成一份可交付的视觉规范。",
+          "下一步优先补齐三视图与表情包，让角色从「单张形象」变成可复用的角色资产；再把颜色、描边与版式写成一份可交付的视觉规范。",
           "延展的难点不在画一个新动作，而在每一次新动作里仍然让人认出是同一个角色。",
         ],
       },
@@ -557,8 +562,8 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
-        body: "该组素材为 AI 辅助角色视觉设定与概念图，用于展示角色一致性与视觉开发流程；不代表已经完成的影视成片。",
+        title: "素材说明",
+        body: "该组素材为人工智能辅助角色视觉设定与概念图，用于展示角色一致性与视觉开发流程；不代表已经完成的影视成片。",
       },
       {
         type: "text",
@@ -603,7 +608,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "标题与栏目信息来自原始作品；页面未改写采访内容或人物身份。",
       },
     ],
@@ -680,7 +685,7 @@ export const WORKS: Work[] = [
         eyebrow: "OVERVIEW / 概述",
         title: "把校园装进一个红包。",
         paragraphs: [
-          "长理 IP 红包封图设计，以校园建筑、马年纹样与卡通形象组成三张可展开的红包封面。",
+          "长理红包封图设计，以校园建筑、马年纹样与卡通形象组成三张可展开的红包封面。",
           "把校门、图书馆与主楼做成可识别的剪影，再用红金、线稿与卡通三套语言分别对应传统、雅致与年轻三种气质。",
         ],
       },
@@ -693,7 +698,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "画面中的校园建筑与年份信息来自原始作品；页面未虚构使用场景或发放数据。",
       },
     ],
@@ -771,7 +776,7 @@ export const WORKS: Work[] = [
         title: "童年动画的温柔暴击。",
         note: "6 页长图文，按原始顺序排列。",
         layout: "strip",
-        items: group("xinlingChild").map((item, index) => cap(item, `P${String(index + 1).padStart(2, "0")}`)),
+        items: group("xinlingChild").map((item, index) => cap(item, `第${index + 1}页`)),
       },
       {
         type: "gallery",
@@ -779,7 +784,7 @@ export const WORKS: Work[] = [
         title: "以杀为刃，护我所执。",
         note: "6 页长图文，按原始顺序排列。",
         layout: "strip",
-        items: group("xinlingSword").map((item, index) => cap(item, `P${String(index + 1).padStart(2, "0")}`)),
+        items: group("xinlingSword").map((item, index) => cap(item, `第${index + 1}页`)),
       },
       {
         type: "gallery",
@@ -787,7 +792,7 @@ export const WORKS: Work[] = [
         title: "智慧的低语，心灵的启迪。",
         note: "6 页长图文，按原始顺序排列。",
         layout: "strip",
-        items: group("xinlingWisdom").map((item, index) => cap(item, `P${String(index + 1).padStart(2, "0")}`)),
+        items: group("xinlingWisdom").map((item, index) => cap(item, `第${index + 1}页`)),
       },
       {
         type: "gallery",
@@ -795,11 +800,11 @@ export const WORKS: Work[] = [
         title: "现状剖析：大学生的四重迷雾。",
         note: "4 页手机端排版，按原始顺序排列。",
         layout: "strip",
-        items: group("xiumi").map((item, index) => cap(item, `P${String(index + 1).padStart(2, "0")}`)),
+        items: group("xiumi").map((item, index) => cap(item, `第${index + 1}页`)),
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "长图按原始顺序展示，可在灯箱中放大阅读；页面未改写文章内容。",
       },
     ],
@@ -825,7 +830,7 @@ export const WORKS: Work[] = [
         title: "先用手，理解形状。",
         paragraphs: [
           "板绘与素描作品选。板绘包含角色、植物与场景练习；素描以人物结构为主。",
-          "不套滤镜、不做 AI 风格化，保留纸张纹理、笔触边缘与原始扫描的色偏。",
+          "不套滤镜、不做人工智能风格化，保留纸张纹理、笔触边缘与原始扫描的色偏。",
         ],
       },
       {
@@ -844,8 +849,8 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
-        body: "展示为原作扫描/导出，未进行风格化处理，也未把素描处理成 AI 风格。后续若补充草图、线稿与深入刻画的过程文件，会按真实顺序加入。",
+        title: "素材说明",
+        body: "展示为原作扫描/导出，未进行风格化处理，也未把素描处理成人工智能风格。后续若补充草图、线稿与深入刻画的过程文件，会按真实顺序加入。",
       },
     ],
   },
@@ -858,7 +863,7 @@ export const WORKS: Work[] = [
     category: "游戏视觉 / GAME UI",
     year: "2025",
     summary: "用声波、霓虹和玻璃质感，建立一套节奏游戏的界面语言。",
-    tags: ["游戏界面", "声波", "UI 组件"],
+    tags: ["游戏界面", "声波", "界面组件"],
     cover: img("game", "game-cover"),
     coverAlt: "快放电波游戏标题界面",
     featured: true,
@@ -869,7 +874,7 @@ export const WORKS: Work[] = [
         eyebrow: "OVERVIEW / 概述",
         title: "让声音，变成看得见的界面。",
         paragraphs: [
-          "快放电波游戏视觉设计，包含标题页、玩法说明、游戏内界面与一套可复用的 UI 组件。",
+          "快放电波游戏视觉设计，包含标题页、玩法说明、游戏内界面与一套可复用的界面组件。",
           "深蓝底、青蓝霓虹、声波网格与玻璃拟态按钮，把「声音」变成可见的界面材质。",
         ],
       },
@@ -880,7 +885,7 @@ export const WORKS: Work[] = [
         items: [
           { no: "01", title: "情绪板", body: "收集声波、示波器、霓虹与玻璃材质，确定冷暖对比。" },
           { no: "02", title: "标题页", body: "用超大字标与声波环形阵列建立第一眼的节奏感。" },
-          { no: "03", title: "游戏内 HUD", body: "把分数、提示、摇杆与音量控件放进同一套发光边框。" },
+          { no: "03", title: "游戏内界面", body: "把分数、提示、摇杆与音量控件放进同一套发光边框。" },
           { no: "04", title: "组件拆分", body: "把按钮、摇杆、滑块与弹窗拆成可复用组件。" },
         ],
       },
@@ -894,7 +899,7 @@ export const WORKS: Work[] = [
       {
         type: "gallery",
         eyebrow: "KIT / 组件",
-        title: "一套可复用的 UI 零件。",
+        title: "一套可复用的界面零件。",
         layout: "grid",
         items: [
           cap(img("game", "game-start"), "开始按钮"),
@@ -909,7 +914,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "本站展示的是游戏视觉与界面设计案例，不包含可运行的游戏版本，也不虚构试玩功能。",
       },
       {
@@ -917,7 +922,7 @@ export const WORKS: Work[] = [
         eyebrow: "REFLECTION / 复盘",
         title: "下一步，验证手感。",
         paragraphs: [
-          "下一步可以把 UI 组件做成可交互的视觉原型，验证按钮、摇杆与音量控件的手感。",
+          "下一步可以把界面组件做成可交互的视觉原型，验证按钮、摇杆与音量控件的手感。",
           "游戏视觉的完成度不只在截图里，还在按下按钮之后的那 0.2 秒。",
         ],
       },
@@ -927,12 +932,12 @@ export const WORKS: Work[] = [
     slug: "second-culture",
     no: "15",
     chapter: "image",
-    title: "第二文化 UI",
+    title: "第二文化界面",
     titleEn: "SUBCULTURE APP",
     category: "界面设计 / PRODUCT UI",
     year: "2025",
     summary: "把亚文化测试产品，做成一套可浏览、可分享的界面。",
-    tags: ["小程序", "UI", "亚文化"],
+    tags: ["小程序", "界面", "亚文化"],
     cover: img("ui", "01-home"),
     coverAlt: "第二文化小程序首页",
     order: 15,
@@ -942,7 +947,7 @@ export const WORKS: Work[] = [
         eyebrow: "OVERVIEW / 概述",
         title: "把现场感带进产品。",
         paragraphs: [
-          "第二文化小程序 UI 设计，包含首页、测试介绍、题库、报告、筛选与注册等 8 个核心界面，以及一段界面演示。",
+          "第二文化小程序界面设计，包含首页、测试介绍、题库、报告、筛选与注册等 8 个核心界面，以及一段界面演示。",
           "黑白影像、荧光绿点缀与大字号标题，把亚文化的「现场感」带进产品界面；卡片圆角与底部导航保证可用性。",
         ],
       },
@@ -955,8 +960,8 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
-        body: "展示为 UI 设计稿与界面演示，不代表线上产品状态；页面未虚构用户数据或运营结果。",
+        title: "素材说明",
+        body: "展示为界面设计稿与界面演示，不代表线上产品状态；页面未虚构用户数据或运营结果。",
       },
     ],
   },
@@ -994,7 +999,7 @@ export const WORKS: Work[] = [
       },
       {
         type: "note",
-        title: "MATERIAL NOTE",
+        title: "素材说明",
         body: "五条音频与五张封面均为原始素材；播放器读取真实音频文件，不使用模拟播放。",
       },
       {
@@ -1016,7 +1021,7 @@ export const WORKS: Work[] = [
     titleEn: "FILM ARCHIVE",
     category: "影像 / FILM",
     year: "2026",
-    summary: "钢琴、古筝、画画与 PPT——四种内容，四种节奏。",
+    summary: "钢琴、古筝、绘画与演示——四种内容，四种节奏。",
     tags: ["视频", "演奏", "演示"],
     cover: filmCover,
     coverAlt: "钢琴演奏封面图",
@@ -1029,14 +1034,14 @@ export const WORKS: Work[] = [
         title: "每一段影像，都是一次表达。",
         paragraphs: [
           "公众号影像作品档案，收录 11 段视频与 4 份演示文稿节选。",
-          "把视频按内容类型而不是时间顺序排列：演奏看手与弦，画画看线条生长，PPT 看信息如何被组织成叙事。",
+          "把视频按内容类型而不是时间顺序排列：演奏看手与弦，画画看线条生长，演示看信息如何被组织成叙事。",
         ],
       },
       { type: "film", eyebrow: "SCREENING / 放映", title: "按类型进入放映室。" },
       {
         type: "note",
-        title: "MATERIAL NOTE",
-        body: "视频为原始素材转码，保留原声；PPT 以节选页与 PDF 形式展示，未虚构演示内容。",
+        title: "素材说明",
+        body: "视频为原始素材转码，保留原声；演示文稿以节选页与文档形式展示，未虚构演示内容。",
       },
     ],
   },

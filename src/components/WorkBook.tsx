@@ -58,7 +58,7 @@ export function WorkBook({
       if (!node.id) node.id = `book-leaf-${index + 1}`;
       const leaf = {
         id: node.id,
-        label: node.dataset.leafLabel || "Untitled",
+        label: node.dataset.leafLabel || "未命名",
         type: node.dataset.leafType || "text",
         index: node.dataset.leafIndex || pad(index + 1),
       };
@@ -324,7 +324,7 @@ export function WorkBook({
     <div className={`work-book${open ? " is-reader" : ""}`} ref={rootRef}>
       <section className="book-intro" aria-label="翻页阅读入口">
         <div className="book-intro__copy">
-          <span className="mono">READING EDITION / 阅读版</span>
+          <span className="mono">阅读版</span>
           <p className="serif">
             把项目当作一本书来读。
             <em>全书 {pad(leaves.length)} 页，滚轮、方向键或按钮都可以翻页。</em>
@@ -334,9 +334,9 @@ export function WorkBook({
           type="button"
           className="book-intro__launch"
           onClick={(event) => openReader(0, event.currentTarget)}
-          data-cursor-label="READ"
+          data-cursor-label="翻页"
         >
-          <span className="mono">BOOK MODE</span>
+          <span className="mono">翻页阅读</span>
           <b className="serif">开始翻页</b>
           <ArrowRight size={18} />
         </button>
@@ -344,7 +344,7 @@ export function WorkBook({
 
       <div className="book-toolbar">
         <div className="book-toolbar__id">
-          <span className="mono">READING COPY / 阅读版</span>
+          <span className="mono">阅读版</span>
           <b className="serif">{no} / {title}</b>
         </div>
         <div className="book-toolbar__count mono" aria-live="polite">
@@ -358,7 +358,7 @@ export function WorkBook({
             className="book-toolbar__toc"
             aria-expanded={tocOpen}
             onClick={() => setTocOpen((value) => !value)}
-            data-cursor-label="INDEX"
+            data-cursor-label="目录"
           >
             全书目录
           </button>
@@ -366,7 +366,7 @@ export function WorkBook({
             type="button"
             className="book-launch"
             onClick={(event) => openReader(active, event.currentTarget)}
-            data-cursor-label="READ"
+            data-cursor-label="翻页"
           >
             <span>从当前页继续</span>
             <Expand size={15} />
@@ -379,8 +379,8 @@ export function WorkBook({
       {tocOpen ? (
         <div className="book-toc" role="dialog" aria-label="全书目录">
           <div className="book-toc__head">
-            <span className="mono">CONTENTS / 全书目录</span>
-            <button type="button" onClick={() => setTocOpen(false)} aria-label="关闭全书目录" data-cursor-label="CLOSE">
+            <span className="mono">全书目录</span>
+            <button type="button" onClick={() => setTocOpen(false)} aria-label="关闭全书目录" data-cursor-label="关闭">
               <Close size={14} />
             </button>
           </div>
@@ -391,7 +391,7 @@ export function WorkBook({
                 key={leaf.id}
                 className={index === active ? "is-active" : ""}
                 onClick={() => goTo(index)}
-                data-cursor-label="GO"
+                data-cursor-label="前往"
               >
                 <span className="book-toc__no mono">{leaf.index}</span>
                 <b className="serif">{leaf.label}</b>
@@ -407,7 +407,7 @@ export function WorkBook({
           <div className="book-reader__scrim" aria-hidden="true" />
           <header className="book-reader__bar">
             <div className="book-reader__id">
-              <span className="mono">BOOK MODE / 翻页阅读</span>
+              <span className="mono">翻页阅读</span>
               <b className="serif">{no} / {title}</b>
             </div>
             <div className="book-reader__meta" aria-live="polite">
@@ -420,18 +420,18 @@ export function WorkBook({
                 className="book-reader__toc"
                 aria-expanded={tocOpen}
                 onClick={() => setTocOpen((value) => !value)}
-                data-cursor-label="INDEX"
+                data-cursor-label="目录"
               >
                 目录
               </button>
-              <button type="button" className="book-reader__close" onClick={closeReader} aria-label="关闭翻页阅读" data-cursor-label="CLOSE">
+              <button type="button" className="book-reader__close" onClick={closeReader} aria-label="关闭翻页阅读" data-cursor-label="关闭">
                 <Close size={17} />
               </button>
             </div>
           </header>
 
           <footer className="book-reader__foot">
-            <button type="button" onClick={() => turn(-1)} disabled={active <= 0} data-cursor-label="PREV">
+            <button type="button" onClick={() => turn(-1)} disabled={active <= 0} data-cursor-label="上一页">
               <ChevronLeft size={16} />
               <span>上一页</span>
             </button>
@@ -440,7 +440,7 @@ export function WorkBook({
               <i><b style={{ transform: `scaleX(${progress})` }} /></i>
               <span className="mono">{pad(leaves.length)}</span>
             </div>
-            <button type="button" onClick={() => turn(1)} disabled={active >= leaves.length - 1} data-cursor-label="NEXT">
+            <button type="button" onClick={() => turn(1)} disabled={active >= leaves.length - 1} data-cursor-label="下一页">
               <span>下一页</span>
               <ChevronRight size={16} />
             </button>

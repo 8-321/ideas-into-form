@@ -9,15 +9,15 @@ import { TransitionLink } from "@/components/TransitionLink";
 import { DECKS, FILM_COVERS, filmVideos, vid } from "@/content/works";
 
 export const metadata: Metadata = {
-  title: "03 成境 / EXPERIENCE",
-  description: "让创意成为可以感受的体验。钢琴、古筝、画画与 PPT，11 段真实影像与 4 份演示文稿。",
+  title: "成境 · 影像与演示",
+  description: "让创意成为可以感受的体验。钢琴、古筝、绘画与演示文稿，11 段真实影像与 4 份演示文稿。",
 };
 
 const nav = [
-  { id: "a-statement", no: "A", label: "影像主张" },
-  { id: "b-screenings", no: "B", label: "数字放映室" },
-  { id: "c-programme", no: "C", label: "四类节目" },
-  { id: "d-decks", no: "D", label: "演示文稿" },
+  { id: "a-statement", no: "一", label: "影像主张" },
+  { id: "b-screenings", no: "二", label: "数字放映室" },
+  { id: "c-programme", no: "三", label: "四类节目" },
+  { id: "d-decks", no: "四", label: "演示文稿" },
 ];
 
 const fmt = (value: number) => {
@@ -30,7 +30,6 @@ const groups: CinemaGroup[] = [
   {
     key: "piano",
     label: "钢琴",
-    en: "PIANO",
     note: "手指落下，声音有了时间。钢琴部分保留完整演奏段落，不做剪辑替身。",
     cover: FILM_COVERS.piano,
     videos: filmVideos.piano,
@@ -38,7 +37,6 @@ const groups: CinemaGroup[] = [
   {
     key: "guzheng",
     label: "古筝",
-    en: "GUZHENG",
     note: "竖屏记录弦与手的关系。两支短片，两种情绪：爱情讯息与沧海一声笑。",
     cover: FILM_COVERS.guzheng,
     videos: filmVideos.guzheng,
@@ -46,14 +44,12 @@ const groups: CinemaGroup[] = [
   {
     key: "painting",
     label: "画画",
-    en: "PAINTING",
     note: "线条不是结果，是过程。三段竖屏记录把「画」还原成时间里的动作。",
     videos: filmVideos.painting,
   },
   {
     key: "ppt",
-    label: "PPT",
-    en: "DECK FILM",
+    label: "演示",
     note: "信息如何被组织成叙事。演示视频与 4 份演示文稿节选互为证据。",
     videos: filmVideos.ppt,
   },
@@ -85,17 +81,14 @@ export default function ExperienceChapterPage() {
         <div className="wrap film-hero__grid">
           <div className="film-hero__copy">
             <div className="chapter-hero__label" data-reveal>
-              <span className="mono">CHAPTER 03 / EXPERIENCE</span>
-              <span className="status status--ready">{allVideos.length} FILMS / {DECKS.length} DECKS</span>
+              <span className="mono">第三章 · 影像</span>
+              <span className="status status--ready">{allVideos.length} 段影像 / {DECKS.length} 份演示</span>
             </div>
 
             <h1 className="chapter-hero__title serif" data-reveal>
               <span className="char">成</span><span className="char">境</span>
             </h1>
 
-            <p className="chapter-hero__en display" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
-              BEYOND THE <em>FRAME.</em>
-            </p>
 
             <p className="chapter-hero__lead" data-reveal style={{ "--d": "190ms" } as React.CSSProperties}>
               让创意成为可以感受的体验。<br />
@@ -112,9 +105,9 @@ export default function ExperienceChapterPage() {
             </div>
 
             <dl className="film-hero__meta" data-reveal style={{ "--d": "310ms" } as React.CSSProperties}>
-              <div><dt className="mono">FILMS</dt><dd>{String(allVideos.length).padStart(2, "0")} / 11</dd></div>
-              <div><dt className="mono">RUNTIME</dt><dd>{fmt(totalRuntime)}</dd></div>
-              <div><dt className="mono">CATEGORIES</dt><dd>PIANO · GUZHENG · PAINTING · PPT</dd></div>
+              <div><dt className="mono">影像</dt><dd>{String(allVideos.length).padStart(2, "0")} / 11</dd></div>
+              <div><dt className="mono">总时长</dt><dd>{fmt(totalRuntime)}</dd></div>
+              <div><dt className="mono">类型</dt><dd>钢琴 · 古筝 · 绘画 · 演示</dd></div>
             </dl>
           </div>
 
@@ -126,7 +119,7 @@ export default function ExperienceChapterPage() {
                 <span className="film-hero__shade" aria-hidden="true" />
                 <span className="film-hero__play"><Play size={22} /></span>
                 <span className="film-hero__overlay mono">
-                  <span>REEL 01 / 梦中的婚礼</span>
+                  <span>第一段 · 梦中的婚礼</span>
                   <span>{fmt(heroPoster.duration)}</span>
                 </span>
                 <span className="film-hero__scan" aria-hidden="true" />
@@ -148,8 +141,8 @@ export default function ExperienceChapterPage() {
             </div>
 
             <p className="film-hero__caption mono muted">
-              <span>11 FILMS / 4 SERIES</span>
-              <span>PIANO COVER / 001</span>
+              <span>11 段影像 · 四类节目</span>
+              <span>钢琴 · 系列封面</span>
             </p>
           </div>
         </div>
@@ -160,7 +153,7 @@ export default function ExperienceChapterPage() {
       <section className="film-statement section" id="a-statement">
         <div className="wrap film-statement__grid">
           <div className="film-statement__title">
-            <span className="eyebrow" data-reveal>A.01 / POSITION</span>
+            <span className="eyebrow" data-reveal>一 · 影像主张</span>
             <h2 className="serif" data-reveal>
               <span className="split-line"><span>每一段影像，</span></span>
               <span className="split-line"><span>都是一次表达。</span></span>
@@ -172,12 +165,12 @@ export default function ExperienceChapterPage() {
 
           <div className="film-statement__body">
             <p data-reveal>
-              成境收录 11 段真实影像：5 段钢琴、2 段古筝、3 段画画、1 段 PPT 演示视频。
+              成境收录 11 段真实影像：5 段钢琴、2 段古筝、3 段画画、1 段演示视频。
               总时长 {fmt(totalRuntime)}，全部保留原声与原始画幅。
             </p>
             <p data-reveal style={{ "--d": "90ms" } as React.CSSProperties}>
               排列不按时间顺序，而按「观看方式」：演奏看手与弦，画画看线条生长，
-              PPT 看信息如何被组织成叙事。三种时间感，共用一间放映室。
+              演示文稿看信息如何被组织成叙事。三种时间感，共用一间放映室。
             </p>
             <p data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
               另有 4 份演示文稿，共 {totalDecks} 页节选。它们不是视频的附属品，
@@ -185,10 +178,10 @@ export default function ExperienceChapterPage() {
             </p>
 
             <div className="film-statement__stats stagger">
-              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{allVideos.length}</b><span className="mono">FILMS / 影像</span></div>
-              <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{fmt(totalRuntime)}</b><span className="mono">RUNTIME / 总时长</span></div>
-              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display" data-count>{groups.length}</b><span className="mono">CATEGORIES / 类型</span></div>
-              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display" data-count>{DECKS.length}</b><span className="mono">DECKS / 演示</span></div>
+              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{allVideos.length}</b><span className="mono">影像</span></div>
+              <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{fmt(totalRuntime)}</b><span className="mono">总时长</span></div>
+              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display" data-count>{groups.length}</b><span className="mono">类型</span></div>
+              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display" data-count>{DECKS.length}</b><span className="mono">演示文稿</span></div>
             </div>
           </div>
         </div>
@@ -198,12 +191,12 @@ export default function ExperienceChapterPage() {
         <div className="wrap">
           <div className="section-head">
             <div>
-              <span className="eyebrow" data-reveal>B / SCREENING ROOM</span>
+              <span className="eyebrow" data-reveal>二 · 数字放映室</span>
               <h2 className="serif" data-reveal>数字放映室</h2>
             </div>
             <p className="section-head__note" data-reveal>
               点击主画面进入全屏播放器；下方胶片可选择任意一段。
-              键盘 ← → 切换影像，ESC 退出。
+              键盘左右方向键切换影像，退出键关闭播放器。
             </p>
           </div>
           <div className="screenings__stage" data-reveal>
@@ -216,7 +209,7 @@ export default function ExperienceChapterPage() {
         <div className="wrap">
           <div className="section-head">
             <div>
-              <span className="eyebrow" data-reveal>C / PROGRAMME</span>
+              <span className="eyebrow" data-reveal>三 · 四类节目</span>
               <h2 className="serif" data-reveal>四类节目，四种时间。</h2>
             </div>
             <p className="section-head__note" data-reveal>
@@ -228,11 +221,11 @@ export default function ExperienceChapterPage() {
             {programme.map((item, index) => (
               <article className="programme-row" key={item.key} data-reveal style={{ "--d": `${index * 60}ms` } as React.CSSProperties}>
                 <div className="programme-row__no">
-                  <span className="mono">PROGRAMME</span>
+                  <span className="mono">节目</span>
                   <b className="display">{String(index + 1).padStart(2, "0")}</b>
                 </div>
                 <div className="programme-row__title">
-                  <span className="mono">{item.en} / {item.videos.length} FILMS</span>
+                  <span className="mono">{item.videos.length} 段影像</span>
                   <h3 className="serif">{item.label}</h3>
                   <p>{item.note}</p>
                   <a href="#b-screenings" className="link-line">进入放映室 <ArrowRight size={12} /></a>
@@ -241,7 +234,7 @@ export default function ExperienceChapterPage() {
                   {item.still ? <FilmArtwork src={item.still} alt={`${item.label}封面`} portrait={item.portrait} loading="lazy" /> : null}
                 </div>
                 <div className="programme-row__runtime">
-                  <span className="mono">TOTAL</span>
+                  <span className="mono">合计</span>
                   <b className="display">{fmt(item.total)}</b>
                   <ul>
                     {item.videos.map((video) => (
@@ -259,11 +252,11 @@ export default function ExperienceChapterPage() {
         <div className="wrap">
           <div className="section-head">
             <div>
-              <span className="eyebrow" data-reveal>D / PRESENTATION</span>
+              <span className="eyebrow" data-reveal>四 · 演示文稿</span>
               <h2 className="serif" data-reveal>信息，也需要被导演。</h2>
             </div>
             <p className="section-head__note" data-reveal>
-              4 份演示文稿，共 {totalDecks} 页节选。可逐页翻阅、自动播放，或下载完整 PDF。
+              4 份演示文稿，共 {totalDecks} 页节选。可逐页翻阅、自动播放，或下载完整文档。
             </p>
           </div>
 
@@ -275,7 +268,7 @@ export default function ExperienceChapterPage() {
             {DECKS.map((deck) => (
               <span key={deck.key}>
                 <img src={deck.slides[0].src} alt="" loading="lazy" />
-                <em className="mono">{deck.format} / {deck.slideCount} P</em>
+                <em className="mono">{deck.slideCount} 页</em>
               </span>
             ))}
           </div>
@@ -285,7 +278,7 @@ export default function ExperienceChapterPage() {
       <section className="experience-end">
         <div className="wrap experience-end__inner">
           <div className="experience-end__copy" data-reveal>
-            <span className="mono">END OF CHAPTER / 03</span>
+            <span className="mono">第三章结束</span>
             <h2 className="serif">看过之后，<br />回到原点。</h2>
             <p>三种形态并不是终点。它们只是同一个想法，在不同媒介里留下的三种证据。</p>
             <div className="experience-end__actions">

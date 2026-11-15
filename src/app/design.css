@@ -534,3 +534,107 @@ html[data-reduce="true"] [data-reveal="flip"] {
   .site .section-head__note,
   .site .work-section__note { font-size: 0.96rem; }
 }
+
+
+/* ---------- 中文界面统一 ---------- */
+
+html[data-theme="home"],
+html[data-theme="image"] {
+  --mint: #aab7a3;
+  --mint-deep: #74856d;
+  --accent: #7c8d74;
+  --accent-ink: #223126;
+}
+
+.nav__brand {
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: none;
+}
+.nav__brand .mark {
+  width: 9px;
+  height: 9px;
+  border: 0;
+  background: var(--accent);
+}
+.nav__brand .mark::after { display: none; }
+.nav__link {
+  padding-block: 8px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
+.switch {
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+.menu-btn {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+.menu__item {
+  gap: 0;
+  font-size: clamp(2.4rem, 8vw, 4.6rem);
+}
+.menu__foot {
+  font-size: 11px !important;
+  letter-spacing: 0.06em !important;
+}
+.footer__word {
+  margin-left: -0.045em;
+  padding-bottom: 0.02em;
+  font-family: var(--font-serif);
+  font-size: clamp(3.4rem, 11.5vw, 12.4rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+}
+.footer__links a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+.footer__bottom {
+  font-size: 11px !important;
+  letter-spacing: 0.035em !important;
+}
+/* 404 */
+.not-found {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+}
+.not-found__inner {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  padding-block: 18vh;
+}
+.not-found__label {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+.not-found h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 400;
+}
+.not-found__lead {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+.not-found .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}

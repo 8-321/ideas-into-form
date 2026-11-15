@@ -126,39 +126,39 @@ const game = group("game");
 const ui = group("ui");
 
 export const IMAGE_FOLDERS: ImageFolder[] = [
-  makeFolder("A", "covers", "封面与主题", "COVER & THEME", [
-    { title: "100 DAYS", items: days, orbit: true },
-    { title: "MBTI", items: mbti },
-    { title: "SUBCULTURE", items: subculture },
-    { title: "MONO", items: bw },
-    { title: "TALK", items: talk },
+  makeFolder("A", "covers", "封面与主题", "COVERS", [
+    { title: "100 天实验", items: days, orbit: true },
+    { title: "人格封面", items: mbti },
+    { title: "亚文化封面", items: subculture },
+    { title: "黑白视觉", items: bw },
+    { title: "口播封面", items: talk },
   ]),
-  makeFolder("B", "characters", "IP 与人物", "IP & CHARACTERS", [
-    { title: "PANDA", items: panda },
-    { title: "DRAMA", items: drama },
-    { title: "WOLF", items: wolf },
-    { title: "INTERVIEW", items: interview },
+  makeFolder("B", "characters", "角色与人物", "CHARACTERS", [
+    { title: "熊猫角色", items: panda },
+    { title: "角色视觉", items: drama },
+    { title: "狼人杀形象", items: wolf },
+    { title: "采访设计", items: interview },
   ]),
   makeFolder("C", "spaces", "校园与空间", "CAMPUS & SPACE", [
-    { title: "CAMPUS", items: campus },
-    { title: "RED PACKET", items: redpacket },
-    { title: "HORIZON", items: fifteen },
+    { title: "校园建筑", items: campus },
+    { title: "红包设计", items: redpacket },
+    { title: "十五五视觉", items: fifteen },
   ]),
   makeFolder("D", "editorial", "图文与编排", "EDITORIAL & TYPE", [
-    { title: "CHILD", items: child },
-    { title: "SWORD", items: sword },
-    { title: "WISDOM", items: wisdom },
-    { title: "XIUMI", items: xiumi },
+    { title: "儿童插画", items: child },
+    { title: "刀剑意象", items: sword },
+    { title: "智慧主题", items: wisdom },
+    { title: "图文编排", items: xiumi },
   ]),
   makeFolder("E", "drawing", "绘画与造型", "DRAWING & FORM", [
-    { title: "DRAWING", items: drawing },
-    { title: "SKETCH", items: sketch },
+    { title: "绘画作品", items: drawing },
+    { title: "速写手稿", items: sketch },
   ]),
   makeFolder("F", "digital", "数字创意", "DIGITAL CREATIVE", [
-    { title: "FAST WAVE", items: game },
+    { title: "快放声波", items: game },
   ]),
   makeFolder("G", "interface", "界面与系统", "INTERFACE & SYSTEM", [
-    { title: "SUBCULTURE APP", items: ui },
+    { title: "第二文化界面", items: ui },
   ]),
 ];
 

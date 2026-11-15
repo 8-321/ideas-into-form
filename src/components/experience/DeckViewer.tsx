@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight, Download, Pause, Play } from "@/components/I
 import { useLightbox } from "@/components/Lightbox";
 import type { Deck } from "@/content/works";
 
+const zhTitle = (value: string) => value.replace(/\bAI\b/gi, "人工智能").replace(/\bPPT\b/gi, "演示").replace(/\bUI\b/gi, "界面");
+
 export function DeckViewer({ decks }: { decks: Deck[] }) {
   const [active, setActive] = useState(0);
   const [slide, setSlide] = useState(0);
@@ -12,6 +14,7 @@ export function DeckViewer({ decks }: { decks: Deck[] }) {
   const stage = useRef<HTMLDivElement>(null);
   const { open } = useLightbox();
   const deck = decks[active];
+  const deckTitle = deck ? zhTitle(deck.title) : "";
   const total = deck?.slides.length ?? 0;
   const safe = total ? Math.min(slide, total - 1) : 0;
 
@@ -59,14 +62,14 @@ export function DeckViewer({ decks }: { decks: Deck[] }) {
 
   const gallery = deck.slides.map((item, index) => ({
     src: item.src,
-    alt: `${deck.title} 第 ${index + 1} 页`,
-    caption: `${deck.title} · P${String(index + 1).padStart(2, "0")} / ${deck.slideCount}`,
+    alt: `${deckTitle} 第 ${index + 1} 页`,
+    caption: `${deckTitle} · 第 ${index + 1} 页 / ${deck.slideCount}`,
   }));
 
   return (
     <div className="deck-viewer">
       <aside className="deck-list" aria-label="演示文稿列表">
-        <span className="mono deck-list__label">DECK INDEX / 04</span>
+        <span className="mono deck-list__label">演示目录</span>
         {decks.map((item, index) => (
           <button
             type="button"
@@ -77,25 +80,25 @@ export function DeckViewer({ decks }: { decks: Deck[] }) {
           >
             <span className="mono">{String(index + 1).padStart(2, "0")}</span>
             <span className="deck-item__copy">
-              <b className="serif">{item.title}</b>
-              <em className="mono">{item.format} · {item.slideCount} PAGES · {item.sizeMB.toFixed(1)} MB</em>
+              <b className="serif">{zhTitle(item.title)}</b>
+              <em className="mono">{item.slideCount} 页 · {item.sizeMB.toFixed(1)} 兆</em>
             </span>
           </button>
         ))}
         <p className="deck-list__note mono muted">
-          演示文稿以节选页与 PDF 展示。<br />不包含演讲者备注或虚构数据。
+          演示文稿以节选页与文档展示。<br />不包含演讲者备注或虚构数据。
         </p>
       </aside>
 
       <div className="deck-stage" ref={stage}>
         <div className="deck-stage__bar">
-          <span className="mono">DECK {String(active + 1).padStart(2, "0")} / {deck.format}</span>
+          <span className="mono">第 {String(active + 1).padStart(2, "0")} 份演示</span>
           <div className="deck-stage__tools">
             <button type="button" onClick={() => setPlaying((value) => !value)} aria-label={playing ? "暂停自动播放" : "自动播放"}>
-              {playing ? <Pause size={12} /> : <Play size={12} />} <span>{playing ? "PAUSE" : "AUTO"}</span>
+              {playing ? <Pause size={12} /> : <Play size={12} />} <span>{playing ? "暂停" : "轮播"}</span>
             </button>
-            <a href={deck.pdf} download aria-label={`下载 ${deck.title} PDF`}>
-              <Download size={12} /> <span>PDF</span>
+            <a href={deck.pdf} download aria-label={`下载 ${deckTitle} 文档`}>
+              <Download size={12} /> <span>下载</span>
             </a>
           </div>
         </div>
@@ -107,7 +110,7 @@ export function DeckViewer({ decks }: { decks: Deck[] }) {
             onClick={() => open(gallery, safe)}
             aria-label={`放大查看第 ${safe + 1} 页`}
           >
-            <img key={`${deck.key}-${safe}`} src={deck.slides[safe].src} alt={`${deck.title} 第 ${safe + 1} 页`} />
+            <img key={`${deck.key}-${safe}`} src={deck.slides[safe].src} alt={`${deckTitle} 第 ${safe + 1} 页`} />
           </button>
           <button type="button" className="deck-stage__nav deck-stage__nav--prev" onClick={() => step(-1)} aria-label="上一页">
             <ChevronLeft size={16} />

@@ -72,7 +72,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
       {current ? (
         <div className="lightbox" role="dialog" aria-modal="true" aria-label="作品图片放大预览">
           <div className="lightbox__bar">
-            <span className="mono">由意成形 / IMAGE VIEWER</span>
+            <span className="mono">由意成形 · 作品预览</span>
             <div className="lightbox__actions">
               <button
                 type="button"
@@ -128,7 +128,7 @@ export function LightboxProvider({ children }: { children: React.ReactNode }) {
           <div className="lightbox__foot">
             <div>
               <div className="lightbox__caption">{current.caption || current.alt}</div>
-              <div className="mono muted" style={{ marginTop: 6, color: "rgba(241,239,233,.45)" }}>点击图片放大 · 方向键切换 · ESC 关闭</div>
+              <div className="mono muted" style={{ marginTop: 6, color: "rgba(241,239,233,.45)" }}>点击图片放大 · 方向键切换 · 退出键关闭</div>
             </div>
             <span className="lightbox__count">
               {String(index + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}

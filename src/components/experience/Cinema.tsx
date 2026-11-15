@@ -9,7 +9,6 @@ import type { ImageAsset, VideoAsset } from "@/content/works";
 export type CinemaGroup = {
   key: string;
   label: string;
-  en: string;
   note: string;
   cover?: ImageAsset;
   videos: VideoAsset[];
@@ -31,7 +30,7 @@ const ratioLabel = (video: VideoAsset) => {
 
 export function Cinema({ groups }: { groups: CinemaGroup[] }) {
   const all = useMemo(
-    () => groups.flatMap((group) => group.videos.map((video) => ({ ...video, group: group.key, groupLabel: group.label, en: group.en }))),
+    () => groups.flatMap((group) => group.videos.map((video) => ({ ...video, group: group.key, groupLabel: group.label }))),
     [groups]
   );
   const [filter, setFilter] = useState("all");
@@ -113,8 +112,8 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
           ))}
         </div>
         <p className="cinema__hint mono">
-          <span>SELECT A FRAME / 选择画面</span>
-          <span>CLICK TO SCREEN / 点击播放</span>
+          <span>选择画面</span>
+          <span>点击播放</span>
         </p>
       </div>
 
@@ -137,8 +136,8 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
             />
             <span className="screening__shade" aria-hidden="true" />
             <span className="screening__play"><Play size={20} /></span>
-            <span className="screening__corner screening__corner--tl mono">REEL {String(visible.findIndex((v) => v.key === active.key) + 1).padStart(2, "0")} / {String(visible.length).padStart(2, "0")}</span>
-            <span className="screening__corner screening__corner--br mono">{screenCover ? "SERIES COVER" : ratioLabel(active)} / {fmt(active.duration)}</span>
+            <span className="screening__corner screening__corner--tl mono">第 {visible.findIndex((v) => v.key === active.key) + 1} / {visible.length} 段</span>
+            <span className="screening__corner screening__corner--br mono">{screenCover ? "系列封面" : ratioLabel(active)} / {fmt(active.duration)}</span>
             <span className="screening__scan" aria-hidden="true" />
           </button>
           <div className="screening__bars" aria-hidden="true">
@@ -147,14 +146,14 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
         </div>
 
         <aside className="screening__meta">
-          <span className="mono screening__kicker">NOW SCREENING</span>
+          <span className="mono screening__kicker">正在放映</span>
           <h3 className="serif">{active.label}</h3>
-          <p className="screening__group mono">{active.en} / {active.groupLabel}</p>
+          <p className="screening__group mono">{active.groupLabel}</p>
           <dl>
-            <div><dt className="mono">DURATION</dt><dd>{fmt(active.duration)}</dd></div>
-            <div><dt className="mono">FORMAT</dt><dd>{ratioLabel(active)} · ORIGINAL</dd></div>
-            <div><dt className="mono">FILE</dt><dd>{active.sizeMB.toFixed(1)} MB</dd></div>
-            <div><dt className="mono">AUDIO</dt><dd>ORIGINAL</dd></div>
+            <div><dt className="mono">时长</dt><dd>{fmt(active.duration)}</dd></div>
+            <div><dt className="mono">画幅</dt><dd>{ratioLabel(active)} · 原始</dd></div>
+            <div><dt className="mono">文件</dt><dd>{active.sizeMB.toFixed(1)} 兆</dd></div>
+            <div><dt className="mono">声音</dt><dd>原始</dd></div>
           </dl>
           <p className="screening__note">{groups.find((group) => group.key === active.group)?.note}</p>
           <button type="button" className="btn" onClick={() => setOpen(true)}><Play size={12} /> 全屏观看</button>
@@ -187,7 +186,7 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
                   <span className="film-frame__dur mono">{fmt(video.duration)}</span>
                 </span>
                 <span className="film-frame__copy">
-                  <span className="mono">{String(index + 1).padStart(2, "0")} / {video.en}</span>
+                  <span className="mono">第 {String(index + 1).padStart(2, "0")} 段</span>
                   <b className="serif">{video.label}</b>
                 </span>
               </button>
@@ -200,7 +199,7 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
         <div className="cine-modal" role="dialog" aria-modal="true" aria-label={`播放：${active.label}`}>
           <div className="cine-modal__bar">
             <div>
-              <span className="mono">NOW SCREENING / {active.en}</span>
+              <span className="mono">正在放映</span>
               <b className="serif">{active.label}</b>
             </div>
             <div className="cine-modal__actions">
@@ -231,7 +230,7 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
             </span>
             <button type="button" className="cine-modal__step" onClick={() => step(1)}>下一段 <ChevronRight size={14} /></button>
           </div>
-          <p className="cine-modal__tip mono">ESC 关闭 · ← → 切换 · 空格暂停（原生控件）</p>
+          <p className="cine-modal__tip mono">退出键关闭 · 左右方向键切换 · 空格暂停（原生控件）</p>
         </div>
       ) : null}
     </div>

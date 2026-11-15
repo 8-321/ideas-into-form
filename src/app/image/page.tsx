@@ -5,7 +5,7 @@ import { ImageGallery } from "@/components/image/ImageGallery";
 import { IMAGE_FOLDERS } from "@/content/imageArchive";
 
 export const metadata: Metadata = {
-  title: "01 成象 / IMAGE",
+  title: "成象 · 视觉档案",
   description: "成象作品档案：封面与主题、IP 与人物、校园与空间、图文与编排、绘画与造型、数字创意、界面与系统。",
 };
 

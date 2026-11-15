@@ -9,16 +9,16 @@ import { TransitionLink } from "@/components/TransitionLink";
 import { AUDIO, group, worksByChapter } from "@/content/works";
 
 export const metadata: Metadata = {
-  title: "02 成声 / SOUND",
+  title: "成声 · 声音档案",
   description: "让思想拥有自己的声音。一条长音频、四段红尘手记与五张同系列封面，真实音频与真实频谱。",
 };
 
 const nav = [
-  { id: "a-statement", no: "A", label: "声音立场" },
-  { id: "b-archive", no: "B", label: "唱片档案" },
-  { id: "c-player", no: "C", label: "完整播放" },
-  { id: "d-covers", no: "D", label: "封面系统" },
-  { id: "e-notes", no: "E", label: "素材说明" },
+  { id: "a-statement", no: "一", label: "声音立场" },
+  { id: "b-archive", no: "二", label: "唱片档案" },
+  { id: "c-player", no: "三", label: "完整播放" },
+  { id: "d-covers", no: "四", label: "封面系统" },
+  { id: "e-notes", no: "五", label: "素材说明" },
 ];
 
 const covers = group("soundCovers");
@@ -44,12 +44,12 @@ const coverGallery = covers.map((cover, index) => ({
 }));
 
 const tickerItems = [
-  "RED DUST / 2026",
+  "万丈红尘 · 2026",
   "万丈红尘，体验为王",
-  "05 TRACKS",
+  "五条音轨",
   "21:24",
-  "SIDE A · 33 ⅓ RPM",
-  "THE VOICE OF IDEAS",
+  "首版 · 甲面 · 33 ⅓ 转",
+  "思想的声音",
   "五张封面，同一扇窗",
 ];
 
@@ -70,17 +70,13 @@ export default function SoundChapterPage() {
         <div className="wrap sound-hero__grid">
           <div className="sound-hero__copy">
             <div className="chapter-hero__label" data-reveal>
-              <span className="mono">CHAPTER 02 / SOUND</span>
-              <span className="status status--ready">{tracks.length} TRACKS / {totalLabel}</span>
+              <span className="mono">第二章 · 成声</span>
+              <span className="status status--ready">{tracks.length} 条音轨 / {totalLabel}</span>
             </div>
 
             <h1 className="chapter-hero__title serif" data-reveal>
               <span className="char">成</span><span className="char">声</span>
             </h1>
-
-            <p className="chapter-hero__en display" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
-              THE VOICE OF <em>IDEAS.</em>
-            </p>
 
             <p className="chapter-hero__lead" data-reveal style={{ "--d": "190ms" } as React.CSSProperties}>
               让思想拥有自己的声音。<br />
@@ -97,22 +93,22 @@ export default function SoundChapterPage() {
             </div>
 
             <dl className="sound-hero__meta" data-reveal style={{ "--d": "320ms" } as React.CSSProperties}>
-              <div><dt className="mono">FORMAT</dt><dd>LONG FORM + NOTES</dd></div>
-              <div><dt className="mono">SOURCE</dt><dd>ORIGINAL AUDIO</dd></div>
-              <div><dt className="mono">COVERS</dt><dd>05 / 1:1</dd></div>
+              <div><dt className="mono">形式</dt><dd>长音频与手记</dd></div>
+              <div><dt className="mono">来源</dt><dd>原始音频</dd></div>
+              <div><dt className="mono">封面</dt><dd>五张 · 1:1</dd></div>
             </dl>
           </div>
 
           <div className="sound-hero__aside" data-reveal="mask" style={{ "--d": "200ms" } as React.CSSProperties}>
-            <div className="sound-hero__disc-wrap" data-tilt="0.45" data-cursor-label="33 RPM">
+            <div className="sound-hero__disc-wrap" data-tilt="0.45" data-cursor-label="唱片">
               <div className="sound-hero__orbit sound-hero__orbit--a" aria-hidden="true"><i /></div>
               <div className="sound-hero__orbit sound-hero__orbit--b" aria-hidden="true"><i /></div>
               <div className="sound-hero__disc" aria-hidden="true">
                 <img src={covers[0].src} alt="" />
                 <span className="sound-hero__hole" />
               </div>
-              <span className="sound-hero__stamp mono">SIDE A<br />33 ⅓ RPM</span>
-              <span className="sound-hero__serial mono">IIF–SND–001<br />RED DUST / 2026</span>
+              <span className="sound-hero__stamp mono">首版 · 甲面<br />33 ⅓ 转</span>
+              <span className="sound-hero__serial mono">声档 · 001<br />万丈红尘 · 2026</span>
             </div>
             <p className="sound-hero__caption mono muted">
               <span>01 / 万丈红尘，体验为王</span>
@@ -131,10 +127,10 @@ export default function SoundChapterPage() {
       <ChapterNav items={nav} />
 
       <section className="sound-statement section" id="a-statement">
-        <span className="sound-statement__ghost display" data-parallax="0.05" aria-hidden="true">SOUND</span>
+        <span className="sound-statement__ghost display" data-parallax="0.05" aria-hidden="true">声</span>
         <div className="wrap sound-statement__grid">
           <div className="sound-statement__title">
-            <span className="eyebrow" data-reveal>A.01 / POSITION</span>
+            <span className="eyebrow" data-reveal>一 · 声音立场</span>
             <h2 className="serif" data-reveal>
               <span className="split-line"><span>声音，是思想的</span></span>
               <span className="split-line"><span>另一种形态。</span></span>
@@ -158,10 +154,10 @@ export default function SoundChapterPage() {
 
           </div>
           <div className="sound-statement__stats stagger">
-            <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{tracks.length}</b><span className="mono">TRACKS / 音轨</span></div>
-            <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{totalLabel}</b><span className="mono">TOTAL / 总时长</span></div>
-            <div style={{ "--i": 2 } as React.CSSProperties}><b className="display">01</b><span className="mono">LONG FORM / 长音频</span></div>
-            <div style={{ "--i": 3 } as React.CSSProperties}><b className="display">04</b><span className="mono">NOTES / 手记</span></div>
+            <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{tracks.length}</b><span className="mono">音轨</span></div>
+            <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{totalLabel}</b><span className="mono">总时长</span></div>
+            <div style={{ "--i": 2 } as React.CSSProperties}><b className="display">01</b><span className="mono">长音频</span></div>
+            <div style={{ "--i": 3 } as React.CSSProperties}><b className="display">04</b><span className="mono">手记</span></div>
           </div>
         </div>
       </section>
@@ -182,11 +178,11 @@ export default function SoundChapterPage() {
         <div className="wrap">
           <div className="section-head">
             <div>
-              <span className="eyebrow" data-reveal>B / DIGITAL RECORD</span>
+              <span className="eyebrow" data-reveal>二 · 数字唱片</span>
               <h2 className="serif" data-reveal>数字唱片档案</h2>
             </div>
             <p className="section-head__note" data-reveal>
-              两张 ISSUE，五条音轨。封面保持原始比例，播放器读取真实文件；
+              两组唱片，五条音轨。封面保持原始比例，播放器读取真实文件；
               以下所有时长均来自音频元数据。
             </p>
           </div>
@@ -208,7 +204,7 @@ export default function SoundChapterPage() {
         <div className="wrap">
           <div className="section-head">
             <div>
-              <span className="eyebrow" data-reveal>D / COVER SYSTEM</span>
+              <span className="eyebrow" data-reveal>四 · 封面系统</span>
               <h2 className="serif" data-reveal>五张封面，同一扇窗。</h2>
             </div>
             <p className="section-head__note" data-reveal>
@@ -224,12 +220,12 @@ export default function SoundChapterPage() {
         <div className="wrap">
           <div className="sound-notes__top">
             <div className="sound-notes__head">
-              <span className="eyebrow" data-reveal>E / MATERIAL NOTE</span>
+              <span className="eyebrow" data-reveal>五 · 素材说明</span>
               <h2 className="serif" data-reveal>真实，是这组作品的<br />最低要求。</h2>
             </div>
 
             <div className="sound-quote" data-reveal>
-              <span className="mono">ON LISTENING</span>
+              <span className="mono">关于聆听</span>
               <p className="serif">「先听见，再理解。<br />声音比观点更早抵达。」</p>
               <TransitionLink href="/work/audio-collection/" className="link-line">
                 展开这组声音档案 <ArrowRight size={13} />
@@ -239,17 +235,17 @@ export default function SoundChapterPage() {
 
           <div className="sound-notes__list stagger">
             <article style={{ "--i": 0 } as React.CSSProperties}>
-              <span className="mono">01 / AUDIO</span>
+              <span className="mono">01 · 音频</span>
               <h3 className="serif">原始音频，不模拟。</h3>
-              <p>5 条 m4a 原文件，总时长 {totalLabel}。播放器使用 HTMLAudioElement，不生成、不替换、不循环伪造时长。</p>
+              <p>5 条音频原文件，总时长 {totalLabel}。播放器读取真实音频，不生成、不替换、不循环伪造时长。</p>
             </article>
             <article style={{ "--i": 1 } as React.CSSProperties}>
-              <span className="mono">02 / SPECTRUM</span>
+              <span className="mono">02 · 频谱</span>
               <h3 className="serif">频谱来自声音本身。</h3>
-              <p>Web Audio AnalyserNode 读取当前音轨的频域数据，驱动环形频谱与线性波形。暂停时归为静止的低电平。</p>
+              <p>浏览器读取当前音轨的频域数据，驱动环形频谱与线性波形。暂停时归为静止的低电平。</p>
             </article>
             <article style={{ "--i": 2 } as React.CSSProperties}>
-              <span className="mono">03 / COVERS</span>
+              <span className="mono">03 · 封面</span>
               <h3 className="serif">封面保持原样。</h3>
               <p>五张封面按原始比例展示，不裁切、不加滤镜。它们与音频同属一组内容，不做跨项目混用。</p>
             </article>
@@ -261,8 +257,8 @@ export default function SoundChapterPage() {
         <div className="chapter-foot">
           <TransitionLink href="/experience/" className="chapter-foot__next">
             <div>
-              <span className="mono muted">NEXT CHAPTER / 03 · {soundWorks.length} PROJECT</span>
-              <h2 className="serif">成境 <em className="display">EXPERIENCE</em></h2>
+              <span className="mono muted">下一章 · 03 · {soundWorks.length} 个项目</span>
+              <h2 className="serif">成境</h2>
             </div>
             <span className="arrow">→</span>
           </TransitionLink>

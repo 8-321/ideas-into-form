@@ -86,14 +86,14 @@ try {
     const archive = document.querySelector(".origin-archive");
     const canvas = document.querySelector(".origin-archive__canvas")?.getBoundingClientRect();
     const sculpture = document.querySelector(".hero__sculpture")?.getBoundingClientRect();
-    const bottom = document.querySelector(".hero__bottom")?.getBoundingClientRect();
+    const hero = document.querySelector(".hero")?.getBoundingClientRect();
     return {
       live: archive?.classList.contains("is-live"),
       overflowX: document.documentElement.scrollWidth - document.documentElement.clientWidth,
       canvas: canvas ? { width: canvas.width, height: canvas.height } : null,
       sculptureBottom: sculpture?.bottom ?? null,
-      copyTop: bottom?.top ?? null,
-      copyClearance: sculpture && bottom ? bottom.top - sculpture.bottom : null,
+      heroBottom: hero?.bottom ?? null,
+      sculptureClearance: sculpture && hero ? hero.bottom - sculpture.bottom : null,
     };
   });
   await mobile.screenshot({ path: path.join(SHOTS, "origin-3d-mobile.png") });
@@ -140,13 +140,13 @@ try {
 report.checks = {
   "desktop WebGL available": report.desktop?.webgl === true,
   "desktop scene live": report.desktop?.live === true,
-  "5 real textures loaded": report.desktop?.loaded === 5,
+  "3 real textures loaded": report.desktop?.loaded === 3,
   "desktop no horizontal overflow": report.desktop?.overflowX === 0,
   "desktop console clean": report.errors.length === 0,
   "desktop requests clean": report.failures.length === 0,
   "mobile scene live": report.mobile?.live === true,
   "mobile no horizontal overflow": report.mobile?.overflowX === 0,
-  "mobile copy clear of sculpture": (report.mobile?.copyClearance ?? -1) >= 0,
+  "mobile sculpture inside hero": (report.mobile?.sculptureClearance ?? -1) >= 0,
   "mobile console clean": report.mobileErrors.length === 0,
   "reduced motion static": report.reduced?.reduce === "true" && report.reduced?.live === true,
   "WebGL fallback keeps real images": report.fallback?.live === false && report.fallback?.fallbackImages === 3 && report.fallback?.loaded === 3,

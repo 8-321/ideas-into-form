@@ -61,6 +61,7 @@ const base = await page.evaluate(() => ({
   broken: [...document.images].filter((i) => i.complete && i.naturalWidth === 0).length,
 }));
 await at("#a-statement");
+await wait(700);
 const stats = await page.evaluate(() => ({ values: [...document.querySelectorAll(".sound-statement__stats b")].map((e) => e.textContent), inView: document.querySelector(".sound-statement__stats").classList.contains("is-in") }));
 await at("#c-player");
 await page.screenshot({ path: path.join(SHOTS, "check-sound-console.png") });

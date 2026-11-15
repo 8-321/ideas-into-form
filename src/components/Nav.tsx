@@ -7,9 +7,9 @@ import { useMotion } from "./MotionProvider";
 import { TransitionLink } from "./TransitionLink";
 
 const links = [
-  { href: "/image/", no: "01", zh: "成象", en: "IMAGE" },
-  { href: "/sound/", no: "02", zh: "成声", en: "SOUND" },
-  { href: "/experience/", no: "03", zh: "成境", en: "EXPERIENCE" },
+  { href: "/image/", zh: "成象" },
+  { href: "/sound/", zh: "成声" },
+  { href: "/experience/", zh: "成境" },
 ];
 
 export function Nav() {
@@ -40,13 +40,17 @@ export function Nav() {
       <header className="nav">
         <Link href="/" className="nav__brand" aria-label="由意成形 首页">
           <span className="mark" aria-hidden="true" />
-          <span>IDEAS INTO FORM.</span>
-          <em>由意成形</em>
+          <span>由意成形</span>
         </Link>
         <nav className="nav__links" aria-label="章节导航">
           {links.map((link) => (
-            <TransitionLink key={link.href} href={link.href} className="nav__link" ariaLabel={`${link.no} ${link.zh} ${link.en}`}>
-              <span>{link.no}</span>
+            <TransitionLink
+              key={link.href}
+              href={link.href}
+              className="nav__link"
+              ariaLabel={link.zh}
+              aria-current={isActive(link.href) ? "page" : undefined}
+            >
               {link.zh}
             </TransitionLink>
           ))}
@@ -56,32 +60,31 @@ export function Nav() {
             type="button"
             className="switch"
             aria-pressed={!reduced}
+            aria-label={reduced ? "开启动效" : "关闭动效"}
             onClick={() => setReduced(!reduced)}
-            title={reduced ? "开启动效" : "减少动态效果"}
+            title={reduced ? "开启动效" : "关闭动效"}
           >
             <span className="switch__track" aria-hidden="true" />
-            <span className="switch__label">{reduced ? "MOTION OFF" : "MOTION ON"}</span>
+            <span className="switch__label">动效</span>
           </button>
           <button type="button" className="menu-btn" aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen((value) => !value)}>
-            {menuOpen ? "CLOSE" : "MENU"}<i aria-hidden="true" />
+            {menuOpen ? "关闭" : "目录"}<i aria-hidden="true" />
           </button>
         </div>
       </header>
 
       <div id="site-menu" className={`menu${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
         <div className="menu__list">
-          <TransitionLink href="/" className="menu__item" ariaLabel="返回首页">
-            <small>00</small>由意成形<em>Home</em>
-          </TransitionLink>
+          <TransitionLink href="/" className="menu__item" ariaLabel="返回首页">首页</TransitionLink>
           {links.map((link) => (
-            <TransitionLink key={link.href} href={link.href} className="menu__item" ariaLabel={`${link.zh} ${link.en}`}>
-              <small>{link.no}</small>{link.zh}<em>{link.en}</em>
+            <TransitionLink key={link.href} href={link.href} className="menu__item" ariaLabel={link.zh}>
+              {link.zh}
             </TransitionLink>
           ))}
         </div>
         <div className="menu__foot mono">
-          <span>PERSONAL PORTFOLIO / 2026</span>
-          <span>IDEAS INTO FORM.</span>
+          <span>个人作品集 · 2026</span>
+          <span>由意成形</span>
         </div>
       </div>
     </>

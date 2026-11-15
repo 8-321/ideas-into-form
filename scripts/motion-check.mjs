@@ -49,7 +49,7 @@ const scrollTo = async (selector) => {
   await wait(80);
 };
 const readFold = () => page.evaluate(() => {
-  const heading = document.querySelector(".section-head h2[data-fold='1']");
+  const heading = document.querySelector(".home-section-head h2, .section-head h2[data-fold='1']");
   if (!heading) return null;
   const lines = [...heading.querySelectorAll(".fold-line > span")];
   return {
@@ -69,7 +69,7 @@ const report = { fold: {}, magnet: null, glare: null, cursor: null, reduced: nul
 
 // 1. Home section heading folds line by line.
 await goto("/");
-await scrollTo(".selected");
+await scrollTo("#selected");
 const foldEarly = await readFold();
 await wait(150);
 const foldMid = await readFold();
@@ -79,14 +79,14 @@ await page.screenshot({ path: path.join(SHOTS, "motion-fold.png") });
 report.fold.home = { early: foldEarly, mid: foldMid, end: foldEnd };
 
 // 2. Primary link magnetically follows the pointer.
-const link = await page.$(".selected .link-line");
+const link = await page.$(".home-close__link");
 if (link) {
   const box = await link.boundingBox();
   if (box) {
     await page.mouse.move(box.x + box.width * 0.82, box.y + box.height * 0.42, { steps: 5 });
     await wait(160);
     report.magnet = await page.evaluate(() => {
-      const el = document.querySelector(".selected .link-line");
+      const el = document.querySelector(".home-close__link");
       const style = getComputedStyle(el);
       return {
         magnet: el.hasAttribute("data-magnet"),
@@ -99,39 +99,14 @@ if (link) {
     await page.mouse.move(10, 10);
     await wait(420);
     report.magnet.settled = await page.evaluate(() => {
-      const el = document.querySelector(".selected .link-line");
+      const el = document.querySelector(".home-close__link");
       return { mx: getComputedStyle(el).getPropertyValue("--mx").trim(), transform: getComputedStyle(el).transform };
     });
   }
 }
 
-// 3. Work-card glare follows the pointer.
-const card = await page.$(".selected .work-card__img");
-if (card) {
-  const box = await card.boundingBox();
-  if (box) {
-    await page.mouse.move(box.x + box.width * 0.23, box.y + box.height * 0.55, { steps: 6 });
-    await wait(260);
-    report.glare = await page.evaluate(() => {
-      const el = document.querySelector(".selected .work-card__img");
-      const after = getComputedStyle(el, "::after");
-      return {
-        glare: el.hasAttribute("data-glare"),
-        active: el.classList.contains("is-glaring"),
-        x: getComputedStyle(el).getPropertyValue("--glare-x").trim(),
-        opacity: after.opacity,
-        blend: after.mixBlendMode,
-      };
-    });
-    await page.screenshot({ path: path.join(SHOTS, "motion-glare.png") });
-    await page.mouse.move(10, 10);
-    await wait(350);
-    report.glare.settled = await page.evaluate(() => {
-      const el = document.querySelector(".selected .work-card__img");
-      return { active: el.classList.contains("is-glaring"), x: getComputedStyle(el).getPropertyValue("--glare-x").trim() };
-    });
-  }
-}
+// 3. 首页作品卡不再使用旧版眩光层（新版采用纸面与统一画框）。
+report.glare = { supported: false };
 
 // 4. Ink flecks appear on click and clean themselves up.
 await page.evaluate(() => {
@@ -153,10 +128,10 @@ await page.screenshot({ path: path.join(SHOTS, "motion-image-fold.png") });
 // 6. Reduced motion shows the final state without transforms or glare.
 await page.evaluate(() => localStorage.setItem("iif-motion", "off"));
 await goto("/");
-await scrollTo(".selected");
+await scrollTo("#selected");
 await wait(300);
 report.reduced = await page.evaluate(() => {
-  const heading = document.querySelector(".section-head h2[data-fold='1']");
+  const heading = document.querySelector(".home-section-head h2, .section-head h2[data-fold='1']");
   const span = heading?.querySelector(".fold-line > span");
   const card = document.querySelector(".work-card__img");
   return {
@@ -165,7 +140,7 @@ report.reduced = await page.evaluate(() => {
     foldOpacity: span ? getComputedStyle(span).opacity : null,
     foldFilter: span ? getComputedStyle(span).filter : null,
     glareDisplay: card ? getComputedStyle(card, "::after").display : null,
-    magnetTransform: getComputedStyle(document.querySelector(".selected .link-line")).transform,
+    magnetTransform: getComputedStyle(document.querySelector(".home-close__link")).transform,
   };
 });
 await page.screenshot({ path: path.join(SHOTS, "motion-reduced.png") });

@@ -138,7 +138,7 @@ export function CoverOrbit({
                 "--rot": offset * -7,
                 zIndex: 50 - distance,
               } as React.CSSProperties}
-              aria-label={`查看 ${item.key}${offset === 0 ? "，当前封面" : ""}`}
+              aria-label={`查看 ${item.label}${offset === 0 ? "，当前封面" : ""}`}
               aria-current={offset === 0 ? "true" : undefined}
               tabIndex={offset === 0 ? 0 : -1}
               onClick={() => {
@@ -154,7 +154,7 @@ export function CoverOrbit({
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={item.thumb || item.src} alt={`${label} ${pad(index + 1)}`} loading="eager" decoding="async" draggable={false} />
               </span>
-              {offset === 0 ? <span className="cover-orbit__date mono">{item.day ?? item.key}</span> : null}
+              {offset === 0 ? <span className="cover-orbit__date mono">{item.day ?? `第 ${pad(index + 1)} 张`}</span> : null}
             </button>
           );
         })}

@@ -18,7 +18,7 @@ export function CoverOrbit({
   const { open } = useLightbox();
 
   return (
-    <div className="sound-orbit" data-cursor-label="COVERS">
+    <div className="sound-orbit" data-cursor-label="封面">
       <div className="sound-statement__rings" aria-hidden="true">
         <span /><span /><span />
       </div>
@@ -46,7 +46,7 @@ export function CoverOrbit({
         })}
       </div>
 
-      <span className="sound-orbit__core mono" aria-hidden="true">SOUND<br />02</span>
+      <span className="sound-orbit__core mono" aria-hidden="true">声音</span>
     </div>
   );
 }

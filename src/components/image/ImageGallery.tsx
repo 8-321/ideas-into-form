@@ -10,12 +10,14 @@ import type { ImageAsset } from "@/content/works";
 import { CoverOrbit } from "./CoverOrbit";
 
 const pad = (value: number, size = 2) => String(value).padStart(size, "0");
+const CN_NUM = ["一", "二", "三", "四", "五", "六", "七"];
+const cnFor = (letter: string) => CN_NUM[letter.charCodeAt(0) - 65] ?? letter;
 
 const SHAPE_LABEL: Record<ImageShape, string> = {
-  square: "SQUARE",
-  portrait: "PORTRAIT",
-  landscape: "LANDSCAPE",
-  wide: "WIDE",
+  square: "方形",
+  portrait: "竖幅",
+  landscape: "横幅",
+  wide: "宽幅",
 };
 
 type Tier = "desktop" | "tablet" | "mobile";
@@ -83,8 +85,8 @@ function FolderFeature({
           className="catalog-feature"
           data-accent={palette.accent}
           data-letter={folder.letter}
-          data-cursor-label="OPEN"
-          aria-label={`打开 ${folder.letter} ${folder.zh}，${folder.count} 张图片`}
+          data-cursor-label="打开"
+          aria-label={`打开${folder.zh}，${folder.count} 张图片`}
           onClick={(event) => onOpen(folder, event.currentTarget)}
           onPointerEnter={(event) => {
             event.currentTarget.style.setProperty("--reveal", "1");
@@ -117,8 +119,8 @@ function FolderFeature({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img className="catalog-feature__color" src={cover.thumb || cover.src} alt="" loading="eager" decoding="async" />
             </span>
-            <span className="catalog-feature__index mono">{folder.letter}</span>
-            <span className="catalog-feature__open mono">OPEN</span>
+            <span className="catalog-feature__index mono">{cnFor(folder.letter)}</span>
+            <span className="catalog-feature__open mono">打开</span>
             <span className="catalog-feature__sheen" aria-hidden="true" />
           </span>
         </button>
@@ -160,13 +162,11 @@ function ArchiveCover({ folder }: { folder: ImageFolder }) {
   return (
     <div className="archive-cover">
       <div className="archive-cover__identity">
-        <span className="mono archive-cover__eyebrow">FOLDER {folder.letter}</span>
-        <span className="archive-cover__letter display">{folder.letter}</span>
+        <span className="mono archive-cover__eyebrow">第 {cnFor(folder.letter)} 组</span>
         <h2>{folder.zh}</h2>
-        <span className="archive-cover__en">{folder.en}</span>
         <div className="archive-cover__stats mono">
-          <span>{pad(folder.count, 3)} IMAGES</span>
-          <span>{pad(folder.pages.length + 1)} PAGES</span>
+          <span>{pad(folder.count, 3)} 张</span>
+          <span>{pad(folder.pages.length + 1)} 页</span>
         </div>
         <ul className="archive-cover__contents" aria-label={`${folder.zh}目录`}>
           {Array.from(series.entries()).map(([title, count]) => (
@@ -272,7 +272,7 @@ function OrbitPage({
           <h2>{page.series}</h2>
         </div>
         <div className="archive-page__shape mono">
-          <span>ORBIT</span>
+          <span>环形</span>
           <span>{pad(page.items.length)}</span>
         </div>
       </header>
@@ -401,7 +401,7 @@ function Archive({
       className={`archive-overlay${lightboxOpen ? " is-behind-lightbox" : ""}`}
       role="dialog"
       aria-modal="true"
-      aria-label={`${folder.letter} ${folder.zh} 作品阅读层`}
+      aria-label={`${folder.zh} 作品阅读层`}
       data-folder={folder.letter}
       data-accent={palette.accent}
       style={{
@@ -418,14 +418,13 @@ function Archive({
           <Close />
         </button>
         <div className="archive-bar__id">
-          <span className="archive-bar__letter display">{folder.letter}</span>
+          <span className="archive-bar__letter display">{cnFor(folder.letter)}</span>
           <span className="archive-bar__name">
             <b>{folder.zh}</b>
-            <em>{folder.en}</em>
           </span>
         </div>
         <div className="archive-bar__meta mono">
-          <span>{pad(folder.count, 3)} IMAGES</span>
+          <span>{pad(folder.count, 3)} 张</span>
           <span>{pad(pageIndex + 1)} — {pad(total)}</span>
         </div>
       </header>
@@ -549,14 +548,13 @@ export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
     >
       <section className="wrap catalog-shell" aria-label="成象作品文件夹">
         <header className="catalog-head">
-          <span className="mono catalog-head__kicker">CHAPTER 01 / IMAGE</span>
+          <span className="mono catalog-head__kicker">视觉作品档案</span>
           <div className="catalog-head__title">
             <h1>成象</h1>
-            <span className="catalog-head__en display">IMAGE</span>
           </div>
           <div className="catalog-head__meta mono">
-            <span>{pad(folders.length)} FOLDERS</span>
-            <span>{pad(total, 3)} IMAGES</span>
+            <span>{pad(folders.length)} 组</span>
+            <span>{pad(total, 3)} 张</span>
           </div>
         </header>
 
@@ -571,12 +569,11 @@ export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
         >
           <div className="catalog-slide" key={active.letter}>
             <div className="catalog-detail">
-              <span className="mono catalog-detail__index">FOLDER {active.letter} / {pad(activeIndex + 1)} OF {pad(folders.length)}</span>
+              <span className="mono catalog-detail__index">第 {cnFor(active.letter)} 组 · {pad(activeIndex + 1)} / {pad(folders.length)}</span>
               <h2 className="serif">{active.zh}</h2>
-              <p className="catalog-detail__en">{active.en}</p>
               <div className="catalog-detail__stats mono">
-                <span><b>{pad(active.count, 3)}</b> IMAGES</span>
-                <span><b>{pad(active.pages.length + 1)}</b> PAGES</span>
+                <span><b>{pad(active.count, 3)}</b> 张</span>
+                <span><b>{pad(active.pages.length + 1)}</b> 页</span>
               </div>
             </div>
             <FolderFeature
@@ -605,11 +602,11 @@ export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
                     "--tick-accent": itemPalette.accent,
                     "--tick-wash": itemPalette.wash,
                   } as React.CSSProperties}
-                  aria-label={`前往 ${folder.letter} ${folder.zh}`}
+                  aria-label={`前往${folder.zh}`}
                   aria-current={index === activeIndex ? "true" : undefined}
                   onClick={() => setActiveIndex(index)}
                 >
-                  <span className="mono">{folder.letter}</span>
+                  <span className="mono">{cnFor(folder.letter)}</span>
                 </button>
               );
             })}

@@ -269,7 +269,7 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
       <div className="sound-console" data-reveal>
         <div className="sound-deck-zone">
           <div className={`sound-deck${playing ? " is-playing" : ""}`} data-tilt="0.55" data-glare>
-            <span className="sound-deck__rail mono" aria-hidden="true">SIDE A · IIF–SND–001</span>
+            <span className="sound-deck__rail mono" aria-hidden="true">甲面 · 声档 001</span>
             <canvas ref={orbRef} className="sound-deck__orb" aria-hidden="true" />
             <div className="sound-deck__vinyl" aria-hidden="true">
               <div className="sound-deck__disc">
@@ -282,7 +282,7 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
             <figure className="sound-deck__sleeve" key={track.key}>
               <img src={track.cover} alt={`${track.title} 封面`} />
               <span className="sound-deck__badge mono">
-                {isLongForm ? "ISSUE 01 / LONG FORM" : `ISSUE 02 / NOTE ${indexLabel}`}
+                {isLongForm ? "第一期 · 长音频" : `第二期 · 手记 ${indexLabel}`}
               </span>
               <span className="sound-deck__index display" aria-hidden="true">{indexLabel}</span>
               <span className="sound-deck__sheen" aria-hidden="true" />
@@ -298,7 +298,7 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
             </button>
           </div>
           <div className="sound-deck__caption mono">
-            <span>{isLongForm ? "长音频 / LONG FORM" : "红尘手记 / RED DUST NOTE"}</span>
+            <span>{isLongForm ? "长音频" : "红尘手记"}</span>
             <span>{fmt(track.duration)}</span>
           </div>
         </div>
@@ -306,12 +306,12 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
         <div className="sound-console__side">
           <div className="sound-now" aria-live="polite">
             <div className="sound-now__top mono">
-              <span>NOW PLAYING / {indexLabel}</span>
-              <span className={playing ? "is-live" : ""}>{playing ? "PLAYING" : "READY"}</span>
+              <span>正在播放 · {indexLabel}</span>
+              <span className={playing ? "is-live" : ""}>{playing ? "播放中" : "准备就绪"}</span>
             </div>
             <h3 className="serif" key={`${track.key}-title`}>{track.title}</h3>
             <div className="sound-now__meta mono">
-              <span>{isLongForm ? "LONG FORM / 07:42" : "RED DUST NOTES"}</span>
+              <span>{isLongForm ? "长音频 · 07:42" : "红尘手记"}</span>
               <span>{indexLabel} / 05</span>
             </div>
             <canvas ref={waveRef} className="sound-now__wave" aria-hidden="true" />
@@ -319,7 +319,7 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
 
           <div className="sound-tracklist">
             <div className="sound-tracklist__head mono">
-              <span>NO.</span><span>TITLE / 音频</span><span>COVER</span><span>DURATION</span><span />
+              <span>序号</span><span>音频</span><span>封面</span><span>时长</span><span />
             </div>
             {tracks.map((item, index) => {
               const active = index === current;
@@ -334,7 +334,7 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
                   <span className="sound-track__no mono">{String(index + 1).padStart(2, "0")}</span>
                   <span className="sound-track__title">
                     <b className="serif">{item.title}</b>
-                    <em className="mono">{index === 0 ? "长音频 / LONG FORM" : "红尘手记 / NOTE"}</em>
+                    <em className="mono">{index === 0 ? "长音频" : "红尘手记"}</em>
                   </span>
                   <span className="sound-track__cover"><img src={item.coverThumb} alt="" loading="eager" decoding="async" /></span>
                   <span className="sound-track__dur mono">{fmt(item.duration)}</span>
@@ -368,7 +368,7 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
             <div className="sound-transport__status mono">
               <span className="sound-transport__dot" aria-hidden="true" />
               <Sound size={12} />
-              <span>{ready && playing ? "LIVE SPECTRUM" : "REAL AUDIO / READY"}</span>
+              <span>{ready && playing ? "频谱实时显示" : "真实音频 · 就绪"}</span>
             </div>
             <button type="button" className="player__step" onClick={() => playIndex(current - 1)} aria-label="上一段">
               <ChevronLeft size={12} />
