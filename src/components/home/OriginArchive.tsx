@@ -7,13 +7,15 @@ type Tile = {
   src: string;
   alt: string;
   lqip: string;
+  fit?: "cover" | "contain";
 };
 
 const TILES: Tile[] = [
   {
-    src: "/media/image/panda/panda-poster-8@thumb.webp",
-    alt: "小含熊猫竞赛科普插画",
-    lqip: "data:image/webp;base64,UklGRhQBAABXRUJQVlA4IAgBAAAQBgCdASoWABwAPvVur1EqpiQiqAqpUB6JbACw7mwHXSHwW4Zt0rvDbGsorXykp2/vyckrwDXo0AAA/vHc3FFQQulKRvpbAQ6u360RYYe2zEmVS4WvwtwVpDy2UNK0wQ8AUCyYQaOyyqujDbqajcUtfNS1Kj8LKgVEl3aVgqtk0aUVHZzt6nrxytipxuUfEWyfLEw9iuDaW2hz/DDbNl9iZIlZ+bffR6HqLEo9ALHfVh7Njzjigv2d8rKRF0HJbfkYBuJJ/HCLbqLTPvc9TCZCgNXSB9avpzWyFoioGPsmwJTvtY/cr2GTrdMa62V7U5OjwTG9WYmIwe/Duzun+XAD+UwOhMiAAAA=",
+    src: "/media/image/filmCovers/guzheng-cover.webp",
+    alt: "古筝演奏影像",
+    lqip: "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAQBACdASocABAAPvVmqk4qpaQiMAgBUB6JQApgAMeczoNsmUK1I0YQ7AD+6/hnMIzIhZex7o/7utezRclJY3rC82eAksdHNjjf3nxIPm5RX+g5HKm4gcumpNwIwLgk3xuV78swDJLCfL88OZS3K8s7lv1RclXv0AA=",
+    fit: "cover",
   },
   {
     src: "/media/image/soundCovers/cover-main@thumb.webp",
@@ -83,7 +85,7 @@ export function OriginArchive() {
         {TILES.map((tile) => (
           <figure
             key={tile.src}
-            className="origin-archive__tile"
+            className={`origin-archive__tile${tile.fit === "cover" ? " origin-archive__tile--cover" : ""}`}
             style={{ "--lqip": `url("${tile.lqip}")` } as React.CSSProperties}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
