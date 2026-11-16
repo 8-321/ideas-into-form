@@ -23,6 +23,7 @@ import {
   worksByChapter,
   WORKS,
   type GallerySection,
+  type Section,
   type Work,
 } from "@/content/works";
 
@@ -43,6 +44,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+const VISUAL_TYPES = new Set<Section["type"]>(["gallery", "audio", "film", "placeholder"]);
+
+function visualSections(work: Work): Section[] {
+  return work.sections.filter((section) => VISUAL_TYPES.has(section.type));
+}
+
+function visualCount(sections: Section[]): number {
+  return sections.reduce((sum, section) => {
+    if (section.type === "gallery" || section.type === "placeholder") return sum + section.items.length;
+    if (section.type === "audio") return sum + AUDIO.length;
+    return sum;
+  }, 0);
+}
 const filmGroups: CinemaGroup[] = [
   { key: "piano", label: "钢琴", note: "手指落下，声音有了时间。演奏段落保留原声与完整画幅。", cover: FILM_COVERS.piano, videos: filmVideos.piano },
   { key: "guzheng", label: "古筝", note: "竖屏记录弦与手的关系，两支短片两种情绪。", cover: FILM_COVERS.guzheng, videos: filmVideos.guzheng },
@@ -57,28 +71,43 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
     caption: item.caption || item.label,
   }));
   const layout = section.layout ?? "grid";
+  const portrait = section.items.length > 0 && section.items.every((item) => item.height > item.width);
+  const compactRatio = portrait ? 3 / 4 : 4 / 3;
 
   return (
     <section
-      className="work-section work-gallery-block"
+      className={`work-section work-gallery-block${layout === "compact" ? " work-gallery-block--compact" : ""}`}
       data-leaf
       data-leaf-type="gallery"
       data-leaf-label={section.title}
       data-leaf-index={leafIndex}
     >
       <div className="wrap">
-        <div className="work-section__head">
-          <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
+        <div className={`work-section__head work-section__head--solo${layout === "compact" ? " work-section__head--compact" : ""}`}>
           <h2 className="serif">{section.title}</h2>
-          {section.note ? <p className="work-section__note mono">{section.note}</p> : null}
+          {layout === "compact" ? <span className="work-section__count serif">{section.items.length} 张</span> : null}
         </div>
 
-        {layout === "strip" ? (
+        {layout === "compact" ? (
+          <Rail className={`work-gallery work-gallery--compact${portrait ? " is-portrait" : ""}`} label={section.title}>
+            {section.items.map((item, index) => (
+              <figure className="work-compact__item" key={item.key}>
+                <MediaImage
+                  asset={item}
+                  alt={item.caption || item.label}
+                  gallery={gallery}
+                  index={index}
+                  ratio={compactRatio}
+                  contain
+                />
+              </figure>
+            ))}
+          </Rail>
+        ) : layout === "strip" ? (
           <Rail className="work-gallery work-gallery--strip" label={section.title}>
             {section.items.map((item, index) => (
               <figure className="work-strip__item" key={item.key}>
-                <MediaImage asset={item} alt={item.caption || item.label} caption={item.caption} gallery={gallery} index={index} ratio={4 / 3} contain />
-                <figcaption className="mono">{String(index + 1).padStart(2, "0")} / {item.caption || item.label}</figcaption>
+                <MediaImage asset={item} alt={item.caption || item.label} gallery={gallery} index={index} ratio={4 / 3} contain />
               </figure>
             ))}
           </Rail>
@@ -89,7 +118,6 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
                 <MediaImage
                   asset={item}
                   alt={item.caption || item.label}
-                  caption={item.caption}
                   badge={`${String(index + 1).padStart(2, "0")} / ${String(section.items.length).padStart(2, "0")}`}
                   gallery={gallery}
                   index={index}
@@ -97,7 +125,6 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
                   contain
                   priority={index === 0}
                 />
-                {item.caption ? <p className="work-gallery__cap mono">{item.caption}</p> : null}
               </div>
             ))}
           </div>
@@ -106,11 +133,10 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
     </section>
   );
 }
-
-function WorkBody({ work }: { work: Work }) {
+function WorkBody({ sections }: { sections: Section[] }) {
   return (
     <>
-      {work.sections.map((section, index) => {
+      {sections.map((section, index) => {
         if (section.type === "text") {
           return (
             <section
@@ -178,27 +204,6 @@ function WorkBody({ work }: { work: Work }) {
           );
         }
 
-        if (section.type === "note") {
-          return (
-            <section
-              className="work-section work-note"
-              key={`note-${index}`}
-              data-leaf
-              data-leaf-type="note"
-              data-leaf-label={section.title}
-              data-leaf-index={String(index + 1).padStart(2, "0")}
-            >
-              <div className="wrap work-note__inner">
-                <span className="mono">素材说明</span>
-                <div>
-                  <h3 className="serif">{section.title}</h3>
-                  <p>{section.body}</p>
-                </div>
-              </div>
-            </section>
-          );
-        }
-
         if (section.type === "placeholder") {
           return (
             <section
@@ -210,10 +215,8 @@ function WorkBody({ work }: { work: Work }) {
               data-leaf-index={String(index + 1).padStart(2, "0")}
             >
               <div className="wrap">
-                <div className="work-section__head">
-                  <span className="eyebrow">占位</span>
+                <div className="work-section__head work-section__head--solo">
                   <h2 className="serif">{section.title}</h2>
-                  <p className="work-section__note">{section.body}</p>
                 </div>
                 <div className="work-placeholder__grid">
                   {section.items.map((item, itemIndex) => (
@@ -240,10 +243,8 @@ function WorkBody({ work }: { work: Work }) {
               data-leaf-index={String(index + 1).padStart(2, "0")}
             >
               <div className="wrap">
-                <div className="work-section__head">
-                  <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
+                <div className="work-section__head work-section__head--solo">
                   <h2 className="serif">{section.title}</h2>
-                  {section.note ? <p className="work-section__note">{section.note}</p> : null}
                 </div>
                 <SoundArchive tracks={AUDIO} />
               </div>
@@ -262,10 +263,8 @@ function WorkBody({ work }: { work: Work }) {
               data-leaf-index={String(index + 1).padStart(2, "0")}
             >
               <div className="wrap">
-                <div className="work-section__head">
-                  <span className="eyebrow">{zhOnly(section.eyebrow)}</span>
+                <div className="work-section__head work-section__head--solo">
                   <h2 className="serif">{section.title}</h2>
-                  {section.note ? <p className="work-section__note">{section.note}</p> : null}
                 </div>
                 <Cinema groups={filmGroups} />
                 <div className="work-film__decks">
@@ -296,6 +295,8 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
   const index = siblings.findIndex((item) => item.slug === work.slug);
   const prev = index > 0 ? siblings[index - 1] : siblings[siblings.length - 1];
   const next = index < siblings.length - 1 ? siblings[index + 1] : siblings[0];
+  const sections = visualSections(work);
+  const itemCount = visualCount(sections);
 
   return (
     <article className={`chapter-page work-page work-page--${work.chapter}`}>
@@ -315,7 +316,6 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="work-hero__intro">
-              {work.summary ? <p className="serif" data-reveal style={{ "--d": "150ms" } as React.CSSProperties}>{work.summary}</p> : null}
               <ul className="work-hero__tags stagger">
                 {work.tags.map((tag, tagIndex) => (
                   <li key={tag} style={{ "--i": tagIndex } as React.CSSProperties} className="mono">{tag}</li>
@@ -324,7 +324,8 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
               <dl className="work-hero__meta" data-reveal style={{ "--d": "240ms" } as React.CSSProperties}>
                 <div><dt className="mono">章节</dt><dd>{chapter?.no} {chapter?.zh}</dd></div>
                 <div><dt className="mono">年份</dt><dd>{work.year}</dd></div>
-                <div><dt className="mono">页数</dt><dd>{String(work.sections.length).padStart(2, "0")}</dd></div>
+                <div><dt className="mono">作品</dt><dd>{String(itemCount).padStart(2, "0")}</dd></div>
+                <div><dt className="mono">系列</dt><dd>{String(sections.length).padStart(2, "0")}</dd></div>
               </dl>
             </div>
           </div>
@@ -337,15 +338,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             <img src={work.cover.src} alt={work.coverAlt} />
             <span className="work-cover__badge mono">项目封面 · {work.no}</span>
           </figure>
-          <div className="work-cover__bar mono">
-            <span>{work.coverAlt}</span>
-            <span>{work.cover.width} × {work.cover.height} · 原图</span>
-          </div>
+
         </div>
       </section>
 
       <WorkBook title={work.title} no={work.no}>
-        <WorkBody work={work} />
+        <WorkBody sections={sections} />
       </WorkBook>
 
       <section className="work-end">

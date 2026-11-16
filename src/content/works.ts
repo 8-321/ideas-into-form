@@ -92,7 +92,7 @@ export type GallerySection = {
   eyebrow: string;
   title: string;
   note?: string;
-  layout?: "grid" | "wall" | "strip" | "wide";
+  layout?: "grid" | "wall" | "strip" | "wide" | "compact";
   items: (ImageAsset & { caption?: string })[];
 };
 
@@ -222,9 +222,8 @@ export const WORKS: Work[] = [
       {
         type: "gallery",
         eyebrow: "ARCHIVE / 封面墙",
-        title: "98 张，按时间排列。",
-        note: "点击任意封面放大；左右方向键可连续翻阅。",
-        layout: "wall",
+        title: "100 天实验",
+        layout: "compact",
         items: days.map((item) => cap(item, `${item.day} · 2026`)),
       },
       {
@@ -354,8 +353,8 @@ export const WORKS: Work[] = [
       {
         type: "gallery",
         eyebrow: "ARCHIVE / 影像墙",
-        title: "30 张，保持黑白。",
-        layout: "wall",
+        title: "黑白视觉",
+        layout: "compact",
         items: group("bw").map((item) => cap(item, "黑白影像")),
       },
       {

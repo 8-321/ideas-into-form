@@ -108,9 +108,10 @@ html[data-theme="experience"] .work-page .work-cover__frame {
   margin: clamp(34px, 5vw, 72px) auto 0;
   padding-block: clamp(26px, 3.4vw, 42px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: clamp(26px, 5vw, 80px);
-  align-items: end;
+  grid-template-columns: 1fr;
+  justify-items: end;
+  gap: 0;
+  align-items: center;
   border-top: 1px solid var(--line-strong);
   border-bottom: 1px solid var(--line);
 }
@@ -138,7 +139,7 @@ html[data-theme="experience"] .work-page .work-cover__frame {
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  min-width: 235px;
+  min-width: 158px;
   padding: 15px 18px;
   border: 1px solid var(--line-strong);
   background: transparent;

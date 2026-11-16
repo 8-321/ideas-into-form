@@ -322,29 +322,20 @@ export function WorkBook({
 
   return (
     <div className={`work-book${open ? " is-reader" : ""}`} ref={rootRef}>
-      <section className="book-intro" aria-label="翻页阅读入口">
-        <div className="book-intro__copy">
-          <span className="mono">阅读版</span>
-          <p className="serif">
-            把项目当作一本书来读。
-            <em>全书 {pad(leaves.length)} 页，滚轮、方向键或按钮都可以翻页。</em>
-          </p>
-        </div>
+      <section className="book-intro" aria-label="翻页入口">
         <button
           type="button"
           className="book-intro__launch"
           onClick={(event) => openReader(0, event.currentTarget)}
           data-cursor-label="翻页"
         >
-          <span className="mono">翻页阅读</span>
-          <b className="serif">开始翻页</b>
+          <b className="serif">翻页</b>
           <ArrowRight size={18} />
         </button>
       </section>
 
       <div className="book-toolbar">
         <div className="book-toolbar__id">
-          <span className="mono">阅读版</span>
           <b className="serif">{no} / {title}</b>
         </div>
         <div className="book-toolbar__count mono" aria-live="polite">
@@ -360,7 +351,7 @@ export function WorkBook({
             onClick={() => setTocOpen((value) => !value)}
             data-cursor-label="目录"
           >
-            全书目录
+            目录
           </button>
           <button
             type="button"
@@ -368,7 +359,7 @@ export function WorkBook({
             onClick={(event) => openReader(active, event.currentTarget)}
             data-cursor-label="翻页"
           >
-            <span>从当前页继续</span>
+            <span>翻页</span>
             <Expand size={15} />
           </button>
         </div>
@@ -407,7 +398,6 @@ export function WorkBook({
           <div className="book-reader__scrim" aria-hidden="true" />
           <header className="book-reader__bar">
             <div className="book-reader__id">
-              <span className="mono">翻页阅读</span>
               <b className="serif">{no} / {title}</b>
             </div>
             <div className="book-reader__meta" aria-live="polite">
