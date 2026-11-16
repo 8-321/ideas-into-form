@@ -41,7 +41,6 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
   const visible = useMemo(() => (filter === "all" ? all : all.filter((video) => video.group === filter)), [all, filter]);
   const active = visible.find((video) => video.key === activeKey) ?? visible[0];
   const activeGroup = groups.find((group) => group.key === active?.group);
-  const groupPortrait = Boolean(activeGroup && (activeGroup.key === "guzheng" || activeGroup.videos[0]?.height > activeGroup.videos[0]?.width));
   const screenCover = activeGroup?.cover;
   const screenSrc = screenCover?.src ?? activeGroup?.videos[0]?.poster ?? active.poster;
 
@@ -117,11 +116,11 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
         </p>
       </div>
 
-      <div className={`screening${groupPortrait ? " is-portrait" : ""}`}>
+      <div className="screening">
         <div className="screening__frame">
           <button
             type="button"
-            className={`screening__screen${groupPortrait ? " is-portrait" : ""}`}
+            className="screening__screen"
             onClick={() => setOpen(true)}
             aria-label={`播放：${active.label}`}
             data-group={active.group}
@@ -131,7 +130,6 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
               key={`${active.group}-${screenSrc}`}
               src={screenSrc}
               alt={screenCover ? `${active.groupLabel}封面` : `${active.label} 视频画面`}
-              portrait={groupPortrait}
               loading="eager"
             />
             <span className="screening__shade" aria-hidden="true" />
@@ -165,13 +163,12 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
           {visible.map((video, index) => {
             const isActive = video.key === active.key;
             const videoGroup = groups.find((group) => group.key === video.group);
-            const portrait = Boolean(videoGroup && (videoGroup.key === "guzheng" || videoGroup.videos[0]?.height > videoGroup.videos[0]?.width));
             const coverSrc = videoGroup?.cover?.thumb ?? videoGroup?.cover?.src ?? videoGroup?.videos[0]?.poster ?? video.poster;
             return (
               <button
                 type="button"
                 key={video.key}
-                className={`film-frame${isActive ? " is-active" : ""}${portrait ? " film-frame--tall" : ""}`}
+                className={`film-frame${isActive ? " is-active" : ""}`}
                 onClick={() => setActiveKey(video.key)}
                 onDoubleClick={() => { setActiveKey(video.key); setOpen(true); }}
                 aria-label={`选择影像：${video.label}`}
@@ -181,7 +178,7 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
               >
                 <span className="film-frame__holes" aria-hidden="true" />
                 <span className="film-frame__img">
-                  <FilmArtwork src={coverSrc} alt="" portrait={portrait} loading={index < 4 ? "eager" : "lazy"} />
+                  <FilmArtwork src={coverSrc} alt="" loading={index < 4 ? "eager" : "lazy"} />
                   <span className="film-frame__play"><Play size={13} /></span>
                   <span className="film-frame__dur mono">{fmt(video.duration)}</span>
                 </span>

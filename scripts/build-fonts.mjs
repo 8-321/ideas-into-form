@@ -36,8 +36,12 @@ async function make(src, out, opts = {}) {
 
 const SERIF = process.env.NOTO_SERIF ?? "C:/Windows/Fonts/NotoSerifSC-VF.ttf";
 const SANS = process.env.NOTO_SANS ?? "C:/Windows/Fonts/NotoSansSC-VF.ttf";
+const WENKAI = process.env.LXGW_WENKAI ?? path.join(SITE, "node_modules/@fontsource/lxgw-wenkai/files/lxgw-wenkai-latin-300-normal.woff2");
+const MASHAN = process.env.MA_SHAN ?? "C:/Users/34137/AppData/Local/Microsoft/Windows/Fonts/MaShanZheng.ttf";
 await make(SERIF, "noto-serif-sc.woff2");
 await make(SANS, "noto-sans-sc.woff2");
+await make(WENKAI, "lxgw-wenkai.woff2");
+if (existsSync(MASHAN)) await make(MASHAN, "ma-shan-zheng.woff2");
 
 const latin = [
   ["node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2", "instrument-serif.woff2"],

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./sound.css";
 import { ChapterNav } from "@/components/ChapterNav";
-import { ArrowRight, ArrowUpRight, Play } from "@/components/Icons";
+import { ArrowUpRight, Play } from "@/components/Icons";
 import { CoverAtlas } from "@/components/sound/CoverAtlas";
 import { CoverOrbit } from "@/components/sound/CoverOrbit";
 import { SoundArchive } from "@/components/sound/SoundArchive";
@@ -18,7 +18,6 @@ const nav = [
   { id: "b-archive", no: "二", label: "唱片档案" },
   { id: "c-player", no: "三", label: "完整播放" },
   { id: "d-covers", no: "四", label: "封面系统" },
-  { id: "e-notes", no: "五", label: "素材说明" },
 ];
 
 const covers = group("soundCovers");
@@ -213,43 +212,6 @@ export default function SoundChapterPage() {
           </div>
 
           <CoverAtlas covers={covers} captions={coverCaptions} gallery={coverGallery} />
-        </div>
-      </section>
-
-      <section className="sound-notes section" id="e-notes">
-        <div className="wrap">
-          <div className="sound-notes__top">
-            <div className="sound-notes__head">
-              <span className="eyebrow" data-reveal>五 · 素材说明</span>
-              <h2 className="serif" data-reveal>真实，是这组作品的<br />最低要求。</h2>
-            </div>
-
-            <div className="sound-quote" data-reveal>
-              <span className="mono">关于聆听</span>
-              <p className="serif">「先听见，再理解。<br />声音比观点更早抵达。」</p>
-              <TransitionLink href="/work/audio-collection/" className="link-line">
-                展开这组声音档案 <ArrowRight size={13} />
-              </TransitionLink>
-            </div>
-          </div>
-
-          <div className="sound-notes__list stagger">
-            <article style={{ "--i": 0 } as React.CSSProperties}>
-              <span className="mono">01 · 音频</span>
-              <h3 className="serif">原始音频，不模拟。</h3>
-              <p>5 条音频原文件，总时长 {totalLabel}。播放器读取真实音频，不生成、不替换、不循环伪造时长。</p>
-            </article>
-            <article style={{ "--i": 1 } as React.CSSProperties}>
-              <span className="mono">02 · 频谱</span>
-              <h3 className="serif">频谱来自声音本身。</h3>
-              <p>浏览器读取当前音轨的频域数据，驱动环形频谱与线性波形。暂停时归为静止的低电平。</p>
-            </article>
-            <article style={{ "--i": 2 } as React.CSSProperties}>
-              <span className="mono">03 · 封面</span>
-              <h3 className="serif">封面保持原样。</h3>
-              <p>五张封面按原始比例展示，不裁切、不加滤镜。它们与音频同属一组内容，不做跨项目混用。</p>
-            </article>
-          </div>
         </div>
       </section>
 

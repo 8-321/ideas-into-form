@@ -14,10 +14,10 @@ const CN_NUM = ["一", "二", "三", "四", "五", "六", "七"];
 const cnFor = (letter: string) => CN_NUM[letter.charCodeAt(0) - 65] ?? letter;
 
 const SHAPE_LABEL: Record<ImageShape, string> = {
-  square: "方形",
-  portrait: "竖幅",
-  landscape: "横幅",
-  wide: "宽幅",
+  square: "图版",
+  portrait: "图版",
+  landscape: "图版",
+  wide: "图版",
 };
 
 type Tier = "desktop" | "tablet" | "mobile";
@@ -58,8 +58,7 @@ function FolderFeature({
   onOpen: (folder: ImageFolder, trigger: HTMLButtonElement) => void;
 }) {
   const palette = paletteForFolder(folder.letter);
-  const cover = folder.cover;
-  const echoes = folder.previews.filter((image) => image.src !== cover.src).slice(0, 2);
+  const previews = folder.previews.slice(0, 4);
 
   return (
     <div
@@ -73,13 +72,6 @@ function FolderFeature({
       data-letter={folder.letter}
     >
       <div className="catalog-cover-stack">
-        {echoes.map((image, index) => (
-          <figure className={`catalog-echo catalog-echo--${index + 1}`} key={image.key} aria-hidden="true">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={image.thumb || image.src} alt="" loading="eager" decoding="async" />
-          </figure>
-        ))}
-
         <button
           type="button"
           className="catalog-feature"
@@ -113,11 +105,15 @@ function FolderFeature({
           }}
         >
           <span className="catalog-feature__media">
-            <span className="catalog-feature__art" aria-hidden="true">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="catalog-feature__base" src={cover.thumb || cover.src} alt="" loading="eager" decoding="async" />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="catalog-feature__color" src={cover.thumb || cover.src} alt="" loading="eager" decoding="async" />
+            <span className="catalog-feature__art catalog-feature__mosaic" aria-hidden="true">
+              {previews.map((image) => (
+                <span className="catalog-feature__cell" key={image.key}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="catalog-feature__base" src={image.thumb || image.src} alt="" loading="eager" decoding="async" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img className="catalog-feature__color" src={image.thumb || image.src} alt="" loading="eager" decoding="async" />
+                </span>
+              ))}
             </span>
             <span className="catalog-feature__index mono">{cnFor(folder.letter)}</span>
             <span className="catalog-feature__open mono">打开</span>

@@ -77,7 +77,7 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
           <Rail className="work-gallery work-gallery--strip" label={section.title}>
             {section.items.map((item, index) => (
               <figure className="work-strip__item" key={item.key}>
-                <MediaImage asset={item} alt={item.caption || item.label} caption={item.caption} gallery={gallery} index={index} />
+                <MediaImage asset={item} alt={item.caption || item.label} caption={item.caption} gallery={gallery} index={index} ratio={4 / 3} contain />
                 <figcaption className="mono">{String(index + 1).padStart(2, "0")} / {item.caption || item.label}</figcaption>
               </figure>
             ))}
@@ -93,6 +93,8 @@ function GalleryBlock({ section, leafIndex }: { section: GallerySection; leafInd
                   badge={`${String(index + 1).padStart(2, "0")} / ${String(section.items.length).padStart(2, "0")}`}
                   gallery={gallery}
                   index={index}
+                  ratio={4 / 3}
+                  contain
                   priority={index === 0}
                 />
                 {item.caption ? <p className="work-gallery__cap mono">{item.caption}</p> : null}
@@ -313,7 +315,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="work-hero__intro">
-              <p className="serif" data-reveal style={{ "--d": "150ms" } as React.CSSProperties}>{work.summary}</p>
+              {work.summary ? <p className="serif" data-reveal style={{ "--d": "150ms" } as React.CSSProperties}>{work.summary}</p> : null}
               <ul className="work-hero__tags stagger">
                 {work.tags.map((tag, tagIndex) => (
                   <li key={tag} style={{ "--i": tagIndex } as React.CSSProperties} className="mono">{tag}</li>

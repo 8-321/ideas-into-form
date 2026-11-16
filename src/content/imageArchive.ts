@@ -23,64 +23,21 @@ export type ImageFolder = {
   pages: ArchivePage[];
 };
 
-const shapeOf = (asset: ImageAsset): ImageShape => {
-  const ratio = asset.width / asset.height;
-  if (ratio >= 0.88 && ratio <= 1.12) return "square";
-  if (ratio < 0.88) return "portrait";
-  if (ratio <= 1.8) return "landscape";
-  return "wide";
-};
-
 const chunk = <T,>(items: T[], size: number): T[][] => {
   const pages: T[][] = [];
   for (let index = 0; index < items.length; index += size) pages.push(items.slice(index, index + size));
   return pages;
 };
 
-const capacity: Record<ImageShape, number> = {
-  square: 12,
-  portrait: 12,
-  landscape: 12,
-  wide: 4,
-};
-
-const shapeOrder: ImageShape[] = ["square", "portrait", "landscape", "wide"];
-
-const shapeTag: Record<ImageShape, string> = {
-  square: "sq",
-  portrait: "pt",
-  landscape: "ls",
-  wide: "wd",
-};
-
-function pagesFor(series: string, assets: ImageAsset[], orbit = false): ArchivePage[] {
-  if (orbit) {
-    return [{ id: `${series.replace(/\s+/g, "-").toLowerCase()}-orbit`, series, shape: "portrait", kind: "orbit", items: assets }];
-  }
-
-  const byShape = new Map<ImageShape, ImageAsset[]>();
-  assets.forEach((asset) => {
-    const shape = shapeOf(asset);
-    const list = byShape.get(shape) ?? [];
-    list.push(asset);
-    byShape.set(shape, list);
-  });
-
-  const result: ArchivePage[] = [];
-  shapeOrder.forEach((shape) => {
-    const list = byShape.get(shape) ?? [];
-    chunk(list, capacity[shape]).forEach((items, index) => {
-      const slug = series.replace(/\s+/g, "-").toLowerCase();
-      result.push({
-        id: `${slug}-${shapeTag[shape]}-${index + 1}`,
-        series,
-        shape,
-        kind: "grid",
-        items,
-      });
-    });
-  });
-  return result;
+function pagesFor(series: string, assets: ImageAsset[]): ArchivePage[] {
+  const slug = series.replace(/\s+/g, "-").toLowerCase();
+  return chunk(assets, 8).map((items, index) => ({
+    id: `${slug}-plate-${index + 1}`,
+    series,
+    shape: "landscape" as const,
+    kind: "grid" as const,
+    items,
+  }));
 }
 
 function makeFolder(
@@ -88,9 +45,9 @@ function makeFolder(
   slug: string,
   zh: string,
   en: string,
-  series: { title: string; items: ImageAsset[]; orbit?: boolean }[]
+  series: { title: string; items: ImageAsset[] }[]
 ): ImageFolder {
-  const pages = series.flatMap((entry) => pagesFor(entry.title, entry.items, entry.orbit));
+  const pages = series.flatMap((entry) => pagesFor(entry.title, entry.items));
   const count = pages.reduce((total, page) => total + page.items.length, 0);
   const previewPool: ImageAsset[] = [];
   pages.forEach((page) => {
@@ -100,7 +57,7 @@ function makeFolder(
   });
   const cover = previewPool[0];
   if (!cover) throw new Error(`Folder ${letter} has no images`);
-  const previews = [cover, ...previewPool.filter((item) => item.src !== cover.src).slice(0, 2)];
+  const previews = [cover, ...previewPool.filter((item) => item.src !== cover.src).slice(0, 3)];
   return { letter, slug, zh, en, count, cover, previews, pages };
 }
 
@@ -122,12 +79,12 @@ const wisdom = group("xinlingWisdom");
 const xiumi = group("xiumi");
 const drawing = group("drawing");
 const sketch = group("sketch");
-const game = group("game");
+const game = group("game").filter((item) => item.key !== "game-ball");
 const ui = group("ui");
 
 export const IMAGE_FOLDERS: ImageFolder[] = [
   makeFolder("A", "covers", "封面与主题", "COVERS", [
-    { title: "100 天实验", items: days, orbit: true },
+    { title: "100 天实验", items: days },
     { title: "人格封面", items: mbti },
     { title: "亚文化封面", items: subculture },
     { title: "黑白视觉", items: bw },

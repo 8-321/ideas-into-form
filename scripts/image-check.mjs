@@ -333,14 +333,14 @@ report.image.tour = {
   wrap: await clickNextFolder(),
 };
 
-// Folder book: cover collage, page turn, 98-item 100 DAYS orbit.
+// Folder book: cover collage and the first 8-image 100 DAYS page.
 await openFolder(".catalog-feature");
 report.image.cover = await readerState();
 await shot("check-image-cover-1512");
 await page.keyboard.press("ArrowRight");
 await wait(950);
-report.image.orbit = await readerState();
-await shot("check-image-orbit-1512");
+report.image.pageTwo = await readerState();
+await shot("check-image-page-1512");
 await closeOverlay();
 
 report.removedCopy.image = ["所有画面", "HONESTY", "视觉档案", "长理建筑线稿", "MATERIAL NOTE", "01 / VIDEO", "02 / DECK"].filter((copy) => report.image.desktop.text.includes(copy));
@@ -407,13 +407,13 @@ report.responsive.experience1280 = await experienceState();
 const checks = [
   ["image folder total", report.image.desktop.total === 7],
   ["image one folder per stage", report.image.desktop.folders === 1 && report.image.desktop.slides === 1],
-  ["image echo stack present", report.image.desktop.echoes.length === 2 && report.image.desktop.echoes.every((echo) => echo.display !== "none" && echo.fit === "contain")],
+  ["image echo stack removed", report.image.desktop.echoes.length === 0],
   ["image folder rail present", report.image.desktop.railTicks === 7 && report.image.desktop.railActive === "一"],
   ["image legacy grid removed", report.image.desktop.legacy === 0],
   ["image tour reaches all folders", report.image.tour.states.map((state) => state.active).join("") === "ABCDEFG"],
   ["image tour wraps", report.image.tour.wrap.active === "A"],
   ["image right click advances", report.image.rightClick.prevented === true && report.image.rightClick.active === "D"],
-  ["image one folder after navigation", report.image.tour.states.every((state) => state.folderCount === 1 && state.slideCount === 1 && state.echoCount === 2)],
+  ["image one folder after navigation", report.image.tour.states.every((state) => state.folderCount === 1 && state.slideCount === 1)],
   ["image rail follows folder", report.image.tour.states.every((state) => state.railActive === "一二三四五六七"["ABCDEFG".indexOf(state.active)])],
   ["image unique palettes", new Set(report.image.tour.states.map((state) => state.accent)).size === 7],
   ["image palette follows folder", report.image.tour.states.every((state) => state.pageAccent === state.accent)],
@@ -421,7 +421,7 @@ const checks = [
   ["image starts grey", report.image.desktop.defaultColorOpacity.every((value) => value === "0")],
   ["image contains originals", report.image.tour.states.every((state) => state.baseFit === "contain" && state.colorFit === "contain")],
   ["image hover reveals colour", report.image.hover.reveal === "1" && Number(report.image.hover.opacity) > 0.95 && report.image.hover.pageAccent === report.image.hover.accent],
-  ["image hover chroma echoes", String(report.image.hover.echoFilter).includes("grayscale(0)")],
+  ["image hover has no echo layer", report.image.hover.echoFilter === null],
   ["image cover follows pointer", report.image.motion.tilt !== "" && report.image.hover.stackTransform !== "none"],
   ["image stage animates", String(report.image.motion.coverAnimation).includes("catalog-cover-in") && String(report.image.motion.detailAnimation).includes("catalog-detail-in")],
   ["image motion off is static", report.image.reduced.coverAnimation === "none" && report.image.reduced.detailAnimation === "none" && report.image.reduced.stackTransform === "none"],
@@ -432,9 +432,9 @@ const checks = [
   ["image stage fits first viewport", [report.image.desktop, report.responsive.image390, report.responsive.image1280].every((state) => state.navBottom <= state.viewportHeight + 0.5)],
   ["cover collage complete", report.image.cover.photos.length === 4 && report.image.cover.photoFit.every((value) => value === "contain")],
   ["cover collage uniform", same(report.image.cover.photos.map((box) => box.width)) && same(report.image.cover.photos.map((box) => box.height))],
-  ["100 DAYS orbit complete", report.image.orbit.orbit && report.image.orbit.orbitTotal === 98],
-  ["100 DAYS orbit contains originals", report.image.orbit.orbitFit === "contain"],
-  ["archive tiles contain originals", report.image.orbit.tileFit.every((value) => value === "contain")],
+  ["100 DAYS paginated", !report.image.pageTwo.orbit && report.image.pageTwo.tiles === 8],
+  ["100 DAYS page contains originals", report.image.pageTwo.tileFit.every((value) => value === "contain")],
+  ["archive tiles contain originals", report.image.pageTwo.tileFit.every((value) => value === "contain")],
   ["mobile book art visible", report.responsive.image390Cover.art?.position === "relative" && report.responsive.image390Cover.art?.opacity === "1"],
   ["mobile book no overflow", report.responsive.image390Cover.overflowX === 0],
   ["removed image copy absent", report.removedCopy.image.length === 0],
@@ -443,7 +443,7 @@ const checks = [
   ["experience hero hero contains cover", report.experience.desktop.heroCoverFit === "contain"],
   ["experience no overflow", report.experience.desktop.overflowX === 0 && report.responsive.experience390.overflowX === 0 && report.responsive.experience1280.overflowX === 0],
   ["experience mobile title first", report.responsive.experience390.titleTop < report.responsive.experience390.screenTop],
-  ["guzheng is portrait", report.experience.guzheng.screen?.group === "guzheng" && report.experience.guzheng.screen?.ratio < 0.6 && report.experience.guzheng.screen?.className.includes("is-portrait")],
+  ["guzheng stays horizontal", report.experience.guzheng.screen?.group === "guzheng" && report.experience.guzheng.screen?.ratio > 1.5 && !report.experience.guzheng.screen?.className.includes("is-portrait")],
   ["guzheng cover reused", report.experience.guzheng.screen?.artwork.endsWith("/guzheng-cover.webp") && report.experience.guzheng.frames.length === 2 && new Set(report.experience.guzheng.frames.map((frame) => frame.artwork)).size === 1],
   ["guzheng strip contains original", report.experience.guzheng.frames.every((frame) => frame.imageFit === "contain")],
   ["guzheng player poster", report.experience.guzhengPoster?.endsWith("/guzheng-cover.webp")],
@@ -469,7 +469,7 @@ console.log(JSON.stringify({
   rightClick: report.image.rightClick,
   palettes: new Set(report.image.tour.states.map((state) => state.accent)).size,
   coverPhotos: report.image.cover.photos.length,
-  orbit: report.image.orbit.orbitTotal,
+  pageTwoTiles: report.image.pageTwo.tiles,
   guzhengScreen: report.experience.guzheng.screen,
   guzhengFrames: report.experience.guzheng.frames.length,
   pianoFrames: report.experience.piano.frames.length,

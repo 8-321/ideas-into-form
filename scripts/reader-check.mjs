@@ -127,24 +127,6 @@ report.reader.push({ step: "audio", mid: await activeInfo() });
 await wait(1000);
 await page.screenshot({ path: path.join(SHOTS, "book-audio.png") });
 
-// Film leaf
-await page.goto(url("/work/film-archive/"), { waitUntil: "domcontentloaded", timeout: 60000 });
-await wait(800);
-const filmTypes = await page.evaluate(() => Array.from(document.querySelectorAll("[data-leaf]")).map((el) => el.getAttribute("data-leaf-type")));
-report.types.film = filmTypes;
-await openBook("/work/film-archive/");
-const filmIndex = Math.max(0, filmTypes.indexOf("film"));
-if (filmIndex > 0) {
-  await page.click(".book-reader__toc");
-  await wait(120);
-  await page.evaluate((idx) => document.querySelectorAll(".book-toc__list button")[idx]?.click(), filmIndex);
-  await wait(320);
-  await page.waitForFunction(() => document.querySelector(".work-book__pages > [data-leaf].is-reader-active")?.getAttribute("data-leaf-type") === "film", { timeout: 2500 }).catch(() => {});
-}
-report.reader.push({ step: "film", mid: await activeInfo() });
-await wait(1100);
-await page.screenshot({ path: path.join(SHOTS, "book-film.png") });
-
 // Reduced motion path
 await page.evaluate(() => localStorage.setItem("iif-motion", "off"));
 await openBook("/work/panda-ip/");

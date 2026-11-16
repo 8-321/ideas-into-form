@@ -4,7 +4,7 @@ import { ChapterNav } from "@/components/ChapterNav";
 import { Cinema, type CinemaGroup } from "@/components/experience/Cinema";
 import { DeckViewer } from "@/components/experience/DeckViewer";
 import { FilmArtwork } from "@/components/experience/FilmArtwork";
-import { ArrowRight, ArrowUpRight, Play } from "@/components/Icons";
+import { ArrowRight, Play } from "@/components/Icons";
 import { TransitionLink } from "@/components/TransitionLink";
 import { DECKS, FILM_COVERS, filmVideos, vid } from "@/content/works";
 
@@ -14,10 +14,9 @@ export const metadata: Metadata = {
 };
 
 const nav = [
-  { id: "a-statement", no: "一", label: "影像主张" },
-  { id: "b-screenings", no: "二", label: "数字放映室" },
-  { id: "c-programme", no: "三", label: "四类节目" },
-  { id: "d-decks", no: "四", label: "演示文稿" },
+  { id: "b-screenings", no: "一", label: "数字放映室" },
+  { id: "c-programme", no: "二", label: "四类节目" },
+  { id: "d-decks", no: "三", label: "演示文稿" },
 ];
 
 const fmt = (value: number) => {
@@ -64,13 +63,11 @@ const reel = groups.map((item) => ({
   key: item.key,
   label: item.label,
   src: item.cover?.thumb ?? item.cover?.src ?? item.videos[0]?.poster,
-  portrait: item.key === "guzheng" || item.key === "painting",
 })).filter((item) => Boolean(item.src));
 
 const programme = groups.map((item) => ({
   ...item,
   total: item.videos.reduce((sum, video) => sum + video.duration, 0),
-  portrait: item.key === "guzheng" || item.key === "painting",
   still: item.cover?.src ?? item.videos[0]?.poster,
 }));
 
@@ -89,7 +86,6 @@ export default function ExperienceChapterPage() {
               <span className="char">成</span><span className="char">境</span>
             </h1>
 
-
             <p className="chapter-hero__lead" data-reveal style={{ "--d": "190ms" } as React.CSSProperties}>
               让创意成为可以感受的体验。<br />
               演奏、绘画与演示——把时间本身，做成作品。
@@ -99,9 +95,6 @@ export default function ExperienceChapterPage() {
               <a href="#b-screenings" className="btn film-hero__enter">
                 <Play size={12} /> 进入放映室
               </a>
-              <TransitionLink href="/work/film-archive/" className="link-line">
-                查看影像档案 <ArrowUpRight size={13} />
-              </TransitionLink>
             </div>
 
             <dl className="film-hero__meta" data-reveal style={{ "--d": "310ms" } as React.CSSProperties}>
@@ -135,7 +128,7 @@ export default function ExperienceChapterPage() {
                   data-group={item.key}
                   data-artwork={item.key}
                 >
-                  <FilmArtwork src={item.src ?? ""} alt="" portrait={item.portrait} loading="lazy" />
+                  <FilmArtwork src={item.src ?? ""} alt="" loading="lazy" />
                 </span>
               ))}
             </div>
@@ -149,43 +142,6 @@ export default function ExperienceChapterPage() {
       </section>
 
       <ChapterNav items={nav} />
-
-      <section className="film-statement section" id="a-statement">
-        <div className="wrap film-statement__grid">
-          <div className="film-statement__title">
-            <span className="eyebrow" data-reveal>一 · 影像主张</span>
-            <h2 className="serif" data-reveal>
-              <span className="split-line"><span>每一段影像，</span></span>
-              <span className="split-line"><span>都是一次表达。</span></span>
-            </h2>
-            <div className="film-statement__marks" aria-hidden="true">
-              <span /><span /><span /><span /><span />
-            </div>
-          </div>
-
-          <div className="film-statement__body">
-            <p data-reveal>
-              成境收录 11 段真实影像：5 段钢琴、2 段古筝、3 段画画、1 段演示视频。
-              总时长 {fmt(totalRuntime)}，全部保留原声与原始画幅。
-            </p>
-            <p data-reveal style={{ "--d": "90ms" } as React.CSSProperties}>
-              排列不按时间顺序，而按「观看方式」：演奏看手与弦，画画看线条生长，
-              演示文稿看信息如何被组织成叙事。三种时间感，共用一间放映室。
-            </p>
-            <p data-reveal style={{ "--d": "160ms" } as React.CSSProperties}>
-              另有 4 份演示文稿，共 {totalDecks} 页节选。它们不是视频的附属品，
-              而是另一种把想法组织成结构的方式。
-            </p>
-
-            <div className="film-statement__stats stagger">
-              <div style={{ "--i": 0 } as React.CSSProperties}><b className="display" data-count>{allVideos.length}</b><span className="mono">影像</span></div>
-              <div style={{ "--i": 1 } as React.CSSProperties}><b className="display">{fmt(totalRuntime)}</b><span className="mono">总时长</span></div>
-              <div style={{ "--i": 2 } as React.CSSProperties}><b className="display" data-count>{groups.length}</b><span className="mono">类型</span></div>
-              <div style={{ "--i": 3 } as React.CSSProperties}><b className="display" data-count>{DECKS.length}</b><span className="mono">演示文稿</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="screenings section" id="b-screenings">
         <div className="wrap">
@@ -230,8 +186,8 @@ export default function ExperienceChapterPage() {
                   <p>{item.note}</p>
                   <a href="#b-screenings" className="link-line">进入放映室 <ArrowRight size={12} /></a>
                 </div>
-                <div className={`programme-row__still${item.portrait ? " is-portrait" : ""}`} data-group={item.key} data-artwork={item.still}>
-                  {item.still ? <FilmArtwork src={item.still} alt={`${item.label}封面`} portrait={item.portrait} loading="lazy" /> : null}
+                <div className="programme-row__still" data-group={item.key} data-artwork={item.still}>
+                  {item.still ? <FilmArtwork src={item.still} alt={`${item.label}封面`} loading="lazy" /> : null}
                 </div>
                 <div className="programme-row__runtime">
                   <span className="mono">合计</span>
@@ -283,7 +239,6 @@ export default function ExperienceChapterPage() {
             <p>三种形态并不是终点。它们只是同一个想法，在不同媒介里留下的三种证据。</p>
             <div className="experience-end__actions">
               <TransitionLink href="/" className="btn">回到首页 <ArrowRight size={13} /></TransitionLink>
-              <TransitionLink href="/work/film-archive/" className="link-line">展开影像档案 <ArrowUpRight size={13} /></TransitionLink>
             </div>
           </div>
           <div className="experience-end__origin" aria-hidden="true" data-reveal="mask">

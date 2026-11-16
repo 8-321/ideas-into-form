@@ -42,8 +42,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
-        <link rel="preload" href="/fonts/noto-serif-sc.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        <link rel="preload" href="/fonts/noto-sans-sc.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/lxgw-wenkai.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/ma-shan-zheng.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <script id="iif-init" dangerouslySetInnerHTML={{ __html: init }} />
       </head>
       <body suppressHydrationWarning>

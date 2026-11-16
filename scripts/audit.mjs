@@ -133,7 +133,6 @@ const desktop = [
   ["work-panda", "/work/panda-ip/", { y: 0 }],
   ["work-panda-body", "/work/panda-ip/", { selector: ".work-text" }],
   ["work-audio", "/work/audio-collection/", { selector: "#main" }],
-  ["work-film", "/work/film-archive/", { y: 0 }],
   ["work-wolf", "/work/wolf-design/", { y: 0 }],
 ];
 

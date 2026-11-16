@@ -183,11 +183,6 @@ export const FILM_COVERS: Record<string, ImageAsset | undefined> = {
   guzheng: filmCoverGroup.find((item) => item.key === "guzheng-cover"),
 };
 
-const filmCover = FILM_COVERS.piano ?? (() => {
-  const v = vid("piano", "piano-wedding");
-  return { key: "film-cover", label: v.label, src: v.poster, thumb: v.poster, width: v.width, height: v.height, ratio: +(v.width / v.height).toFixed(3) };
-})();
-
 export const WORKS: Work[] = [
   {
     slug: "100-days",
@@ -339,7 +334,7 @@ export const WORKS: Work[] = [
     chapter: "image",
     title: "黑白视觉",
     titleEn: "MONOCHROME",
-    category: "影像档案 / PHOTO ARCHIVE",
+    category: "黑白摄影 / PHOTOGRAPHY",
     year: "2025",
     summary: "30 张黑白影像，一次关于光、结构与呼吸的练习。",
     tags: ["黑白", "摄影", "视觉贴图"],
@@ -973,75 +968,20 @@ export const WORKS: Work[] = [
     titleEn: "AUDIO COLLECTION",
     category: "声音档案 / AUDIO ARCHIVE",
     year: "2026",
-    summary: "五张封面，五段声音。关于经历、筛选与成长的音频档案。",
+    summary: "",
     tags: ["播客", "封面", "声音"],
     cover: img("soundCovers", "cover-main"),
     coverAlt: "万丈红尘体验为王音频封面",
     featured: true,
     order: 1,
     sections: [
-      {
-        type: "text",
-        eyebrow: "OVERVIEW / 概述",
-        title: "声音，是思想的另一种形态。",
-        paragraphs: [
-          "《万丈红尘》与《体验为王》音频系列，包含 1 条长音频与 4 段手记，以及 5 张同系列封面。",
-          "封面共享同一组视觉母题：窗、台灯、耳机、纸页与城市的光。标题用细画线宋体压在大面积留白上，像在夜里写下的一页手记。",
-        ],
-      },
-      { type: "audio", eyebrow: "LISTEN / 试听", title: "真实音频，真实波形。", note: "点击播放；波形由当前音频的频谱数据驱动。" },
+      { type: "audio", eyebrow: "LISTEN / 试听", title: "试听" },
       {
         type: "gallery",
         eyebrow: "COVERS / 封面",
-        title: "五张封面，同一扇窗。",
+        title: "五张封面",
         layout: "grid",
         items: group("soundCovers").map((item) => cap(item, "1:1 封面")),
-      },
-      {
-        type: "note",
-        title: "素材说明",
-        body: "五条音频与五张封面均为原始素材；播放器读取真实音频文件，不使用模拟播放。",
-      },
-      {
-        type: "text",
-        eyebrow: "REFLECTION / 复盘",
-        title: "把「听」变成一种空间。",
-        paragraphs: [
-          "这一组作品的重点不是把封面做得更响，而是让人愿意在夜里停下来听几分钟。",
-          "下一步可以把五期内容做成一条可连续播放的声音时间轴，并补齐每期的文字摘要与章节标记。",
-        ],
-      },
-    ],
-  },
-  {
-    slug: "film-archive",
-    no: "01",
-    chapter: "experience",
-    title: "影像档案",
-    titleEn: "FILM ARCHIVE",
-    category: "影像 / FILM",
-    year: "2026",
-    summary: "钢琴、古筝、绘画与演示——四种内容，四种节奏。",
-    tags: ["视频", "演奏", "演示"],
-    cover: filmCover,
-    coverAlt: "钢琴演奏封面图",
-    featured: true,
-    order: 1,
-    sections: [
-      {
-        type: "text",
-        eyebrow: "OVERVIEW / 概述",
-        title: "每一段影像，都是一次表达。",
-        paragraphs: [
-          "公众号影像作品档案，收录 11 段视频与 4 份演示文稿节选。",
-          "把视频按内容类型而不是时间顺序排列：演奏看手与弦，画画看线条生长，演示看信息如何被组织成叙事。",
-        ],
-      },
-      { type: "film", eyebrow: "SCREENING / 放映", title: "按类型进入放映室。" },
-      {
-        type: "note",
-        title: "素材说明",
-        body: "视频为原始素材转码，保留原声；演示文稿以节选页与文档形式展示，未虚构演示内容。",
       },
     ],
   },

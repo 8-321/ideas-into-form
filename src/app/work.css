@@ -262,3 +262,40 @@
   .work-placeholder__grid { grid-template-columns: 1fr; }
   .work-film__decks-head { flex-direction: column; align-items: flex-start; }
 }
+/* ---------- uniform 4:3 picture frames ---------- */
+
+.work-gallery--grid,
+.work-gallery--wall {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(14px, 2vw, 28px) !important;
+  align-items: start !important;
+}
+
+.work-gallery--grid .work-gallery__item,
+.work-gallery--wall .work-gallery__item {
+  grid-column: auto !important;
+  margin-top: 0 !important;
+}
+
+.work-gallery--wide {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: clamp(14px, 2vw, 28px) !important;
+}
+
+.work-gallery--wide .work-gallery__item--1 {
+  grid-column: auto !important;
+}
+
+.work-gallery__item .media,
+.work-strip__item .media {
+  aspect-ratio: 4 / 3 !important;
+  background: var(--bg-2);
+}
+
+.work-gallery__item .media img,
+.work-strip__item .media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  padding: clamp(4px, 0.7vw, 10px);
+}

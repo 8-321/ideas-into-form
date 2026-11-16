@@ -180,7 +180,7 @@
 }
 .film-hero__still {
   position: relative;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border: 1px solid rgba(147, 169, 181, 0.16);
   opacity: 0.62;
@@ -374,7 +374,7 @@
 .film-frame__img {
   position: relative;
   display: block;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #000;
   border: 1px solid var(--line);
@@ -478,12 +478,13 @@
 .programme-row__title p { margin-top: 9px; max-width: 42ch; color: var(--muted); font-size: 0.88rem; line-height: 1.92; }
 .programme-row__title .link-line { margin-top: 14px; font-size: 10px; }
 .programme-row__still {
-  width: min(100%, 230px);
-  aspect-ratio: 9 / 16;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: #000;
   border: 1px solid var(--line);
-  justify-self: center;
+  justify-self: stretch;
 }
 .programme-row__still .film-artwork { filter: saturate(0.86); transition: filter 0.4s ease; }
 .programme-row__still:hover .film-artwork { filter: saturate(1); }
