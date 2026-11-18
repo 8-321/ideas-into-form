@@ -111,12 +111,13 @@ site/
 ```powershell
 cd site
 npm run build
-robocopy out "D:/deploy/ideas-into-form-pages" /MIR /XD "D:/deploy/ideas-into-form-pages/.git"
-if ($LASTEXITCODE -ge 8) { throw "robocopy failed" }
+Copy-Item -Path "out/*" -Destination "D:/deploy/ideas-into-form-pages" -Recurse -Force
 git -C "D:/deploy/ideas-into-form-pages" add -A
 git -C "D:/deploy/ideas-into-form-pages" commit -m "deploy: update site"
 git -C "D:/deploy/ideas-into-form-pages" push
 ```
+
+主站与 `/thought/` 共用同一个成品仓库。**不要**使用 `robocopy /MIR` 或先清空目录：那会删除另一套页面仍需的 `_next` 哈希资源，导致页面只剩无样式文字。部署只做增量覆盖，不删除旧文件。
 
 若部署目录不存在，先克隆一次：
 

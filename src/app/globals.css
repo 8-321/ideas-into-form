@@ -361,6 +361,8 @@ html:not(.js) [data-reveal] { opacity: 1 !important; transform: none !important;
   transition-delay: var(--d, 0ms);
 }
 [data-reveal].is-in { opacity: 1; transform: none; }
+@keyframes reveal-safe { to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); } }
+html.js [data-reveal] { animation: reveal-safe 0.01s linear 3s forwards; }
 [data-reveal="mask"] {
   opacity: 1;
   transform: none;
