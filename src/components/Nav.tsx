@@ -65,7 +65,7 @@ export function Nav() {
             title={reduced ? "开启动效" : "关闭动效"}
           >
             <span className="switch__track" aria-hidden="true" />
-            <span className="switch__label">动效</span>
+            <span className="switch__label">动效 · {reduced ? "关" : "开"}</span>
           </button>
           <button type="button" className="menu-btn" aria-expanded={menuOpen} aria-controls="site-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? "关闭" : "目录"}<i aria-hidden="true" />

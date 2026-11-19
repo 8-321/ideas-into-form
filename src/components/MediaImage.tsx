@@ -15,6 +15,7 @@ export function MediaImage({
   index = 0,
   ratio,
   contain = false,
+  full = false,
 }: {
   asset: Pick<ImageAsset, "src" | "thumb" | "width" | "height">;
   alt: string;
@@ -26,6 +27,7 @@ export function MediaImage({
   index?: number;
   ratio?: number;
   contain?: boolean;
+  full?: boolean;
 }) {
   const { open } = useLightbox();
   const item: LightboxItem = { src: asset.src, alt, caption: caption || alt };
@@ -40,7 +42,7 @@ export function MediaImage({
       <figure className={`media${contain ? " media--contain" : ""}`} style={{ aspectRatio: `${aspect}` } as CSSProperties}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={asset.thumb || asset.src}
+          src={full ? asset.src : asset.thumb || asset.src}
           alt={alt}
           width={asset.width}
           height={asset.height}

@@ -8,13 +8,13 @@ type Go = (href: string, event?: { clientX: number; clientY: number } | React.Mo
 const Ctx = createContext<Go>(() => {});
 
 const colorFor = (href: string) => {
-  if (href.startsWith("/sound")) return "#c9a96a";
-  if (href.startsWith("/experience")) return "#93a9b5";
-  if (href.startsWith("/work/audio")) return "#c9a96a";
-  if (href.startsWith("/work/film")) return "#93a9b5";
-  if (href.startsWith("/work/")) return "#d9d6cb";
-  if (href.startsWith("/image")) return "#8f9f8b";
-  return "#f4f2ec";
+  if (href.startsWith("/sound")) return "#b89a66";
+  if (href.startsWith("/experience")) return "#9aabb2";
+  if (href.startsWith("/work/audio")) return "#b89a66";
+  if (href.startsWith("/work/film")) return "#9aabb2";
+  if (href.startsWith("/work/")) return "#d8d1c2";
+  if (href.startsWith("/image")) return "#cbbfa8";
+  return "#f0ece3";
 };
 
 export function TransitionProvider({ children }: { children: React.ReactNode }) {

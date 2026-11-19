@@ -4,7 +4,7 @@ import { DECKS, STATS } from "@/content/works";
 import { OriginArchive } from "./OriginArchive";
 
 const deckPages = DECKS.reduce((sum, deck) => sum + deck.slideCount, 0);
-const disciplines = ["封面系统", "角色 IP", "界面设计", "建筑线稿", "黑白摄影", "影像与声音"];
+const disciplines = ["封面系统", "角色形象", "界面设计", "建筑线稿", "黑白摄影", "影像与声音"];
 
 export function Hero() {
   return (

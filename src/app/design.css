@@ -4,8 +4,8 @@
    ============================================================ */
 
 :root {
-  --text-micro: 10px;
-  --text-label: 11px;
+  --text-micro: 12px;
+  --text-label: 13px;
   --text-body: 16px;
   --text-lead: clamp(1.02rem, 1.18vw, 1.16rem);
   --text-h2: clamp(1.9rem, 3.5vw, 3.6rem);
@@ -538,10 +538,10 @@ html[data-reduce="true"] [data-reveal="flip"] {
 
 html[data-theme="home"],
 html[data-theme="image"] {
-  --mint: #aab7a3;
-  --mint-deep: #74856d;
-  --accent: #7c8d74;
-  --accent-ink: #223126;
+  --mint: #6f7d76;
+  --mint-deep: #56645e;
+  --accent: #9a8259;
+  --accent-ink: #fbf7ee;
 }
 
 .nav__brand {
@@ -569,10 +569,12 @@ html[data-theme="image"] {
 .switch {
   gap: 8px;
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: none;
 }
+.switch__label { min-width: 3.2em; text-align: left; color: var(--ink-soft); }
+.switch[aria-pressed="true"] .switch__label { color: var(--accent); }
 .menu-btn {
   font-family: var(--font-sans);
   font-size: 12px;
@@ -588,13 +590,13 @@ html[data-theme="image"] {
   letter-spacing: 0.06em !important;
 }
 .footer__word {
-  margin-left: -0.045em;
-  padding-bottom: 0.02em;
-  font-family: var(--font-serif);
-  font-size: clamp(3.4rem, 11.5vw, 12.4rem);
-  font-weight: 500;
-  line-height: 0.9;
-  letter-spacing: -0.055em;
+  margin-left: -0.03em;
+  padding-bottom: 0.04em;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 10vw, 10.5rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.03em;
 }
 .footer__links a {
   font-family: var(--font-sans);

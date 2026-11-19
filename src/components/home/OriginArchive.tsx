@@ -6,52 +6,29 @@ import { useMotion } from "@/components/MotionProvider";
 type Tile = {
   src: string;
   alt: string;
-  lqip: string;
-  slot: string;
+  index: string;
 };
 
 const TILES: Tile[] = [
   {
     src: "/media/image/filmCovers/guzheng-cover.webp",
     alt: "古筝演奏影像",
-    lqip: "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAQBACdASocABAAPvVmqk4qpaQiMAgBUB6JQApgAMeczoNsmUK1I0YQ7AD+6/hnMIzIhZex7o/7utezRclJY3rC82eAksdHNjjf3nxIPm5RX+g5HKm4gcumpNwIwLgk3xuV78swDJLCfL88OZS3K8s7lv1RclXv0AA=",
-    slot: "guzheng",
+    index: "01",
   },
   {
-    src: "/media/image/soundCovers/cover-main@thumb.webp",
+    src: "/media/image/soundCovers/cover-main.webp",
     alt: "万丈红尘声音封面",
-    lqip: "data:image/webp;base64,UklGRtwAAABXRUJQVlA4INAAAAAQBQCdASocABwAPulgp04pJaOiMAwBIB0JYgC07a7ELaQ8AaZsO3MKllHys3gRf06QAP73bbyLW/ouNZdUoloXgoDjOgUrhULNgR31BDCmkWwpAriBJcY9B+XvxX3xQAJaKObzBwlA9z8e2dCGp06YZ+5j4hiSAIl9JkPHcEyumsQyCdEztGQoThSHFB7B0hpwaguD/akUNVH92pyvQjRxg8adZZoNKbyloIPhsrKbJ8idRsBgAMRIYzzSKB6sDgUvQNeSZJAldRZih5F6BSAA",
-    slot: "sound",
+    index: "02",
   },
   {
-    src: "/media/image/campus/arch-01@thumb.webp",
+    src: "/media/image/campus/arch-01.webp",
     alt: "长理建筑线稿",
-    lqip: "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADQBACdASocABIAPvVssVCqpaSiqAqpUB6JaQAFEARvos8gU//2tOcq7ZSNCZYM4AD+9OxTp2+dDeL57L0vkyEa5hdLY8O8nRTtBal1SV0FsZCp7kD237apWHULmG+vnoLOK/Fb5Xq2sOOYkjUjTdBAEy83cGAEMGAgAA==",
-    slot: "arch",
+    index: "03",
   },
   {
-    src: "/media/image/drawing/draw-04@thumb.webp",
-    alt: "绘画作品",
-    lqip: "data:image/webp;base64,UklGRuoAAABXRUJQVlA4IN4AAADwBQCdASoYABwAPvVurVGqpiQiqAqpUB6JQBlAO6RvhnDvoJ6yfksqew12uxFvz9O90jvtITwYYAD+8dt8aeg+KS545ilEfcnGaBONC3jLugULyY4gqBa1sP/yy7sY+UzxJfrbHV849CuOl/wNdXkFZhUMeT4aZFm90u4FYEzdZWRIHp/DXrKCOuvo5IIbYe9HWyHvRESVwCDT5ee8jvkmV28sPGIQ2k1E8ncw2vVs+WBYgcAd3YCNtPjAr1zjHgy7JXN6QGFjZgi+QIk4JEw56RR58kt0ZNyvTDGKAAA=",
-    slot: "drawing",
-  },
-  {
-    src: "/media/image/panda/panda-original@thumb.webp",
-    alt: "小含熊猫原始标准形象",
-    lqip: "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAQBACdASocABAAPvVmqk4qpaQiMAgBUB6JQApgAMeczoNsmUK1I0YQ7AD+6/hnMIzIhZex7o/7utezRclJY3rC82eAksdHNjjf3nxIPm5RX+g5HKm4gcumpNwIwLgk3xuV78swDJLCfL88OZS3K8s7lv1RclXv0AA=",
-    slot: "panda",
-  },
-  {
-    src: "/media/image/days/02-14@thumb.webp",
-    alt: "100 天实验系列封面",
-    lqip: "data:image/webp;base64,UklGRtwAAABXRUJQVlA4INAAAAAQBQCdASocABwAPulgp04pJaOiMAwBIB0JYgC07a7ELaQ8AaZsO3MKllHys3gRf06QAP73bbyLW/ouNZdUoloXgoDjOgUrhULNgR31BDCmkWwpAriBJcY9B+XvxX3xQAJaKObzBwlA9z8e2dCGp06YZ+5j4hiSAIl9JkPHcEyumsQyCdEztGQoThSHFB7B0hpwaguD/akUNVH92pyvQjRxg8adZZoNKbyloIPhsrKbJ8idRsBgAMRIYzzSKB6sDgUvQNeSZJAldRZih5F6BSAA",
-    slot: "days",
-  },
-  {
-    src: "/media/image/game/game-cover@thumb.webp",
+    src: "/media/image/game/game-cover.webp",
     alt: "快放电波游戏界面",
-    lqip: "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADQBACdASocABIAPvVssVCqpaSiqAqpUB6JaQAFEARvos8gU//2tOcq7ZSNCZYM4AD+9OxTp2+dDeL57L0vkyEa5hdLY8O8nRTtBal1SV0FsZCp7kD237apWHULmG+vnoLOK/Fb5Xq2sOOYkjUjTdBAEy83cGAEMGAgAA==",
-    slot: "game",
+    index: "04",
   },
 ];
 
@@ -74,8 +51,8 @@ export function OriginArchive() {
 
     const apply = () => {
       frame = 0;
-      root.style.setProperty("--mx", nextX.toFixed(4));
-      root.style.setProperty("--my", nextY.toFixed(4));
+      root.style.setProperty("--mx", nextX.toFixed(3));
+      root.style.setProperty("--my", nextY.toFixed(3));
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -102,18 +79,27 @@ export function OriginArchive() {
 
   return (
     <div ref={rootRef} className="origin-archive" aria-label="作品预览">
-      <div className="origin-archive__board">
+      <div className="origin-archive__strip">
         {TILES.map((tile) => (
-          <figure
-            key={tile.src}
-            className={`origin-archive__tile origin-archive__tile--${tile.slot}`}
-            style={{ "--lqip": `url("${tile.lqip}")` } as React.CSSProperties}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={tile.src} alt={tile.alt} loading="eager" decoding="async" fetchPriority="high" />
+          <figure className="origin-archive__tile" key={tile.src}>
+            <span
+              className="origin-archive__frame"
+              onPointerMove={(event) => {
+                const rect = event.currentTarget.getBoundingClientRect();
+                event.currentTarget.style.setProperty("--x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+                event.currentTarget.style.setProperty("--y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="origin-archive__base" src={tile.src} alt={tile.alt} loading="eager" decoding="async" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="origin-archive__color" src={tile.src} alt="" loading="eager" decoding="async" />
+            </span>
+            <figcaption className="mono">{tile.index}</figcaption>
           </figure>
         ))}
       </div>
     </div>
   );
 }
+

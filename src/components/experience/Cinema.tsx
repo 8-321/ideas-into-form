@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ChevronLeft, ChevronRight, Close, Expand, Play } from "@/components/Icons";
 import { Rail } from "@/components/Rail";
 import { FilmArtwork } from "@/components/experience/FilmArtwork";
@@ -9,7 +9,7 @@ import type { ImageAsset, VideoAsset } from "@/content/works";
 export type CinemaGroup = {
   key: string;
   label: string;
-  note: string;
+  note?: string;
   cover?: ImageAsset;
   videos: VideoAsset[];
 };
@@ -37,12 +37,14 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
   const [activeKey, setActiveKey] = useState(all[0]?.key ?? "");
   const [open, setOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const returnRef = useRef<HTMLButtonElement>(null);
 
   const visible = useMemo(() => (filter === "all" ? all : all.filter((video) => video.group === filter)), [all, filter]);
   const active = visible.find((video) => video.key === activeKey) ?? visible[0];
   const activeGroup = groups.find((group) => group.key === active?.group);
   const screenCover = activeGroup?.cover;
-  const screenSrc = screenCover?.src ?? activeGroup?.videos[0]?.poster ?? active.poster;
+  const stagePortrait = Boolean(active && active.height > active.width);
+  const screenSrc = stagePortrait ? active?.poster ?? screenCover?.src : screenCover?.src ?? activeGroup?.videos[0]?.poster ?? active?.poster;
 
   useEffect(() => {
     if (visible.length && !visible.some((video) => video.key === activeKey)) {
@@ -50,9 +52,43 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
     }
   }, [visible, activeKey]);
 
+  const jumpToGroup = useCallback((key: string) => {
+    if (!groups.some((group) => group.key === key)) return;
+    setFilter(key);
+    const first = all.find((video) => video.group === key);
+    if (first) setActiveKey(first.key);
+  }, [all, groups]);
+
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    const onJump = (event: Event) => jumpToGroup((event as CustomEvent<string>).detail);
+    window.addEventListener("iif:cinema-group", onJump);
+    return () => window.removeEventListener("iif:cinema-group", onJump);
+  }, [jumpToGroup]);
+
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      const trigger = (event.target as Element).closest<HTMLElement>("[data-cinema-group]");
+      if (!trigger) return;
+      const key = trigger.dataset.cinemaGroup;
+      if (key) jumpToGroup(key);
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [jumpToGroup]);
+
+  useEffect(() => {
+    if (!active?.key) return;
+    const frame = document.querySelector<HTMLElement>(`.film-frame[data-key="${active.key}"]`);
+    const viewport = frame?.closest<HTMLElement>(".rail__viewport");
+    if (!frame || !viewport) return;
+    const left = frame.offsetLeft - viewport.clientWidth / 2 + frame.clientWidth / 2;
+    viewport.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+  }, [active?.key]);
+
+  useEffect(() => {
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = open ? "hidden" : previous;
+    return () => { document.body.style.overflow = previous; };
   }, [open]);
 
   const step = useCallback(
@@ -75,6 +111,11 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, step]);
+
+  const close = useCallback(() => {
+    setOpen(false);
+    window.setTimeout(() => returnRef.current?.focus({ preventScroll: true }), 40);
+  }, []);
 
   const goFull = async () => {
     const el = videoRef.current;
@@ -110,17 +151,14 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
             </button>
           ))}
         </div>
-        <p className="cinema__hint mono">
-          <span>选择画面</span>
-          <span>点击播放</span>
-        </p>
       </div>
 
-      <div className="screening">
+      <div className={`screening${stagePortrait ? " is-portrait" : ""}`}>
         <div className="screening__frame">
           <button
+            ref={returnRef}
             type="button"
-            className="screening__screen"
+            className={`screening__screen${stagePortrait ? " is-portrait" : ""}`}
             onClick={() => setOpen(true)}
             aria-label={`播放：${active.label}`}
             data-group={active.group}
@@ -130,12 +168,13 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
               key={`${active.group}-${screenSrc}`}
               src={screenSrc}
               alt={screenCover ? `${active.groupLabel}封面` : `${active.label} 视频画面`}
+              portrait={stagePortrait}
               loading="eager"
             />
             <span className="screening__shade" aria-hidden="true" />
-            <span className="screening__play"><Play size={20} /></span>
+            <span className="screening__play"><Play size={22} /></span>
             <span className="screening__corner screening__corner--tl mono">第 {visible.findIndex((v) => v.key === active.key) + 1} / {visible.length} 段</span>
-            <span className="screening__corner screening__corner--br mono">{screenCover ? "系列封面" : ratioLabel(active)} / {fmt(active.duration)}</span>
+            <span className="screening__corner screening__corner--br mono">{ratioLabel(active)} / {fmt(active.duration)}</span>
             <span className="screening__scan" aria-hidden="true" />
           </button>
           <div className="screening__bars" aria-hidden="true">
@@ -149,12 +188,11 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
           <p className="screening__group mono">{active.groupLabel}</p>
           <dl>
             <div><dt className="mono">时长</dt><dd>{fmt(active.duration)}</dd></div>
-            <div><dt className="mono">画幅</dt><dd>{ratioLabel(active)} · 原始</dd></div>
+            <div><dt className="mono">画幅</dt><dd>{ratioLabel(active)}</dd></div>
             <div><dt className="mono">文件</dt><dd>{active.sizeMB.toFixed(1)} 兆</dd></div>
-            <div><dt className="mono">声音</dt><dd>原始</dd></div>
+            <div><dt className="mono">声音</dt><dd>原声</dd></div>
           </dl>
-          <p className="screening__note">{groups.find((group) => group.key === active.group)?.note}</p>
-          <button type="button" className="btn" onClick={() => setOpen(true)}><Play size={12} /> 全屏观看</button>
+          <button type="button" className="btn" onClick={() => setOpen(true)}><Play size={14} /> 播放</button>
         </aside>
       </div>
 
@@ -173,13 +211,15 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
                 onDoubleClick={() => { setActiveKey(video.key); setOpen(true); }}
                 aria-label={`选择影像：${video.label}`}
                 aria-pressed={isActive}
+                data-key={video.key}
                 data-group={video.group}
+                data-orientation={video.height > video.width ? "portrait" : "landscape"}
                 data-artwork={coverSrc}
               >
                 <span className="film-frame__holes" aria-hidden="true" />
-                <span className="film-frame__img">
-                  <FilmArtwork src={coverSrc} alt="" loading={index < 4 ? "eager" : "lazy"} />
-                  <span className="film-frame__play"><Play size={13} /></span>
+                <span className="film-frame__img" style={{ "--frame-ratio": `${video.width} / ${video.height}` } as CSSProperties}>
+                  <FilmArtwork src={coverSrc} alt="" portrait={video.height > video.width} loading={index < 6 ? "eager" : "lazy"} />
+                  <span className="film-frame__play"><Play size={14} /></span>
                   <span className="film-frame__dur mono">{fmt(video.duration)}</span>
                 </span>
                 <span className="film-frame__copy">
@@ -193,15 +233,18 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
       </div>
 
       {open ? (
-        <div className="cine-modal" role="dialog" aria-modal="true" aria-label={`播放：${active.label}`}>
+        <div className="cine-modal" role="dialog" aria-modal="true" aria-label={`播放：${active.label}`} onClick={(event) => { if (event.target === event.currentTarget) close(); }}>
           <div className="cine-modal__bar">
-            <div>
+            <button type="button" className="cine-modal__back" onClick={close}>
+              <ChevronLeft size={18} /> 返回
+            </button>
+            <div className="cine-modal__title">
               <span className="mono">正在放映</span>
               <b className="serif">{active.label}</b>
             </div>
             <div className="cine-modal__actions">
-              <button type="button" onClick={goFull} aria-label="全屏"><Expand size={15} /></button>
-              <button type="button" onClick={() => setOpen(false)} aria-label="关闭"><Close size={16} /></button>
+              <button type="button" onClick={goFull} aria-label="全屏"><Expand size={17} /></button>
+              <button type="button" onClick={close} aria-label="关闭"><Close size={18} /></button>
             </div>
           </div>
 
@@ -221,15 +264,17 @@ export function Cinema({ groups }: { groups: CinemaGroup[] }) {
           </div>
 
           <div className="cine-modal__foot">
-            <button type="button" className="cine-modal__step" onClick={() => step(-1)}><ChevronLeft size={14} /> 上一段</button>
+            <button type="button" className="cine-modal__step" onClick={() => step(-1)}><ChevronLeft size={16} /> 上一段</button>
             <span className="mono cine-modal__count">
               {String(Math.max(0, visible.findIndex((v) => v.key === active.key)) + 1).padStart(2, "0")} / {String(visible.length).padStart(2, "0")}
             </span>
-            <button type="button" className="cine-modal__step" onClick={() => step(1)}>下一段 <ChevronRight size={14} /></button>
+            <button type="button" className="cine-modal__step" onClick={() => step(1)}>下一段 <ChevronRight size={16} /></button>
           </div>
-          <p className="cine-modal__tip mono">退出键关闭 · 左右方向键切换 · 空格暂停（原生控件）</p>
         </div>
       ) : null}
     </div>
   );
 }
+
+
+

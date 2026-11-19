@@ -2783,7 +2783,7 @@
       "title": "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品",
       "format": "PPTX",
       "sizeMB": 84.5,
-      "slideCount": 12,
+      "slideCount": 34,
       "slides": [
         {
           "src": "/media/ppt/ai-product/slide-01.webp",
@@ -2842,6 +2842,116 @@
         },
         {
           "src": "/media/ppt/ai-product/slide-12.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-13.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-14.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-15.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-16.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-17.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-18.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-19.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-20.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-21.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-22.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-23.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-24.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-25.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-26.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-27.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-28.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-29.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-30.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-31.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-32.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-33.webp",
+          "width": 1600,
+          "height": 900
+        },
+        {
+          "src": "/media/ppt/ai-product/slide-34.webp",
           "width": 1600,
           "height": 900
         }

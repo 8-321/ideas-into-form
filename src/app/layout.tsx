@@ -10,6 +10,7 @@ import { SiteShell } from "@/components/SiteShell";
 import { TransitionProvider } from "@/components/TransitionProvider";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://8-321.github.io"),
   title: {
     default: "由意成形 · 个人作品集",
     template: "%s · 由意成形",
@@ -29,8 +30,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F4F2EC" },
-    { media: "(prefers-color-scheme: dark)", color: "#151719" },
+    { media: "(prefers-color-scheme: light)", color: "#F0ECE3" },
+    { media: "(prefers-color-scheme: dark)", color: "#15191B" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -65,3 +66,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

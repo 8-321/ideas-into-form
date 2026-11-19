@@ -315,7 +315,7 @@ async function main() {
   console.log("\nppt exports...");
   const pptDefs = [
     { slug: "zengguofan", title: "曾国藩传阅读分享", src: path.join(expRoot, "PPT", "曾国藩传阅读分享.pptx") },
-    { slug: "ai-product", title: "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品", src: path.join(expRoot, "PPT", "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品.pptx") },
+    { slug: "ai-product", title: "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品", src: path.join(expRoot, "PPT", "敢接、敢做、敢上线：零基础大学生如何做出第一个 AI 产品.pptx"), exportLimit: 34 },
     { slug: "defense", title: "个人答辩作品集", src: path.join(expRoot, "PPT", "个人答辩作品集——柯孟含.pptx") },
     { slug: "growth", title: "化学与医药工程学院 · 成长赛道", src: path.join(expRoot, "PPT", "化学与医药工程学院-成长赛道-柯孟含.pdf"), pdf: true },
   ];
@@ -326,7 +326,7 @@ async function main() {
       const files = (await list(exportDir)).filter((n) => /\.(png|jpg|jpeg)$/i.test(n)).sort((a, b) => parseInt(a.match(/\d+/)?.[0] ?? "0") - parseInt(b.match(/\d+/)?.[0] ?? "0"));
       const outDir = path.join(MEDIA, "ppt", deck.slug);
       await ensure(outDir);
-      for (const [i, f] of files.slice(0, 12).entries()) {
+      for (const [i, f] of files.slice(0, deck.exportLimit ?? 12).entries()) {
         const dest = path.join(outDir, `slide-${String(i + 1).padStart(2, "0")}.webp`);
         await sharp(path.join(exportDir, f)).resize({ width: 1600, withoutEnlargement: true }).webp({ quality: 82, effort: 5 }).toFile(dest);
         const m = await sharp(dest).metadata();

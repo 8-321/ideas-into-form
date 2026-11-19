@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Pause, Play, Sound } from "@/components/Icons";
+import { ChevronLeft, ChevronRight, Expand, Pause, Play, Sound } from "@/components/Icons";
 import { useMotion } from "@/components/MotionProvider";
 import type { AudioAsset } from "@/content/works";
 
@@ -31,13 +31,12 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [duration, setDuration] = useState(tracks[0]?.duration ?? 0);
-  const [ready, setReady] = useState(false);
+  const [room, setRoom] = useState(false);
+  const roomTrigger = useRef<HTMLButtonElement>(null);
   const { reduced } = useMotion();
 
   const track = tracks[current];
   const indexLabel = String(current + 1).padStart(2, "0");
-  const isLongForm = current === 0;
-
   const ensureAudio = useCallback(async () => {
     const audio = audioRef.current;
     if (!audio) return null;
@@ -54,7 +53,6 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
         ctxRef.current = ctx;
         analyserRef.current = analyser;
         dataRef.current = new Uint8Array(new ArrayBuffer(analyser.frequencyBinCount));
-        setReady(true);
       }
     }
     if (ctxRef.current?.state === "suspended") await ctxRef.current.resume();
@@ -244,6 +242,30 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
   }, [playing, track?.title, reduced]);
 
   useEffect(() => {
+    if (!room) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setRoom(false);
+        window.setTimeout(() => roomTrigger.current?.focus({ preventScroll: true }), 40);
+      }
+      if (event.key === "ArrowLeft") playIndex(current - 1);
+      if (event.key === "ArrowRight") playIndex(current + 1);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previous;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [room, current, playIndex]);
+
+  const exitRoom = useCallback(() => {
+    setRoom(false);
+    window.setTimeout(() => roomTrigger.current?.focus({ preventScroll: true }), 40);
+  }, []);
+
+  useEffect(() => {
     return () => {
       ctxRef.current?.close().catch(() => {});
     };
@@ -266,10 +288,22 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
         }}
       />
 
-      <div className="sound-console" data-reveal>
+      <div
+        className={`sound-console${room ? " is-room" : ""}`}
+        data-reveal
+        role={room ? "dialog" : undefined}
+        aria-modal={room ? "true" : undefined}
+        aria-label={room ? "播放室" : undefined}
+      >
+        <div className="sound-room__bar">
+          <button type="button" className="sound-room__back" onClick={exitRoom}>
+            <ChevronLeft size={18} /> 返回
+          </button>
+          <span className="mono">播放室</span>
+          <span className="mono">{indexLabel} / 05</span>
+        </div>
         <div className="sound-deck-zone">
           <div className={`sound-deck${playing ? " is-playing" : ""}`} data-tilt="0.55" data-glare>
-            <span className="sound-deck__rail mono" aria-hidden="true">甲面 · 声档 001</span>
             <canvas ref={orbRef} className="sound-deck__orb" aria-hidden="true" />
             <div className="sound-deck__vinyl" aria-hidden="true">
               <div className="sound-deck__disc">
@@ -281,9 +315,6 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
             </div>
             <figure className="sound-deck__sleeve" key={track.key}>
               <img src={track.cover} alt={`${track.title} 封面`} />
-              <span className="sound-deck__badge mono">
-                {isLongForm ? "第一期 · 长音频" : `第二期 · 手记 ${indexLabel}`}
-              </span>
               <span className="sound-deck__index display" aria-hidden="true">{indexLabel}</span>
               <span className="sound-deck__sheen" aria-hidden="true" />
             </figure>
@@ -297,30 +328,22 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
               {playing ? <Pause size={18} /> : <Play size={18} />}
             </button>
           </div>
-          <div className="sound-deck__caption mono">
-            <span>{isLongForm ? "长音频" : "红尘手记"}</span>
-            <span>{fmt(track.duration)}</span>
-          </div>
         </div>
 
         <div className="sound-console__side">
+          <button ref={roomTrigger} type="button" className="sound-room__trigger" onClick={() => setRoom(true)}>
+            <Expand size={14} /> 播放室
+          </button>
           <div className="sound-now" aria-live="polite">
             <div className="sound-now__top mono">
-              <span>正在播放 · {indexLabel}</span>
-              <span className={playing ? "is-live" : ""}>{playing ? "播放中" : "准备就绪"}</span>
+              <span>{indexLabel} / {String(tracks.length).padStart(2, "0")}</span>
+              <span className={playing ? "is-live" : ""}>{playing ? "播放中" : "暂停"}</span>
             </div>
             <h3 className="serif" key={`${track.key}-title`}>{track.title}</h3>
-            <div className="sound-now__meta mono">
-              <span>{isLongForm ? "长音频 · 07:42" : "红尘手记"}</span>
-              <span>{indexLabel} / 05</span>
-            </div>
             <canvas ref={waveRef} className="sound-now__wave" aria-hidden="true" />
           </div>
 
           <div className="sound-tracklist">
-            <div className="sound-tracklist__head mono">
-              <span>序号</span><span>音频</span><span>封面</span><span>时长</span><span />
-            </div>
             {tracks.map((item, index) => {
               const active = index === current;
               return (
@@ -334,7 +357,6 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
                   <span className="sound-track__no mono">{String(index + 1).padStart(2, "0")}</span>
                   <span className="sound-track__title">
                     <b className="serif">{item.title}</b>
-                    <em className="mono">{index === 0 ? "长音频" : "红尘手记"}</em>
                   </span>
                   <span className="sound-track__cover"><img src={item.coverThumb} alt="" loading="eager" decoding="async" /></span>
                   <span className="sound-track__dur mono">{fmt(item.duration)}</span>
@@ -365,10 +387,9 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
               />
               <div className="sound-transport__times mono"><span>{fmt(time)}</span><span>{fmt(duration || track.duration)}</span></div>
             </div>
-            <div className="sound-transport__status mono">
-              <span className="sound-transport__dot" aria-hidden="true" />
+            <div className="sound-transport__status mono" aria-hidden="true">
+              <span className="sound-transport__dot" />
               <Sound size={12} />
-              <span>{ready && playing ? "频谱实时显示" : "真实音频 · 就绪"}</span>
             </div>
             <button type="button" className="player__step" onClick={() => playIndex(current - 1)} aria-label="上一段">
               <ChevronLeft size={12} />
@@ -382,3 +403,4 @@ export function SoundArchive({ tracks }: { tracks: AudioAsset[] }) {
     </>
   );
 }
+

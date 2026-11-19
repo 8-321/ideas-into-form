@@ -20,6 +20,13 @@ const SHAPE_LABEL: Record<ImageShape, string> = {
   wide: "图版",
 };
 
+const SHAPE_RATIO: Record<ImageShape, number> = {
+  square: 1,
+  portrait: 2 / 3,
+  landscape: 4 / 3,
+  wide: 16 / 9,
+};
+
 type Tier = "desktop" | "tablet" | "mobile";
 
 function useTier(): Tier {
@@ -109,9 +116,9 @@ function FolderFeature({
               {previews.map((image) => (
                 <span className="catalog-feature__cell" key={image.key}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="catalog-feature__base" src={image.thumb || image.src} alt="" loading="eager" decoding="async" />
+                  <img className="catalog-feature__base" src={image.src} alt="" loading="eager" decoding="async" />
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img className="catalog-feature__color" src={image.thumb || image.src} alt="" loading="eager" decoding="async" />
+                  <img className="catalog-feature__color" src={image.src} alt="" loading="eager" decoding="async" />
                 </span>
               ))}
             </span>
@@ -142,18 +149,22 @@ function ArchiveCoverCollage({ folder }: { folder: ImageFolder }) {
       {images.map((item, index) => (
         <figure className="archive-cover__photo" key={item.key} style={{ "--cover-photo": index } as React.CSSProperties}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={item.thumb || item.src} alt="" loading="eager" decoding="async" />
+          <img src={item.src} alt="" loading="eager" decoding="async" />
         </figure>
       ))}
     </div>
   );
 }
 
-function ArchiveCover({ folder }: { folder: ImageFolder }) {
-  const series = new Map<string, number>();
-  folder.pages.forEach((page) => {
-    series.set(page.series, (series.get(page.series) ?? 0) + page.items.length);
-  });
+function ArchiveCover({
+  folder,
+  chapters,
+  onJump,
+}: {
+  folder: ImageFolder;
+  chapters: { title: string; count: number; accent: string }[];
+  onJump: (index: number) => void;
+}) {
 
   return (
     <div className="archive-cover">
@@ -165,11 +176,18 @@ function ArchiveCover({ folder }: { folder: ImageFolder }) {
           <span>{pad(folder.pages.length + 1)} 页</span>
         </div>
         <ul className="archive-cover__contents" aria-label={`${folder.zh}目录`}>
-          {Array.from(series.entries()).map(([title, count]) => (
-            <li key={title} style={{ "--series-accent": accentForSeries(title) } as React.CSSProperties}>
-              <i aria-hidden="true" />
-              <span>{title}</span>
-              <em>{pad(count, 3)}</em>
+          {chapters.map((chapter, index) => (
+            <li key={chapter.title} style={{ "--series-accent": chapter.accent } as React.CSSProperties}>
+              <button
+                type="button"
+                className="archive-cover__chapter"
+                onClick={() => onJump(index)}
+                aria-label={`翻到${chapter.title}，${chapter.count} 张`}
+              >
+                <i aria-hidden="true" />
+                <span>{chapter.title}</span>
+                <em>{pad(chapter.count, 3)}</em>
+              </button>
             </li>
           ))}
         </ul>
@@ -194,6 +212,7 @@ function GridPage({
 }) {
   const maxCols = MAX_COLS[tier][page.shape];
   const rowSizes = useMemo(() => splitRows(page.items.length, maxCols), [maxCols, page.items.length]);
+  const pageRatio = SHAPE_RATIO[page.shape];
   let cursor = 0;
 
   return (
@@ -223,16 +242,18 @@ function GridPage({
             <div className="archive-page__row" key={`${page.id}-row-${rowIndex}`}>
               {rowItems.map((item, itemIndex) => {
                 const imageIndex = rowStart + itemIndex;
+                const itemRatio = item.width / item.height;
+                const contain = Math.abs(itemRatio - pageRatio) > 0.16;
                 return (
                   <button
                     type="button"
-                    className="archive-tile"
+                    className={`archive-tile${contain ? " is-contain" : ""}`}
                     key={`${item.key}-${imageIndex}`}
                     onClick={() => onOpen(page, imageIndex)}
                     aria-label={`放大查看 ${page.series} ${pad(imageIndex + 1)}`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={item.thumb || item.src} alt={`${page.series} ${pad(imageIndex + 1)}`} loading="eager" decoding="async" />
+                    <img src={item.src} alt={`${page.series} ${pad(imageIndex + 1)}`} loading="eager" decoding="async" />
                     <span className="archive-tile__index mono">{pad(imageIndex + 1)}</span>
                   </button>
                 );
@@ -280,12 +301,16 @@ function OrbitPage({
 
 function Archive({
   folder,
+  folders,
   returnFocus,
   onClose,
+  onSwitchFolder,
 }: {
   folder: ImageFolder;
+  folders: ImageFolder[];
   returnFocus: React.RefObject<HTMLElement | null>;
   onClose: () => void;
+  onSwitchFolder: (folder: ImageFolder) => void;
 }) {
   const { open, isOpen: lightboxOpen } = useLightbox();
   const { reduced } = useMotion();
@@ -316,6 +341,11 @@ function Archive({
   const stepPage = useCallback((delta: 1 | -1) => {
     goTo(pageIndex + delta, delta);
   }, [goTo, pageIndex]);
+
+  useEffect(() => {
+    setPageIndex(0);
+    setTurn(null);
+  }, [folder.letter]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -390,6 +420,21 @@ function Archive({
 
   const page = pageIndex === 0 ? null : folder.pages[pageIndex - 1];
   const progress = total <= 1 ? 1 : (pageIndex + 1) / total;
+  const chapters = useMemo(() => {
+    const map = new Map<string, { title: string; count: number; page: number; accent: string }>();
+    folder.pages.forEach((item, index) => {
+      const current = map.get(item.series);
+      if (current) current.count += item.items.length;
+      else map.set(item.series, { title: item.series, count: item.items.length, page: index + 1, accent: accentForSeries(item.series) });
+    });
+    return Array.from(map.values());
+  }, [folder]);
+  const activeSeries = page?.series;
+  const jumpChapter = useCallback((index: number) => {
+    const chapter = chapters[index];
+    if (!chapter) return;
+    goTo(chapter.page, chapter.page > pageIndex ? 1 : -1);
+  }, [chapters, goTo, pageIndex]);
 
   return (
     <div
@@ -424,6 +469,47 @@ function Archive({
           <span>{pad(pageIndex + 1)} — {pad(total)}</span>
         </div>
       </header>
+
+      <nav className="archive-cats" aria-label="全部作品分类">
+        {folders.map((item) => {
+          const itemPalette = paletteForFolder(item.letter);
+          return (
+            <button
+              key={item.letter}
+              type="button"
+              className={item.letter === folder.letter ? "is-active" : ""}
+              style={{
+                "--cat-accent": itemPalette.accent,
+                "--cat-wash": itemPalette.wash,
+              } as React.CSSProperties}
+              aria-current={item.letter === folder.letter ? "page" : undefined}
+              onClick={() => onSwitchFolder(item)}
+            >
+              <span className="archive-cats__letter mono">{cnFor(item.letter)}</span>
+              <span className="archive-cats__name">{item.zh}</span>
+              <em className="mono">{pad(item.count, 3)}</em>
+            </button>
+          );
+        })}
+      </nav>
+
+      <nav className="archive-series" aria-label={`${folder.zh}全部系列`}>
+        <span className="archive-series__label mono">系列</span>
+        {chapters.map((chapter, index) => (
+          <button
+            key={chapter.title}
+            type="button"
+            className={activeSeries === chapter.title ? "is-active" : ""}
+            style={{ "--series-accent": chapter.accent } as React.CSSProperties}
+            aria-current={activeSeries === chapter.title ? "true" : undefined}
+            onClick={() => jumpChapter(index)}
+          >
+            <span className="mono">{pad(index + 1)}</span>
+            <b>{chapter.title}</b>
+            <em className="mono">{pad(chapter.count, 2)}</em>
+          </button>
+        ))}
+      </nav>
 
       <div
         ref={stageRef}
@@ -464,7 +550,7 @@ function Archive({
           style={{ "--turn-direction": turn?.dir ?? 1 } as React.CSSProperties}
         >
           <div className="archive-book__content" key={pageIndex}>
-            {pageIndex === 0 ? <ArchiveCover folder={folder} /> : page?.kind === "orbit" ? (
+            {pageIndex === 0 ? <ArchiveCover folder={folder} chapters={chapters} onJump={jumpChapter} /> : page?.kind === "orbit" ? (
               <OrbitPage page={page} pageNumber={pageIndex + 1} onOpen={openImage} />
             ) : page ? (
               <GridPage page={page} pageNumber={pageIndex + 1} tier={tier} onOpen={openImage} />
@@ -616,8 +702,14 @@ export function ImageGallery({ folders }: { folders: ImageFolder[] }) {
       {selected ? (
         <Archive
           folder={selected}
+          folders={folders}
           returnFocus={triggerRef}
           onClose={() => setSelected(null)}
+          onSwitchFolder={(next) => {
+            setSelected(next);
+            const index = folders.findIndex((item) => item.letter === next.letter);
+            if (index >= 0) setActiveIndex(index);
+          }}
         />
       ) : null}
     </div>

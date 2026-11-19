@@ -2,7 +2,7 @@ import type { ImageAsset } from "./works";
 import { group } from "./works";
 
 export type ImageShape = "square" | "portrait" | "landscape" | "wide";
-export type ArchivePageKind = "grid" | "orbit";
+export type ArchivePageKind = "grid" | "ribbon" | "orbit";
 
 export type ArchivePage = {
   id: string;
@@ -23,6 +23,21 @@ export type ImageFolder = {
   pages: ArchivePage[];
 };
 
+const shapeOf = (item: ImageAsset): ImageShape => {
+  const ratio = item.width / item.height;
+  if (ratio >= 1.55) return "wide";
+  if (ratio >= 1.08) return "landscape";
+  if (ratio <= 0.82) return "portrait";
+  return "square";
+};
+
+const MAX_PER_PAGE: Record<ImageShape, number> = {
+  portrait: 4,
+  square: 4,
+  landscape: 4,
+  wide: 4,
+};
+
 const chunk = <T,>(items: T[], size: number): T[][] => {
   const pages: T[][] = [];
   for (let index = 0; index < items.length; index += size) pages.push(items.slice(index, index + size));
@@ -31,13 +46,79 @@ const chunk = <T,>(items: T[], size: number): T[][] => {
 
 function pagesFor(series: string, assets: ImageAsset[]): ArchivePage[] {
   const slug = series.replace(/\s+/g, "-").toLowerCase();
-  return chunk(assets, 8).map((items, index) => ({
-    id: `${slug}-plate-${index + 1}`,
-    series,
-    shape: "landscape" as const,
-    kind: "grid" as const,
-    items,
-  }));
+  const ribbon = series.includes("100 天");
+  if (ribbon) {
+    return chunk(assets, 4).map((items, index) => ({
+      id: `${slug}-plate-${index + 1}`,
+      series,
+      shape: "portrait",
+      kind: "ribbon",
+      items,
+    }));
+  }
+
+  const byShape = new Map<ImageShape, ImageAsset[]>();
+  assets.forEach((item) => {
+    const shape = shapeOf(item);
+    const bucket = byShape.get(shape) ?? [];
+    bucket.push(item);
+    byShape.set(shape, bucket);
+  });
+
+  const made: ArchivePage[] = [];
+  (["portrait", "square", "landscape", "wide"] as ImageShape[]).forEach((shape) => {
+    const bucket = byShape.get(shape);
+    if (!bucket?.length) return;
+    chunk(bucket, MAX_PER_PAGE[shape]).forEach((items) => {
+      made.push({
+        id: `${slug}-${shape}-${made.length + 1}`,
+        series,
+        shape,
+        kind: "grid",
+        items,
+      });
+    });
+  });
+  return made;
+}
+
+function mergeSingletons(pages: ArchivePage[]): ArchivePage[] {
+  const output = pages.map((page) => ({ ...page, items: [...page.items] }));
+  let guard = 0;
+
+  while (output.length > 1 && guard < 64) {
+    guard += 1;
+    const lonelyIndex = output.findIndex((page) => page.items.length === 1);
+    if (lonelyIndex < 0) break;
+
+    const lonely = output[lonelyIndex];
+    const candidates = output
+      .map((page, index) => ({ page, index }))
+      .filter(({ index }) => index !== lonelyIndex);
+    const withRoom = candidates.filter(({ page }) => page.items.length < MAX_PER_PAGE[page.shape]);
+    const sameShape = withRoom.find(({ page }) => page.shape === lonely.shape);
+    const nearest = [...withRoom].sort((a, b) => Math.abs(a.index - lonelyIndex) - Math.abs(b.index - lonelyIndex))[0];
+    const target = sameShape ?? nearest;
+
+    if (target) {
+      target.page.items.push(...lonely.items);
+      output.splice(lonelyIndex, 1);
+      continue;
+    }
+
+    const donor = [...candidates]
+      .filter(({ page }) => page.items.length > 2)
+      .sort((a, b) => {
+        const shapeScore = Number(b.page.shape === lonely.shape) - Number(a.page.shape === lonely.shape);
+        return shapeScore || Math.abs(a.index - lonelyIndex) - Math.abs(b.index - lonelyIndex);
+      })[0];
+    if (!donor) break;
+
+    const moved = donor.page.items.pop();
+    if (moved) lonely.items.push(moved);
+  }
+
+  return output;
 }
 
 function makeFolder(
@@ -47,7 +128,7 @@ function makeFolder(
   en: string,
   series: { title: string; items: ImageAsset[] }[]
 ): ImageFolder {
-  const pages = series.flatMap((entry) => pagesFor(entry.title, entry.items));
+  const pages = mergeSingletons(series.flatMap((entry) => pagesFor(entry.title, entry.items)));
   const count = pages.reduce((total, page) => total + page.items.length, 0);
   const previewPool: ImageAsset[] = [];
   pages.forEach((page) => {
@@ -79,7 +160,7 @@ const wisdom = group("xinlingWisdom");
 const xiumi = group("xiumi");
 const drawing = group("drawing");
 const sketch = group("sketch");
-const game = group("game").filter((item) => item.key !== "game-ball");
+const game = group("game").filter((item) => ["game-cover", "game-play", "game-inner"].includes(item.key));
 const ui = group("ui");
 
 export const IMAGE_FOLDERS: ImageFolder[] = [
@@ -112,7 +193,7 @@ export const IMAGE_FOLDERS: ImageFolder[] = [
     { title: "速写手稿", items: sketch },
   ]),
   makeFolder("F", "digital", "数字创意", "DIGITAL CREATIVE", [
-    { title: "快放声波", items: game },
+    { title: "快放电波", items: game },
   ]),
   makeFolder("G", "interface", "界面与系统", "INTERFACE & SYSTEM", [
     { title: "第二文化界面", items: ui },
@@ -120,4 +201,6 @@ export const IMAGE_FOLDERS: ImageFolder[] = [
 ];
 
 export const IMAGE_TOTAL = IMAGE_FOLDERS.reduce((total, folder) => total + folder.count, 0);
-export const PAGE_TOTAL = IMAGE_FOLDERS.reduce((total, folder) => total + folder.pages.length + 1, 0);
+export const PAGE_TOTAL = IMAGE_FOLDERS.reduce((total, folder) => total + folder.pages.length, 0);
+
+
